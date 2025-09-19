@@ -1,0 +1,49 @@
+{
+    "name": "professional-nextjs-project",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev --turbopack",
+        "dev:restart": "./restart-dev.sh",
+        "dev:auto": "node auto-dev.js",
+        "build": "next build --turbopack",
+        "start": "next start",
+        "lint": "eslint src/ --ext .ts,.tsx,.js,.jsx",
+        "lint:fix": "eslint src/ --ext .ts,.tsx,.js,.jsx --fix",
+        "type-check": "tsc --noEmit",
+        "quality": "node code-quality.js",
+        "quality:watch": "nodemon --watch src/ --exec 'node code-quality.js'",
+        "format": "prettier --write src/",
+        "format:check": "prettier --check src/",
+        "check-all": "npm run type-check && npm run lint && npm run quality && npm run format:check",
+        "auto-test": "./auto-build-test.sh",
+        "test:full": "npm run type-check && npm run lint && npm run build",
+        "watch": "node auto-watch.js",
+        "watch:test": "npm run auto-test && npm run watch",
+        "dev:full": "./start-dev-with-watch.sh",
+        "git:setup": "git init && git add . && git commit -m 'Initial commit: Professional Next.js setup'",
+        "git:push": "git add . && git commit -m 'Update: $(date)' && git push",
+        "github:create": "gh repo create $(node -p 'require(\"./package.json\").name') --public --description 'Professional Next.js application' --source=. --remote=origin --push"
+    },
+    "dependencies": {
+        "next": "15.5.3",
+        "react": "19.1.0",
+        "react-dom": "19.1.0"
+    },
+    "devDependencies": {
+        "@eslint/eslintrc": "^3",
+        "@tailwindcss/postcss": "^4",
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "@typescript-eslint/eslint-plugin": "^8.43.0",
+        "@typescript-eslint/parser": "^8.43.0",
+        "eslint": "^9",
+        "eslint-config-next": "15.5.3",
+        "eslint-formatter-compact": "^8.40.0",
+        "nodemon": "^3.1.10",
+        "prettier": "^3.6.2",
+        "tailwindcss": "^4",
+        "typescript": "^5"
+    }
+}
