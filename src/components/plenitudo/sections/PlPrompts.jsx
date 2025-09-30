@@ -4,7 +4,7 @@ const PROMPTS = [
   "Who could you collaborate with to 10× an idea?",
 ];
 
-export default function Prompts() {
+export default function PlPrompts() {
   return (
     <section aria-labelledby="prompts-title" className="mt-16 mb-24">
       <h2

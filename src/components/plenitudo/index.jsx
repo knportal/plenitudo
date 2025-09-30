@@ -1,22 +1,22 @@
-import Header from "./layout/Header";
-import Footer from "./layout/Footer";
-import BackgroundFX from "./layout/BackgroundFX";
-import Hero from "./sections/Hero";
-import Feed from "./sections/Feed";
-import Rooms from "./sections/Rooms";
-import Prompts from "./sections/Prompts";
+import PlHeader from "./layout/PlHeader";
+import PlFooter from "./layout/PlFooter";
+import PlBackgroundFX from "./layout/PlBackgroundFX";
+import PlHero from "./sections/PlHero";
+import PlFeed from "./sections/PlFeed";
+import PlRooms from "./sections/PlRooms";
+import PlPrompts from "./sections/PlPrompts";
 
 export default function PlenitudoMVP() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 antialiased relative overflow-hidden">
-      <BackgroundFX />
+      <PlBackgroundFX />
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-10">
-        <Header />
-        <Hero />
-        <Feed />
-        <Rooms />
-        <Prompts />
-        <Footer />
+        <PlHeader />
+        <PlHero />
+        <PlFeed />
+        <PlRooms />
+        <PlPrompts />
+        <PlFooter />
       </div>
       {/* Local utility styles (keep once globally or inline here) */}
       <style>{`

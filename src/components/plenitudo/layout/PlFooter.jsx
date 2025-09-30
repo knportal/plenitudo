@@ -1,4 +1,4 @@
-export default function Footer() {
+export default function PlFooter() {
   return (
     <footer className="border-t border-white/10 pt-8 pb-10 text-sm text-slate-400">
       <p>

@@ -23,12 +23,24 @@
     "dev:full": "./start-dev-with-watch.sh",
     "git:setup": "git init && git add . && git commit -m 'Initial commit: Professional Next.js setup'",
     "git:push": "git add . && git commit -m 'Update: $(date)' && git push",
-    "github:create": "gh repo create $(node -p 'require(\"./package.json\").name') --public --description 'Professional Next.js application' --source=. --remote=origin --push"
+    "github:create": "gh repo create $(node -p 'require(\"./package.json\").name') --public --description 'Professional Next.js application' --source=. --remote=origin --push",
+    "seed:ai-daily": "tsx scripts/seed-ai-daily.ts",
+    "rebuild:ai-daily": "tsx scripts/rebuild-ai-daily.ts",
+    "test": "vitest",
+    "test:run": "vitest run"
   },
   "dependencies": {
+    "@prisma/client": "^6.16.2",
+    "date-fns": "^4.1.0",
+    "framer-motion": "^12.23.16",
     "next": "15.5.3",
+    "p-map": "^7.0.3",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "rss-parser": "^3.13.0",
+    "swr": "^2.3.6",
+    "undici": "^7.16.0",
+    "zod": "^4.1.11"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -44,7 +56,10 @@
     "nodemon": "^3.1.10",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
+    "prisma": "^6.16.2",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5"
+    "tsx": "^4.20.6",
+    "typescript": "^5",
+    "vitest": "^3.2.4"
   }
 }

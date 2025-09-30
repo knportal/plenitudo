@@ -1,13 +1,13 @@
-import LogoMark from "../LogoMark";
+import PlLogoMark from "../PlLogoMark";
 
-export default function Header() {
+export default function PlHeader() {
   return (
     <header className="flex items-center justify-between">
       <a
         href="#"
         className="flex items-center gap-2 focus:outline-none focus-visible:ring ring-emerald-400 rounded px-1 -mx-1"
       >
-        <LogoMark />
+        <PlLogoMark />
         <span className="sr-only">Plenitudo.ai Home</span>
       </a>
       <nav aria-label="Primary" className="flex items-center gap-2">

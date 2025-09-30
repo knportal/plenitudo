@@ -1,6 +1,6 @@
-import ArrowIcon from "../icons/ArrowIcon";
+import PlArrowIcon from "../icons/PlArrowIcon";
 
-function RoomCard({ title, desc, accent }) {
+function PlRoomCard({ title, desc, accent }) {
   return (
     <article className="relative overflow-hidden rounded-2xl p-5 ring-1 ring-white/10 bg-slate-900/50 focus-within:ring-emerald-400/80">
       <div
@@ -14,14 +14,14 @@ function RoomCard({ title, desc, accent }) {
       <h3 className="text-lg font-semibold">{title}</h3>
       <p className="mt-1 text-sm text-slate-300 pr-6">{desc}</p>
       <button className="mt-4 btn-ghost" aria-label={`Enter ${title} room`}>
-        <ArrowIcon className="size-4" />
+        <PlArrowIcon className="size-4" />
         Enter room
       </button>
     </article>
   );
 }
 
-export default function Rooms() {
+export default function PlRooms() {
   return (
     <section aria-labelledby="rooms-title" className="mt-16">
       <div className="flex items-center gap-3">
@@ -36,17 +36,17 @@ export default function Rooms() {
         </span>
       </div>
       <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <RoomCard
+        <PlRoomCard
           title="AI"
           desc="Latest breakthroughs, tools, and prompts to build with."
           accent="from-fuchsia-500 via-cyan-400 to-emerald-400"
         />
-        <RoomCard
+        <PlRoomCard
           title="Mindfulness"
           desc="Guided reflections, breathing, and gratitude threads."
           accent="from-emerald-400 via-teal-300 to-sky-400"
         />
-        <RoomCard
+        <PlRoomCard
           title="Entrepreneurship"
           desc="Idea validation, small bets, funding leads, collabs."
           accent="from-amber-400 via-pink-400 to-violet-500"

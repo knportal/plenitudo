@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AIDailyItem {
+  id        String   @id @default(cuid())
+  dateISO   String   // "YYYY-MM-DD" (ET)
+  genre     String   // enum-like: policy|research|chips|enterprise|consumer|robotics|health|climate
+  mood      String   // uplift|opportunity|caution
+  title     String
+  summary   String   // 80–140 words
+  bullets   Json     // string[]
+  sources   Json     // {title,url,publisher,publishedAt}[]
+  score     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

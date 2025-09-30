@@ -1,4 +1,4 @@
-export default function LogoMark() {
+export default function PlLogoMark() {
   return (
     <div className="relative w-8 h-8" aria-hidden>
       <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-emerald-400/80 to-sky-400/80 blur-[6px]" />

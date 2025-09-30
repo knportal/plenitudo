@@ -1,4 +1,4 @@
-export default function BackgroundFX() {
+export default function PlBackgroundFX() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 -z-0">
       <div className="absolute -top-32 -left-24 w-[40rem] h-[40rem] rounded-full blur-3xl opacity-25 bg-gradient-to-tr from-emerald-500 to-sky-500" />

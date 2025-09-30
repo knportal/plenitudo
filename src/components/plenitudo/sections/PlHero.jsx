@@ -1,4 +1,4 @@
-export default function Hero() {
+export default function PlHero() {
   return (
     <section className="mt-14 relative">
       <div className="max-w-3xl">
