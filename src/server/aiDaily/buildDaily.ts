@@ -58,6 +58,57 @@ function publisherLabel(host: string) {
   if (host.includes("brookings")) return "Brookings";
   return host;
 }
+// Filter out advertisements and non-AI content
+function isRelevantAIContent(title: string, desc: string): boolean {
+  const text = (title + " " + desc).toLowerCase();
+  
+  // Exclude advertisements and promotional content
+  const adKeywords = [
+    "sponsored",
+    "advertisement",
+    "deals",
+    "discount",
+    "coupon",
+    "sale",
+    "buy now",
+    "shop",
+    "subscribe",
+    "newsletter",
+    "webinar",
+    "register now",
+    "limited time",
+    "affiliate",
+  ];
+  
+  if (adKeywords.some((kw) => text.includes(kw))) {
+    return false;
+  }
+  
+  // Must contain AI-related keywords
+  const aiKeywords = [
+    "ai",
+    "artificial intelligence",
+    "machine learning",
+    "ml",
+    "deep learning",
+    "neural",
+    "llm",
+    "gpt",
+    "claude",
+    "gemini",
+    "chatbot",
+    "model",
+    "algorithm",
+    "automation",
+    "robotics",
+    "computer vision",
+    "nlp",
+    "natural language",
+  ];
+  
+  return aiKeywords.some((kw) => text.includes(kw));
+}
+
 async function fetchFeed(url: string) {
   try {
     console.log(`📡 Fetching: ${url}`);
@@ -65,8 +116,14 @@ async function fetchFeed(url: string) {
     const items = (feed.items || [])
       .map((i) => ItemZ.safeParse(i))
       .filter((r) => r.success)
-      .map((r) => r.data as RawItem);
-    console.log(`✅ Fetched ${items.length} items from ${url}`);
+      .map((r) => r.data as RawItem)
+      .filter((item) => 
+        isRelevantAIContent(
+          item.title, 
+          item.contentSnippet || item.content || ""
+        )
+      );
+    console.log(`✅ Fetched ${items.length} AI-relevant items from ${url}`);
     return items;
   } catch (error) {
     console.warn(`⚠️  Failed to fetch ${url}:`, error.message);
