@@ -1,8 +1,9 @@
-import { format } from "date-fns";
+import { format, toZonedTime } from "date-fns-tz";
 
 export function toETDateISO(d = new Date()): string {
-  // Trust server TZ=America/New_York
-  return format(d, "yyyy-MM-dd");
+  // Convert to America/New_York timezone
+  const etDate = toZonedTime(d, "America/New_York");
+  return format(etDate, "yyyy-MM-dd", { timeZone: "America/New_York" });
 }
 export function pickMood(
   title: string,

@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import { toETDateISO } from "@/server/aiDaily/text";
+
 const prisma = new PrismaClient();
 
 export async function GET() {
-  const today = new Date().toISOString().slice(0, 10);
+  const today = toETDateISO();
   console.log("API: Looking for dateISO:", today);
 
   const rows = await prisma.aIDailyItem.findMany({
