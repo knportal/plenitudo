@@ -28,7 +28,12 @@
     "seed:ai-daily": "tsx scripts/seed-ai-daily.ts",
     "rebuild:ai-daily": "tsx scripts/rebuild-ai-daily.ts",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "ai:review": "node ai-code-review.js full",
+    "ai:review:staged": "node ai-code-review.js staged",
+    "ai:review:changed": "node ai-code-review.js changed",
+    "ai:review:static": "node ai-code-review.js static",
+    "revert:ai-review": "./revert-ai-review.sh"
   },
   "dependencies": {
     "@prisma/client": "^6.16.2",

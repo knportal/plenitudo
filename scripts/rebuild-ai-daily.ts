@@ -10,8 +10,12 @@ import { buildDaily } from "@/server/aiDaily/buildDaily";
     console.log("✅ Successfully built items:", count);
     console.log("🎉 AI Daily rebuild complete!");
   } catch (error) {
-    console.error("❌ Error during AI Daily rebuild:", error.message);
-    console.error("Stack trace:", error.stack);
+    if (error instanceof Error) {
+      console.error("❌ Error during AI Daily rebuild:", error.message);
+      console.error("Stack trace:", error.stack);
+    } else {
+      console.error("❌ Error during AI Daily rebuild:", String(error));
+    }
     process.exit(1);
   }
 })();

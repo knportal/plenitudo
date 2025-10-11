@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+# Optional Pre-Commit Hook for AI Code Review
+#
+# To enable this hook:
+#   cp .code-review-backups/pre-commit.example .git/hooks/pre-commit
+#   chmod +x .git/hooks/pre-commit
+#
+# This will automatically run AI review on staged files before each commit.
+# You can skip it with: git commit --no-verify
+#
+
+echo "🤖 Running AI code review on staged files..."
+
+# Check if OPENAI_API_KEY is set
+if [ -z "$OPENAI_API_KEY" ]; then
+    echo "⚠️  OPENAI_API_KEY not set. Skipping AI review."
+    echo "   Set it with: export OPENAI_API_KEY='your-key'"
+    echo "   Or disable this hook: git commit --no-verify"
+    exit 0
+fi
+
+# Run AI review on staged files
+npm run ai:review:staged
+
+# Check exit code
+if [ $? -ne 0 ]; then
+    echo ""
+    echo "❌ AI review found issues. Please fix them before committing."
+    echo "   Or skip this check with: git commit --no-verify"
+    exit 1
+fi
+
+echo "✅ AI review passed!"
+exit 0
+
+
+
+
+
+

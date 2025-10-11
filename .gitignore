@@ -51,3 +51,5 @@ next-env.d.ts
 Thumbs.db
 
 /generated/prisma
+.ai-review-results/
+.env.local

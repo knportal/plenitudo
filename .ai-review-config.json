@@ -1,0 +1,57 @@
+{
+  "openai": {
+    "model": "gpt-4o",
+    "temperature": 0.2,
+    "maxTokens": 4000
+  },
+  "review": {
+    "enabled": true,
+    "autoFix": false,
+    "severity": {
+      "showCritical": true,
+      "showHigh": true,
+      "showMedium": true,
+      "showLow": true,
+      "showInfo": false
+    },
+    "categories": {
+      "security": true,
+      "performance": true,
+      "bugs": true,
+      "architecture": true,
+      "bestPractices": true,
+      "complexity": true,
+      "maintainability": true
+    }
+  },
+  "analysis": {
+    "includeContext": true,
+    "maxFilesPerReview": 50,
+    "maxFileSizeKB": 500,
+    "excludePatterns": [
+      "**/*.test.ts",
+      "**/*.test.tsx",
+      "**/*.spec.ts",
+      "**/*.spec.tsx",
+      "**/node_modules/**",
+      "**/.next/**",
+      "**/dist/**",
+      "**/build/**"
+    ]
+  },
+  "output": {
+    "format": "detailed",
+    "saveToFile": true,
+    "outputPath": ".ai-review-results",
+    "colorize": true,
+    "showExamples": true
+  },
+  "prompts": {
+    "systemPrompt": "You are an expert code reviewer with deep knowledge of TypeScript, React, Next.js, and modern web development. Analyze code for bugs, security issues, performance problems, and architectural concerns. Provide specific, actionable feedback.",
+    "reviewPrompt": "Review this code and identify:\n1. Critical bugs or errors\n2. Security vulnerabilities\n3. Performance issues\n4. Architecture/design problems\n5. Code quality and maintainability issues\n\nFor each issue, provide:\n- Severity (critical/high/medium/low)\n- Category (security/performance/bugs/architecture/bestPractices/complexity)\n- Line number (if applicable)\n- Description\n- Suggested fix\n\nRespond in JSON format."
+  }
+}
+
+
+
+

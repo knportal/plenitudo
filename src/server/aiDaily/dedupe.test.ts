@@ -61,6 +61,6 @@ describe("clusterByTitle", () => {
     const items = [{ title: "Single item" }];
     const clusters = clusterByTitle(items as any, 0.3);
     expect(clusters.length).toBe(1);
-    expect(clusters[0].length).toBe(1);
+    expect(clusters[0]!.length).toBe(1);
   });
 });
