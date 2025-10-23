@@ -38,7 +38,7 @@ export default function AIDailyList() {
   if (error) {
     return (
       <div className="text-center py-12 text-amber-300">
-        Failed to load AI Daily: {error.message}
+        Failed to load AI Daily: {String(error?.message ?? error)}
       </div>
     );
   }
@@ -46,7 +46,7 @@ export default function AIDailyList() {
   if (isLoading) {
     return (
       <div className="text-center py-12 text-slate-400 animate-pulse">
-        Loading today's AI breakthroughs...
+        Loading today&apos;s AI breakthroughs...
       </div>
     );
   }

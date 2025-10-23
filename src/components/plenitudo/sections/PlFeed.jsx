@@ -28,7 +28,11 @@ const GENRE_NAMES = {
 };
 
 export default function PlFeed() {
-  const { data: aiDaily, error, isLoading } = useSWR("/api/ai-daily", fetcher, {
+  const {
+    data: aiDaily,
+    error,
+    isLoading,
+  } = useSWR("/api/ai-daily", fetcher, {
     revalidateOnFocus: false,
   });
   // Show loading state
@@ -44,7 +48,7 @@ export default function PlFeed() {
           </h2>
         </div>
         <div className="mt-6 text-center py-12 text-slate-400 animate-pulse">
-          Loading today's AI breakthroughs...
+          Loading today&apos;s AI breakthroughs...
         </div>
       </section>
     );
@@ -85,7 +89,7 @@ export default function PlFeed() {
           href="/daily"
           className="text-sm underline underline-offset-4 focus:outline-none focus-visible:ring ring-emerald-400 rounded px-2 py-1 hover:text-emerald-300 transition-colors"
         >
-          View all →
+          View all &rarr;
         </a>
       </div>
 

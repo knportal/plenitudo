@@ -1,5 +1,6 @@
 import AIDailyList from "@/components/AIDaily/AIDailyList";
 import PlHeader from "@/components/plenitudo/layout/PlHeader";
+import Link from "next/link";
 import PlFooter from "@/components/plenitudo/layout/PlFooter";
 import PlBackgroundFX from "@/components/plenitudo/layout/PlBackgroundFX";
 
@@ -16,12 +17,12 @@ export default function Page() {
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
               AI Daily Breakthroughs
             </h1>
-            <a
+            <Link
               href="/"
               className="text-sm underline underline-offset-4 focus:outline-none focus-visible:ring ring-emerald-400 rounded px-2 py-1 hover:text-emerald-300 transition-colors"
             >
               ← Back to home
-            </a>
+            </Link>
           </div>
           <p className="text-lg text-slate-300 max-w-3xl">
             Cross-verified AI news from 18+ trusted sources. Updated daily at 11

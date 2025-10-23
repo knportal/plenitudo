@@ -1,7 +1,7 @@
 import Parser from "rss-parser";
 import pMap from "p-map";
 import { FEEDS, PUBLISHER_REP } from "./feeds";
-import { clusterByTitle, normalizeTitle } from "./dedupe";
+import { clusterByTitle } from "./dedupe";
 import { toETDateISO, pickMood } from "./text";
 import { z } from "zod";
 import { PrismaClient } from "@prisma/client";
@@ -9,6 +9,21 @@ import { formatISO } from "date-fns";
 
 const prisma = new PrismaClient();
 const parser = new Parser({ timeout: 15000 });
+
+type FeedSource = {
+  title: string;
+  url: string;
+  publisher: string;
+  publishedAt: string;
+  desc?: string;
+};
+
+type EligibleEntry = {
+  leader: FeedSource;
+  sources: FeedSource[];
+  summary: string;
+  bullets: string[];
+};
 
 const ItemZ = z.object({
   title: z.string(),
@@ -61,7 +76,7 @@ function publisherLabel(host: string) {
 // Filter out advertisements and non-AI content
 function isRelevantAIContent(title: string, desc: string): boolean {
   const text = (title + " " + desc).toLowerCase();
-  
+
   // Exclude advertisements and promotional content
   const adKeywords = [
     "sponsored",
@@ -79,11 +94,11 @@ function isRelevantAIContent(title: string, desc: string): boolean {
     "limited time",
     "affiliate",
   ];
-  
+
   if (adKeywords.some((kw) => text.includes(kw))) {
     return false;
   }
-  
+
   // Must contain AI-related keywords
   const aiKeywords = [
     "ai",
@@ -105,7 +120,7 @@ function isRelevantAIContent(title: string, desc: string): boolean {
     "nlp",
     "natural language",
   ];
-  
+
   return aiKeywords.some((kw) => text.includes(kw));
 }
 
@@ -117,16 +132,20 @@ async function fetchFeed(url: string) {
       .map((i) => ItemZ.safeParse(i))
       .filter((r) => r.success)
       .map((r) => r.data as RawItem)
-      .filter((item) => 
+      .filter((item) =>
         isRelevantAIContent(
-          item.title, 
+          item.title,
           item.contentSnippet || item.content || ""
         )
       );
     console.log(`✅ Fetched ${items.length} AI-relevant items from ${url}`);
     return items;
-  } catch (error) {
-    console.warn(`⚠️  Failed to fetch ${url}:`, error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.warn(`⚠️  Failed to fetch ${url}:`, error.message);
+    } else {
+      console.warn(`⚠️  Failed to fetch ${url}:`, String(error));
+    }
     return [];
   }
 }
@@ -207,12 +226,12 @@ export async function buildDaily({ limit = 10 }: { limit?: number } = {}) {
       }));
       const { summary, bullets } = summarizeNaively(
         leader.title,
-        leader.desc,
+        leader.desc || "",
         Array.from(pubs) as string[]
       );
       return { leader, sources, summary, bullets };
     })
-    .filter(Boolean) as any[];
+    .filter(Boolean) as EligibleEntry[];
 
   // Hard cap company/topic repetition later if you like
 
@@ -220,17 +239,16 @@ export async function buildDaily({ limit = 10 }: { limit?: number } = {}) {
   const dateISO = toETDateISO();
   const items = eligible
     .slice(0, Math.max(5, Math.min(limit, 10)))
-    .map(({ leader, sources }: any) => {
-      const text = `${leader.title} ${leader.desc}`;
-      const mood = pickMood(leader.title, leader.desc);
+    .map(({ leader, sources }: EligibleEntry) => {
+      const mood = pickMood(leader.title, leader.desc || "");
       const genre = "enterprise"; // simple default for now
       const score = scoreItem(
-        [...new Set(sources.map((s: any) => s.publisher))],
+        [...new Set(sources.map((s) => s.publisher))] as string[],
         leader.title
       );
       return {
         dateISO,
-        genre: "enterprise",
+        genre,
         mood,
         title: leader.title,
         summary: leader.desc ? leader.desc.slice(0, 280) : "Update on AI.",

@@ -38,7 +38,7 @@ describe("clusterByTitle", () => {
       { title: "A!!" },
       { title: "Completely different" },
     ];
-    const clusters = clusterByTitle(items as any, 0.3);
+    const clusters = clusterByTitle(items, 0.3);
     expect(clusters.length).toBe(3); // All items are different enough to be separate clusters
   });
 
@@ -48,7 +48,7 @@ describe("clusterByTitle", () => {
       { title: "OpenAI announces new model today" },
       { title: "Completely different news story" },
     ];
-    const clusters = clusterByTitle(items as any, 0.3);
+    const clusters = clusterByTitle(items, 0.3);
     expect(clusters.length).toBe(2); // First two should cluster together
   });
 
@@ -59,7 +59,7 @@ describe("clusterByTitle", () => {
 
   it("handles single item", () => {
     const items = [{ title: "Single item" }];
-    const clusters = clusterByTitle(items as any, 0.3);
+    const clusters = clusterByTitle(items, 0.3);
     expect(clusters.length).toBe(1);
     expect(clusters[0].length).toBe(1);
   });

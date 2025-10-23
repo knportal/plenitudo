@@ -19,8 +19,8 @@ export async function GET() {
   const data = rows.map((r) => ({
     id: r.id,
     dateISO: r.dateISO,
-    genre: r.genre as any,
-    mood: r.mood as any,
+    genre: r.genre,
+    mood: r.mood,
     title: r.title,
     summary: r.summary,
     bullets: typeof r.bullets === "string" ? JSON.parse(r.bullets) : r.bullets,
