@@ -13,11 +13,11 @@ const prisma = new PrismaClient();
       title: "EU publishes AI Act guidance for GPAI",
       summary:
         "The European Commission released fresh guidance to help developers comply with GPAI obligations...",
-      bullets: [
+      bullets: JSON.stringify([
         "Impact: clearer path to compliance",
         "Founder tip: map your disclosures early",
-      ] as any,
-      sources: [
+      ]),
+      sources: JSON.stringify([
         {
           title: "Commission guidance",
           url: "https://europa.eu",
@@ -30,7 +30,7 @@ const prisma = new PrismaClient();
           publisher: "Reuters",
           publishedAt: new Date().toISOString(),
         },
-      ] as any,
+      ]),
       score: 7,
     },
   });

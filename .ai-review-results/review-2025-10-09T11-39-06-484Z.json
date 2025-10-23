@@ -1,0 +1,24 @@
+{
+  "timestamp": "2025-10-09T11:39:06.485Z",
+  "filesAnalyzed": 26,
+  "totalIssues": 0,
+  "results": {
+    "critical": [],
+    "high": [],
+    "medium": [],
+    "low": [],
+    "info": []
+  },
+  "config": {
+    "model": "gpt-4o",
+    "categories": {
+      "security": true,
+      "performance": true,
+      "bugs": true,
+      "architecture": true,
+      "bestPractices": true,
+      "complexity": true,
+      "maintainability": true
+    }
+  }
+}

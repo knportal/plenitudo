@@ -19,8 +19,8 @@ export function trigramSim(a: string, b: string) {
   return inter / (A.size + B.size - inter || 1);
 }
 // Cluster by similarity ≥ 0.35
-export function clusterByTitle(items: any[], threshold = 0.35) {
-  const clusters: any[][] = [];
+export function clusterByTitle<T extends { title: string }>(items: T[], threshold = 0.35): T[][] {
+  const clusters: T[][] = [];
   for (const it of items) {
     let placed = false;
     for (const c of clusters) {
