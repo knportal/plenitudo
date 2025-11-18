@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model AIDailyItem {
+  id        String   @id @default(cuid())
+  dateISO   String
+  genre     String
+  mood      String
+  title     String
+  summary   String
+  bullets   Json
+  sources   Json
+  score     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([dateISO])
+  @@index([score])
+}
+
+model Room {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String   @default("")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  threads     Thread[]
+
+  @@index([slug])
+}
+
+model Thread {
+  id          String   @id @default(cuid())
+  roomId      String
+  title       String
+  content     String   @default("")
+  authorName  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  room   Room   @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  posts  Post[]
+
+  @@index([roomId])
+}
+
+model Post {
+  id          String   @id @default(cuid())
+  threadId    String
+  content     String
+  authorName  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  thread Thread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+
+  @@index([threadId])
+}
+
+/// Beta signup waitlist
+model BetaSignup {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  verified          Boolean   @default(false)
+  verificationToken String?   @unique
+  verifiedAt        DateTime?
+  createdAt         DateTime  @default(now())
+
+  @@index([email])
+  @@index([verificationToken])
+}
+

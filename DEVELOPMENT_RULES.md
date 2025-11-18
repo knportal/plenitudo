@@ -233,3 +233,98 @@ This project maintains high quality standards through:
 6. **Maintainability**: Code duplication and complexity analysis
 
 All code must pass these quality gates before being considered ready for production.
+
+---
+
+## ✅ Beta Signup & Responsive UX Rules
+
+These rules protect the beta waitlist flow and the new responsive design so future changes don’t accidentally break them.
+
+### 1. Beta Signup Backend Rules
+
+- **Prisma schemas**
+  - Local development uses **`prisma/schema.dev.prisma`** with SQLite.
+  - Production uses **`prisma/schema.prisma`** with Postgres.
+  - After changing the `BetaSignup` model:
+    - Dev:
+      ```bash
+      DATABASE_URL="file:./prisma/dev.db" npx prisma generate --schema=./prisma/schema.dev.prisma
+      DATABASE_URL="file:./prisma/dev.db" npx prisma db push --schema=./prisma/schema.dev.prisma
+      ```
+    - Prod (CI/deploy):
+      ```bash
+      npx prisma migrate deploy --schema=./prisma/schema.prisma
+      ```
+
+- **API contracts (do not break without updating the UI)**:
+  - `POST /api/beta-signup`:
+    - Accepts `{ email: string }`.
+    - Always **normalizes email**: lowercase + trim.
+    - Returns:
+      - `requiresVerification: true` when an email verification link is sent.
+      - `message` and/or `error` for UX copy.
+    - Must keep:
+      - Format validation + disposable email blocking.
+      - Unique email constraint.
+      - Token generation and storage on `BetaSignup.verificationToken`.
+  - `GET /api/beta-signup/verify`:
+    - Reads `token` query param.
+    - On success/failure, redirects to `/` with `?verified=success|already` or `?error=...`.
+    - Do not change these query keys without updating `VerificationBanner`.
+
+- **Environment variables required in production**:
+  - `DATABASE_URL` – Postgres connection string.
+  - `RESEND_API_KEY` – for outbound email (or equivalent email provider).
+  - `NEXT_PUBLIC_APP_URL` – used to build verification links in emails.
+
+### 2. Beta Signup Frontend Rules
+
+- **Header & navigation**
+  - `PlHeader` lives in `src/app/layout.tsx` and is **global + fixed**.
+    Do not re-mount it per page.
+  - All in-page section links (`Feed`, `Rooms`, `Prompts`) use `Link` with hashes (`/#feed-title`, etc.) and rely on the hash-scroll `useEffect` in `PlHeader`.
+
+- **Join beta button**
+  - The header “Join beta” button must use the **same `btn-primary` gradient style** as the hero “Explore Feed” button for visual consistency.
+  - Desktop and mobile “Join beta” actions must both open the same modal in `PlHeader`.
+
+- **Join beta modal**
+  - Must be rendered with `createPortal(..., document.body)` to stay fully centered and independent of header layout.
+  - Close behavior:
+    - Clicking background closes **only when not loading**.
+    - “Cancel” resets email + status + error.
+  - State machine:
+    - `idle` → `loading` → `success` or `error`.
+    - When `requiresVerification` is true, keep showing the “Check your email” success state before auto-closing.
+
+- **Verification banner**
+  - `VerificationBanner` reads `verified` and `error` from search params on `/`.
+  - Any changes to redirect params in the API must be mirrored in this component.
+
+### 3. Responsive Design & Accessibility Rules
+
+- **Touch targets**
+  - All buttons and clickable controls must have **min-height `44px`** (either via Tailwind `min-h-[44px]` or shared `.btn-*` styles).
+
+- **Text sizes**
+  - Use responsive typography: `text-xs sm:text-sm`, `text-base sm:text-lg`, etc.
+  - Avoid locking large text sizes on very small screens (e.g. `text-4xl` without a smaller mobile size).
+
+- **Layout & overflow**
+  - No horizontal scrolling on the main layout:
+    - `body { overflow-x: hidden; }` is already set in `globals.css` – do not override it.
+  - Background effects (`PlBackgroundFX`) must stay behind content:
+    - Use `fixed inset-0 -z-10 overflow-hidden`.
+    - Avoid adding new large gradient blobs that create “ghost shadows” on edges.
+
+- **Logo**
+  - Always use `PlLogoMark` (not raw `<Image>` tags) so size and behavior stay consistent.
+  - `PlLogoMark` sizes (`sm`, `md`, `lg`) are responsive; do not hardcode conflicting widths/heights around it.
+
+When changing any of the above areas, **run a quick manual regression**:
+- Test beta signup with a valid and invalid email.
+- Click the verification link and confirm the banner shows on `/`.
+- Check header + logo + “Join beta” on:
+  - Mobile width (~375px),
+  - Tablet (~768px),
+  - Desktop (~1280px+).
