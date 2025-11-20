@@ -1,6 +1,7 @@
 "use client";
 
 // AI Daily Feed - Integrated with beautiful landing page
+import Link from "next/link";
 import PlSparklesIcon from "../icons/PlSparklesIcon";
 import PlShareIcon from "../icons/PlShareIcon";
 import { motion } from "framer-motion";
@@ -29,16 +30,19 @@ const GENRE_NAMES = {
 
 export default function PlFeed() {
   const {
-    data: aiDaily,
+    data,
     error,
     isLoading,
   } = useSWR("/api/ai-daily", fetcher, {
     revalidateOnFocus: false,
   });
+
+  // Handle new API response format: { items, threadId, discussUrl }
+  const aiDaily = data?.items || data || [];
   // Show loading state
   if (isLoading) {
     return (
-      <section aria-labelledby="feed-title" className="mt-16">
+      <section aria-labelledby="feed-title" className="mt-8 sm:mt-16">
         <div className="flex items-center justify-between gap-4">
           <h2
             id="feed-title"
@@ -57,7 +61,7 @@ export default function PlFeed() {
   // Show error state
   if (error) {
     return (
-      <section aria-labelledby="feed-title" className="mt-16">
+      <section aria-labelledby="feed-title" className="mt-8 sm:mt-16">
         <div className="flex items-center justify-between gap-4">
           <h2
             id="feed-title"
@@ -99,7 +103,7 @@ export default function PlFeed() {
         </div>
       ) : (
         <ul
-          className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          className="mt-4 sm:mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5"
           role="list"
         >
           {items.slice(0, 6).map((item, idx) => (
@@ -111,7 +115,7 @@ export default function PlFeed() {
               transition={{ duration: 0.5, delay: idx * 0.05, ease: "easeOut" }}
               viewport={{ once: true, amount: 0.25 }}
             >
-              <article className="card-glow rounded-2xl p-5 bg-slate-900/50 ring-1 ring-white/10 hover:ring-emerald-400/60 transition-all duration-300 focus-within:ring-emerald-400/80 h-full flex flex-col">
+              <article className="card-glow rounded-xl sm:rounded-2xl p-4 sm:p-5 bg-slate-900/50 ring-1 ring-white/10 hover:ring-emerald-400/60 transition-all duration-300 focus-within:ring-emerald-400/80 h-full flex flex-col">
                 <div className="flex items-center gap-2 mb-2">
                   <p
                     className={`${
@@ -131,15 +135,15 @@ export default function PlFeed() {
                   )}
                 </div>
 
-                <h3 className="text-lg font-semibold leading-snug mb-3 flex-grow">
+                <h3 className="text-base sm:text-lg font-semibold leading-snug mb-2 sm:mb-3 flex-grow">
                   {item.title}
                 </h3>
 
-                <p className="text-sm text-slate-300 line-clamp-2 mb-3">
+                <p className="text-sm text-slate-300 line-clamp-2 mb-2 sm:mb-3">
                   {item.summary}
                 </p>
 
-                <div className="flex flex-wrap gap-1 mb-3">
+                <div className="flex flex-wrap gap-1 mb-2 sm:mb-3">
                   {(item.sources || []).slice(0, 3).map((s, i) => (
                     <span
                       key={i}
@@ -155,21 +159,25 @@ export default function PlFeed() {
                   )}
                 </div>
 
-                <div className="mt-auto flex items-center gap-3 pt-3 border-t border-white/5">
-                  <button
-                    className="btn-ghost flex-1"
-                    aria-label="Inspire me with similar"
-                    onClick={() =>
-                      window.dispatchEvent(
-                        new CustomEvent("open-room-from-prompt", {
-                          detail: `Turn this into an opportunity: ${item.title}`,
-                        })
-                      )
-                    }
+                <div className="mt-auto flex items-center gap-1 sm:gap-2 pt-2 sm:pt-3 border-t border-white/5">
+                  {data?.discussUrl && (
+                    <a
+                      href={data.discussUrl}
+                      className="btn-ghost flex-1"
+                      aria-label="Discuss this breakthrough"
+                    >
+                      <span className="text-xs">💬</span>
+                      <span className="text-xs">Discuss</span>
+                    </a>
+                  )}
+                  <Link
+                    href="/rooms/ai"
+                    className="btn-ghost flex-1 relative z-10"
+                    aria-label="Explore in AI room"
                   >
                     <PlSparklesIcon className="size-4" />
                     <span className="text-xs">Explore</span>
-                  </button>
+                  </Link>
                   <a
                     href={item.sources?.[0]?.url || "#"}
                     target="_blank"
