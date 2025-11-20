@@ -8,7 +8,7 @@ datasource db {
 }
 
 model AIDailyItem {
-  id        String   @id @default(cuid())
+  id        String   @id
   dateISO   String
   genre     String
   mood      String
@@ -18,63 +18,58 @@ model AIDailyItem {
   sources   Json
   score     Float
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime
 
-  @@index([dateISO])
   @@index([score])
+  @@index([dateISO])
 }
 
-model Room {
-  id          String   @id @default(cuid())
-  slug        String   @unique
-  title       String
-  description String   @default("")
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  threads     Thread[]
-
-  @@index([slug])
-}
-
-model Thread {
-  id          String   @id @default(cuid())
-  roomId      String
-  title       String
-  content     String   @default("")
-  authorName  String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  room   Room   @relation(fields: [roomId], references: [id], onDelete: Cascade)
-  posts  Post[]
-
-  @@index([roomId])
-}
-
-model Post {
-  id          String   @id @default(cuid())
-  threadId    String
-  content     String
-  authorName  String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  thread Thread @relation(fields: [threadId], references: [id], onDelete: Cascade)
-
-  @@index([threadId])
-}
-
-/// Beta signup waitlist
 model BetaSignup {
-  id                String    @id @default(cuid())
+  id                String    @id
   email             String    @unique
   verified          Boolean   @default(false)
   verificationToken String?   @unique
   verifiedAt        DateTime?
   createdAt         DateTime  @default(now())
 
-  @@index([email])
   @@index([verificationToken])
+  @@index([email])
 }
 
+model Post {
+  id         String   @id
+  threadId   String
+  content    String
+  authorName String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime
+  Thread     Thread   @relation(fields: [threadId], references: [id], onDelete: Cascade)
+
+  @@index([threadId])
+}
+
+model Room {
+  id          String   @id
+  slug        String   @unique
+  title       String
+  description String   @default("")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  Thread      Thread[]
+
+  @@index([slug])
+}
+
+model Thread {
+  id         String   @id
+  roomId     String
+  title      String
+  content    String   @default("")
+  authorName String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime
+  Post       Post[]
+  Room       Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  @@index([roomId])
+}
