@@ -20,6 +20,7 @@ export default function PlLogoMark({ showText = false, size = "md", className = 
           height={192}
           className="w-full h-full object-contain"
           priority
+          unoptimized={false}
         />
       </div>
 

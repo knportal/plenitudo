@@ -1,6 +1,6 @@
 export default function PlBackgroundFX() {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 -z-0">
+    <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       <div className="absolute -top-32 -left-24 w-[40rem] h-[40rem] rounded-full blur-3xl opacity-25 bg-gradient-to-tr from-emerald-500 to-sky-500" />
       <div className="absolute -bottom-32 -right-24 w-[36rem] h-[36rem] rounded-full blur-3xl opacity-20 bg-gradient-to-tr from-fuchsia-500 to-amber-400" />
       <svg
