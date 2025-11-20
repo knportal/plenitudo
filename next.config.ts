@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
     // Allow build to succeed even with TypeScript errors (for now)
     ignoreBuildErrors: true,
   },
+  // Include Prisma binaries for Vercel serverless functions
+  outputFileTracingIncludes: {
+    '/api/**/*': ['./node_modules/.prisma/client/**/*'],
+    '/*': ['./node_modules/.prisma/client/**/*'],
+  },
 };
 
 export default nextConfig;
