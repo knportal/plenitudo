@@ -7,7 +7,7 @@
     "dev:restart": "./restart-dev.sh",
     "dev:auto": "node auto-dev.js",
     "dev:clean": "./scripts/clear-cache.sh && npm run dev",
-    "postinstall": "prisma generate",
+    "postinstall": "prisma generate --schema=./prisma/schema.prisma",
     "prebuild": "rm -rf .next .turbo node_modules/.cache || true",
     "build": "prisma generate --schema=./prisma/schema.prisma && next build --turbopack",
     "start": "next start",
