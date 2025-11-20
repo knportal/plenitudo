@@ -2,7 +2,7 @@ import Parser from "rss-parser";
 import pMap from "p-map";
 import { FEEDS, PUBLISHER_REP } from "./feeds";
 import { clusterByTitle } from "./dedupe";
-import { toETDateISO, pickMood } from "./text";
+import { toETDateISO, pickMood, inferGenre } from "./text";
 import { z } from "zod";
 import { PrismaClient } from "@prisma/client";
 import { formatISO } from "date-fns";
@@ -169,6 +169,34 @@ function scoreItem(publishers: string[], title: string) {
   return rep + novelty + practicality; // ~3–9
 }
 
+/**
+ * Diversify items by limiting how many come from the same primary publisher.
+ * This prevents any single source (like NVIDIA) from dominating the feed.
+ */
+function diversifyByPublisher(
+  entries: EligibleEntry[],
+  maxPerPublisher: number = 3
+): EligibleEntry[] {
+  const publisherCounts = new Map<string, number>();
+  const result: EligibleEntry[] = [];
+
+  for (const entry of entries) {
+    const primaryPublisher = entry.sources[0]?.publisher || "Unknown";
+    const count = publisherCounts.get(primaryPublisher) || 0;
+
+    if (count < maxPerPublisher) {
+      result.push(entry);
+      publisherCounts.set(primaryPublisher, count + 1);
+    } else {
+      console.log(
+        `⚠️  Skipping item from ${primaryPublisher} (already have ${count})`
+      );
+    }
+  }
+
+  return result;
+}
+
 export async function buildDaily({ limit = 10 }: { limit?: number } = {}) {
   const all = (
     await pMap(FEEDS, async (f) => fetchFeed(f.url), { concurrency: 4 })
@@ -206,14 +234,14 @@ export async function buildDaily({ limit = 10 }: { limit?: number } = {}) {
     `🔍 Created ${clusters.length} clusters from ${mapped.length} items`
   );
 
-  // Keep only clusters with ≥2 distinct publishers (cross-check rule)
+  // Keep clusters with ≥1 distinct publishers (lowered from 2 for more variety)
   const eligible = clusters
     .map((cl) => {
       const pubs = new Set(cl.map((x) => x.publisher));
       console.log(
         `📊 Cluster with ${cl.length} items from ${pubs.size} publishers: ${Array.from(pubs).join(", ")}`
       );
-      if (pubs.size < 2) return null;
+      if (pubs.size < 1) return null; // Lowered from 2 to 1 to show more variety
       // choose canonical title = longest title
       const leader = cl
         .slice()
@@ -233,19 +261,28 @@ export async function buildDaily({ limit = 10 }: { limit?: number } = {}) {
     })
     .filter(Boolean) as EligibleEntry[];
 
-  // Hard cap company/topic repetition later if you like
+  // Apply diversity filter: max 3 items from same primary publisher
+  const diversified = diversifyByPublisher(eligible, 3);
+  console.log(
+    `🎨 Applied diversity filter: ${eligible.length} → ${diversified.length} items`
+  );
 
   // Convert to AIDailyItem records
   const dateISO = toETDateISO();
-  const items = eligible
-    .slice(0, Math.max(5, Math.min(limit, 10)))
+  const items = diversified
+    .slice(0, Math.max(5, Math.min(limit, 30))) // Increased max to 30 to show variety
     .map(({ leader, sources }: EligibleEntry) => {
       const mood = pickMood(leader.title, leader.desc || "");
-      const genre = "enterprise"; // simple default for now
+      const genre = inferGenre(leader.title, leader.desc || ""); // Smart classification
       const score = scoreItem(
         [...new Set(sources.map((s) => s.publisher))] as string[],
         leader.title
       );
+
+      console.log(
+        `🏷️  Classified as: ${genre} (${mood}) - ${leader.title.substring(0, 60)}...`
+      );
+
       return {
         dateISO,
         genre,
@@ -258,6 +295,7 @@ export async function buildDaily({ limit = 10 }: { limit?: number } = {}) {
         ]),
         sources: JSON.stringify(sources),
         score,
+        updatedAt: new Date(),
       };
     });
 
