@@ -11,7 +11,7 @@
 
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { formatAIDailyAsPost, publishToSubstack, sendPostViaEmail } from "@/server/substack/publish";
+import { publishToSubstack, sendPostViaEmail } from "@/server/substack/publish";
 import { toETDateISO } from "@/server/aiDaily/text";
 
 const prisma = new PrismaClient();
