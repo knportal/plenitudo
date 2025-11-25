@@ -59,14 +59,18 @@ async function getResendClient() {
 
 /**
  * Get the "from" email address.
- * Uses verified domain if available, otherwise falls back to Resend's default.
+ * Uses RESEND_FROM_EMAIL if set, otherwise uses the default verified domain email.
  */
 function getFromEmail(): string {
-  // If you have a verified domain, use it:
-  // return "notifications@plenitudo.ai";
+  // Check if a custom from address is configured
+  const customFrom = process.env.RESEND_FROM_EMAIL;
+  if (customFrom) {
+    return customFrom;
+  }
 
-  // Otherwise, use Resend's default domain (works for testing):
-  return "onboarding@resend.dev";
+  // Default to the verified domain email (news@plenitudo.ai)
+  // This will only work if the domain is verified in Resend
+  return "news@plenitudo.ai";
 }
 
 /**
@@ -104,9 +108,19 @@ export async function sendEmail(
     }
   }
 
+  const fromEmail = getFromEmail();
+
+  // Log the from address being used for debugging
+  console.log("📧 Sending email:", {
+    from: fromEmail,
+    to,
+    subject,
+    hasCustomFrom: !!process.env.RESEND_FROM_EMAIL,
+  });
+
   try {
     const { data, error } = await client.emails.send({
-      from: getFromEmail(),
+      from: fromEmail,
       to: [to],
       subject,
       html,
@@ -114,10 +128,18 @@ export async function sendEmail(
 
     if (error) {
       console.error("❌ Resend error:", error);
+
+      // Provide helpful error message for domain verification issues
+      if (error.message?.includes("verify a domain") || error.message?.includes("testing emails")) {
+        const helpfulMessage = `Domain verification required. ${error.message} To fix: 1) Go to resend.com/domains, 2) Verify plenitudo.ai domain, 3) Set RESEND_FROM_EMAIL=notifications@plenitudo.ai in Vercel, or 4) Use the email address Resend allows (check error message above).`;
+        throw new Error(helpfulMessage);
+      }
+
       throw new Error(`Failed to send email: ${error.message}`);
     }
 
     console.log("✅ Email sent successfully:", {
+      from: fromEmail,
       to,
       subject,
       id: data?.id,
@@ -125,7 +147,11 @@ export async function sendEmail(
 
     return;
   } catch (error) {
-    console.error("❌ Failed to send email:", error);
+    console.error("❌ Failed to send email:", {
+      from: fromEmail,
+      to,
+      error: error instanceof Error ? error.message : String(error),
+    });
     throw error;
   }
 }
