@@ -8,23 +8,51 @@
  * 4. Verify domain in Resend dashboard (optional, can use onboarding.resend.com for testing)
  */
 
-import { Resend } from "resend";
+// Import Resend at module level - Next.js will handle bundling correctly
+// with transpilePackages config
+let ResendClass: typeof import("resend").Resend | null = null;
+
+/**
+ * Lazy load Resend to avoid issues in serverless functions.
+ * Uses dynamic import as fallback if static import fails.
+ */
+async function getResendClass() {
+  if (ResendClass) {
+    return ResendClass;
+  }
+
+  try {
+    // Try static import first (should work with transpilePackages)
+    const resendModule = await import("resend");
+    ResendClass = resendModule.Resend;
+
+    if (!ResendClass || typeof ResendClass !== 'function') {
+      throw new Error(`Resend class not found or not a function. Got: ${typeof ResendClass}`);
+    }
+
+    return ResendClass;
+  } catch (error) {
+    console.error("❌ Failed to import Resend:", error);
+    throw error;
+  }
+}
 
 /**
  * Get or create Resend client.
  * Creates a new instance each time to avoid issues with serverless functions.
  */
-function getResendClient(): Resend | null {
+async function getResendClient() {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     return null;
   }
 
   try {
+    const Resend = await getResendClass();
     // Create new instance each time to avoid serverless function state issues
     return new Resend(apiKey);
   } catch (error) {
-    console.error("Failed to create Resend client:", error);
+    console.error("❌ Failed to create Resend client:", error);
     return null;
   }
 }
@@ -55,7 +83,7 @@ export async function sendEmail(
   subject: string,
   html: string
 ): Promise<void> {
-  const client = getResendClient();
+  const client = await getResendClient();
 
   // If no API key configured, log in development, throw in production
   if (!client) {
