@@ -6,17 +6,17 @@ const PROMPTS = [
 
 export default function PlPrompts() {
   return (
-    <section aria-labelledby="prompts-title" className="mt-16 mb-24">
+    <section aria-labelledby="prompts-title" className="mt-8 sm:mt-16 mb-12 sm:mb-24">
       <h2
         id="prompts-title"
         className="text-xl md:text-2xl font-semibold tracking-tight"
       >
         Guided Prompts
       </h2>
-      <ul className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4" role="list">
+      <ul className="mt-4 sm:mt-6 grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4" role="list">
         {PROMPTS.map((p, i) => (
           <li key={i} className="group">
-            <button className="w-full text-left rounded-2xl p-5 bg-slate-900/50 ring-1 ring-white/10 hover:ring-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 transition-all">
+            <button className="w-full text-left rounded-xl sm:rounded-2xl p-4 sm:p-5 bg-slate-900/50 ring-1 ring-white/10 hover:ring-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 transition-all min-h-[44px]">
               <div className="inline-flex items-center gap-2">
                 <span
                   aria-hidden
@@ -24,7 +24,7 @@ export default function PlPrompts() {
                 ></span>
                 <span className="text-sm text-slate-300">Reflect</span>
               </div>
-              <p className="mt-2 text-base md:text-lg font-medium leading-snug group-hover:underline underline-offset-4 decoration-emerald-400/60">
+              <p className="mt-2 text-sm sm:text-base md:text-lg font-medium leading-snug group-hover:underline underline-offset-4 decoration-emerald-400/60">
                 {p}
               </p>
             </button>

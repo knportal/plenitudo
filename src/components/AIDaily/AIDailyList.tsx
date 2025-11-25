@@ -1,6 +1,8 @@
 "use client";
+import { useState } from "react";
 import useSWR from "swr";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import type { AIDailyItemDTO } from "@/types/aiDaily";
 import PlSparklesIcon from "@/components/plenitudo/icons/PlSparklesIcon";
 import PlShareIcon from "@/components/plenitudo/icons/PlShareIcon";
@@ -26,8 +28,16 @@ const GENRE_NAMES = {
   climate: "Climate",
 };
 
+interface AIDailyResponse {
+  items: AIDailyItemDTO[];
+  threadId: string | null;
+  discussUrl: string | null;
+}
+
 export default function AIDailyList() {
-  const { data, error, isLoading } = useSWR<AIDailyItemDTO[]>(
+  const [visibleCount, setVisibleCount] = useState(6); // Start with 6 items
+
+  const { data, error, isLoading } = useSWR<AIDailyResponse>(
     "/api/ai-daily",
     fetcher,
     {
@@ -51,7 +61,7 @@ export default function AIDailyList() {
     );
   }
 
-  if (!data || data.length === 0) {
+  if (!data || !data.items || data.items.length === 0) {
     return (
       <div className="text-center py-12 text-slate-400">
         No AI breakthroughs today. Check back tomorrow!
@@ -59,16 +69,45 @@ export default function AIDailyList() {
     );
   }
 
+  const { items, discussUrl } = data;
+  const hasMore = items.length > visibleCount;
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + 6, items.length)); // Load 6 more at a time
+  };
+
   return (
-    <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-      {data.map((item, i) => (
-        <motion.article
+    <>
+      {/* Discussion Thread Link */}
+      {discussUrl && (
+        <div className="mb-4 rounded-xl p-3 bg-emerald-500/10 ring-1 ring-emerald-400/30">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <h3 className="text-sm font-semibold text-emerald-300">Join the Discussion</h3>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Share your thoughts on today&apos;s AI breakthroughs
+              </p>
+            </div>
+            <a
+              href={discussUrl}
+              className="btn-ghost whitespace-nowrap text-xs"
+              aria-label="Join discussion thread"
+            >
+              💬 Discuss
+            </a>
+          </div>
+        </div>
+      )}
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {items.slice(0, visibleCount).map((item, i) => (
+          <motion.article
           key={item.id}
           initial={{ opacity: 0, y: 12, scale: 0.98 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.5, delay: i * 0.05, ease: "easeOut" }}
           viewport={{ once: true, amount: 0.25 }}
-          className="card-glow rounded-2xl p-5 bg-slate-900/50 ring-1 ring-white/10 hover:ring-emerald-400/60 transition-all duration-300 focus-within:ring-emerald-400/80 h-full flex flex-col"
+          className="card-glow rounded-xl p-4 sm:p-5 bg-slate-900/50 ring-1 ring-white/10 hover:ring-emerald-400/60 transition-all duration-300 focus-within:ring-emerald-400/80 h-full flex flex-col"
         >
           <div className="flex items-center gap-2 mb-2">
             <p
@@ -91,26 +130,26 @@ export default function AIDailyList() {
             )}
           </div>
 
-          <h3 className="text-lg font-semibold leading-snug mb-3 flex-grow">
+          <h3 className="text-base font-semibold leading-snug mb-2 flex-grow">
             {item.title}
           </h3>
 
-          <p className="text-sm text-slate-300 line-clamp-3 mb-3">
+          <p className="text-sm text-slate-300 line-clamp-3 mb-2">
             {item.summary}
           </p>
 
           {Array.isArray(item.bullets) && item.bullets.length > 0 && (
-            <ul className="mt-2 mb-3 space-y-1 text-sm text-slate-400">
+            <ul className="mb-2 space-y-0.5 text-xs text-slate-400">
               {item.bullets.slice(0, 2).map((b, idx) => (
-                <li key={idx} className="flex items-start gap-2">
-                  <span className="text-emerald-400 mt-1">•</span>
+                <li key={idx} className="flex items-start gap-1.5">
+                  <span className="text-emerald-400 mt-0.5">•</span>
                   <span className="flex-1">{b}</span>
                 </li>
               ))}
             </ul>
           )}
 
-          <div className="flex flex-wrap gap-1 mb-3">
+          <div className="flex flex-wrap gap-1 mb-2">
             {(item.sources || []).slice(0, 4).map((s, idx) => (
               <span
                 key={idx}
@@ -126,21 +165,25 @@ export default function AIDailyList() {
             )}
           </div>
 
-          <div className="mt-auto flex items-center gap-3 pt-3 border-t border-white/5">
-            <button
+          <div className="mt-auto flex items-center gap-1.5 pt-2 border-t border-white/5">
+            {discussUrl && (
+              <a
+                href={discussUrl}
+                className="btn-ghost flex-1"
+                aria-label="Discuss this breakthrough"
+              >
+                <span className="text-xs">💬</span>
+                <span className="text-xs">Discuss</span>
+              </a>
+            )}
+            <Link
+              href="/rooms/ai"
               className="btn-ghost flex-1"
-              aria-label="Inspire me with similar"
-              onClick={() =>
-                window.dispatchEvent(
-                  new CustomEvent("open-room-from-prompt", {
-                    detail: `Turn this into an opportunity: ${item.title}`,
-                  })
-                )
-              }
+              aria-label="Explore in AI room"
             >
               <PlSparklesIcon className="size-4" />
               <span className="text-xs">Explore</span>
-            </button>
+            </Link>
             <a
               href={item.sources?.[0]?.url || "#"}
               target="_blank"
@@ -154,6 +197,38 @@ export default function AIDailyList() {
           </div>
         </motion.article>
       ))}
+      </div>
+
+      {/* Load More Button */}
+      {hasMore && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="mt-6 text-center"
+        >
+          <button
+            onClick={handleLoadMore}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-500/10 text-emerald-300 ring-1 ring-emerald-400/30 hover:bg-emerald-500/20 transition-all duration-200 hover:scale-105"
+            aria-label="Load more AI breakthroughs"
+          >
+            <span className="text-sm font-medium">Load More</span>
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+        </motion.div>
+      )}
 
       {/* Utility styles */}
       <style jsx global>{`
@@ -200,6 +275,6 @@ export default function AIDailyList() {
           border-color: rgba(16, 185, 129, 0.45);
         }
       `}</style>
-    </div>
+    </>
   );
 }

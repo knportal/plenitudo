@@ -1,89 +1,104 @@
 /**
- * Email notification service.
- *
- * TODO: Replace stub implementation with Resend API.
- *
- * Resend integration pattern:
- * ```typescript
- * import { Resend } from "resend";
- *
- * const resend = new Resend(process.env.RESEND_API_KEY);
- *
- * export async function sendEmail(to: string, subject: string, html: string) {
- *   const { data, error } = await resend.emails.send({
- *     from: "notifications@yourdomain.com",
- *     to: [to],
- *     subject,
- *     html,
- *   });
- *
- *   if (error) {
- *     console.error("Resend error:", error);
- *     throw new Error(`Failed to send email: ${error.message}`);
- *   }
- *
- *   return data;
- * }
- * ```
+ * Email notification service using Resend API.
  *
  * Setup:
- * 1. Install: `npm install resend`
+ * 1. Install: `npm install resend` ✅
  * 2. Get API key from https://resend.com/api-keys
  * 3. Add to .env: `RESEND_API_KEY=re_...`
- * 4. Verify domain in Resend dashboard
- * 5. Replace stub implementation below
+ * 4. Verify domain in Resend dashboard (optional, can use onboarding.resend.com for testing)
  */
 
-// Reserved for future email implementation
-// Uncomment when implementing email functionality
-/*
-type SendEmailOptions = {
-  to: string;
-  subject: string;
-  html: string;
-}
-*/
+import { Resend } from "resend";
 
 /**
- * Send an email notification.
- *
- * Current: Stub implementation that logs to console in development.
- * TODO: Replace with Resend API or other email provider.
+ * Get or create Resend client.
+ * Creates a new instance each time to avoid issues with serverless functions.
+ */
+function getResendClient(): Resend | null {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    return null;
+  }
+
+  try {
+    // Create new instance each time to avoid serverless function state issues
+    return new Resend(apiKey);
+  } catch (error) {
+    console.error("Failed to create Resend client:", error);
+    return null;
+  }
+}
+
+/**
+ * Get the "from" email address.
+ * Uses verified domain if available, otherwise falls back to Resend's default.
+ */
+function getFromEmail(): string {
+  // If you have a verified domain, use it:
+  // return "notifications@plenitudo.ai";
+
+  // Otherwise, use Resend's default domain (works for testing):
+  return "onboarding@resend.dev";
+}
+
+/**
+ * Send an email notification using Resend API.
  *
  * @param to Email recipient
  * @param subject Email subject line
  * @param html HTML email content
- * @returns Promise that resolves when email is sent (or logged)
+ * @returns Promise that resolves when email is sent
+ * @throws Error if Resend API key is not configured or email sending fails
  */
 export async function sendEmail(
   to: string,
   subject: string,
   html: string
 ): Promise<void> {
-  // Stub implementation: log to console in development
-  if (process.env.NODE_ENV === "development") {
-    console.log("=".repeat(60));
-    console.log("📧 EMAIL STUB (would send via Resend in production)");
-    console.log("=".repeat(60));
-    console.log(`To: ${to}`);
-    console.log(`Subject: ${subject}`);
-    console.log("---");
-    console.log(html);
-    console.log("=".repeat(60));
-  } else {
-    // In production, this should call Resend API
-    // TODO: Uncomment and configure when Resend is set up
-    // const resend = new Resend(process.env.RESEND_API_KEY);
-    // await resend.emails.send({
-    //   from: "notifications@yourdomain.com",
-    //   to: [to],
-    //   subject,
-    //   html,
-    // });
+  const client = getResendClient();
 
-    console.warn(
-      `[EMAIL STUB] Would send email to ${to} with subject: ${subject}`
-    );
+  // If no API key configured, log in development, throw in production
+  if (!client) {
+    if (process.env.NODE_ENV === "development") {
+      console.log("=".repeat(60));
+      console.log("📧 EMAIL STUB (RESEND_API_KEY not configured)");
+      console.log("=".repeat(60));
+      console.log(`To: ${to}`);
+      console.log(`Subject: ${subject}`);
+      console.log("---");
+      console.log(html.substring(0, 200) + "...");
+      console.log("=".repeat(60));
+      return;
+    } else {
+      throw new Error(
+        "RESEND_API_KEY is not configured. Cannot send email in production."
+      );
+    }
+  }
+
+  try {
+    const { data, error } = await client.emails.send({
+      from: getFromEmail(),
+      to: [to],
+      subject,
+      html,
+    });
+
+    if (error) {
+      console.error("❌ Resend error:", error);
+      throw new Error(`Failed to send email: ${error.message}`);
+    }
+
+    console.log("✅ Email sent successfully:", {
+      to,
+      subject,
+      id: data?.id,
+    });
+
+    return;
+  } catch (error) {
+    console.error("❌ Failed to send email:", error);
+    throw error;
   }
 }
 
@@ -168,4 +183,33 @@ export async function sendSummaryEmail(
   `;
 
   await sendEmail(userEmail, subject, html);
+}
+
+/**
+ * Send formatted post to Substack via email-to-post.
+ * This is the easiest way to automate Substack publishing.
+ */
+export async function sendSubstackPost(
+  title: string,
+  htmlBody: string,
+  to: string
+): Promise<void> {
+  // Format as email with proper subject line
+  // Substack email-to-post uses the subject as the post title
+  const subject = title;
+
+  // Wrap HTML body in email-friendly format
+  const emailHtml = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+      </head>
+      <body style="font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px;">
+        ${htmlBody}
+      </body>
+    </html>
+  `;
+
+  await sendEmail(to, subject, emailHtml);
 }

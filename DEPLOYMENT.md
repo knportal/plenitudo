@@ -64,12 +64,15 @@ git push -u origin main
 
 Go to **Project Settings → Environment Variables** and add:
 
-| Name           | Value                            | Environment                      |
-| -------------- | -------------------------------- | -------------------------------- |
-| `DATABASE_URL` | `postgresql://user:pass@host/db` | Production                       |
-| `TZ`           | `America/New_York`               | Production, Preview, Development |
+| Name              | Value                            | Environment                      |
+| ----------------- | -------------------------------- | -------------------------------- |
+| `DATABASE_URL`    | `postgresql://user:pass@host/db` | Production                       |
+| `TZ`              | `America/New_York`               | Production, Preview, Development |
+| `BETA_START_THREAD` | `1` (optional)                 | Production, Preview, Development |
 
-**Important:** Make sure to select the appropriate environments for each variable!
+**Important:**
+- Make sure to select the appropriate environments for each variable!
+- `BETA_START_THREAD` enables thread creation in Rooms. Omit or set to `0` to disable.
 
 ---
 
@@ -171,12 +174,17 @@ npx tsx scripts/setup-production.ts
 After deployment, populate your database:
 
 ```bash
+# AI Daily data
 # Option 1: Via API (recommended)
 curl https://your-domain.vercel.app/api/admin/ai-daily/rebuild
 
 # Option 2: Via Vercel CLI
 vercel env pull .env.production
 npm run rebuild:ai-daily
+
+# Rooms (seed initial rooms and threads)
+vercel env pull .env.production
+npm run seed:rooms
 ```
 
 ---
@@ -185,12 +193,17 @@ npm run rebuild:ai-daily
 
 - [ ] Database provisioned (Neon/Supabase/PlanetScale)
 - [ ] Environment variables set in Vercel
+  - [ ] `DATABASE_URL` (required)
+  - [ ] `TZ` (optional, defaults to America/New_York)
+  - [ ] `BETA_START_THREAD` (optional, set to `1` to enable thread creation)
 - [ ] Code pushed to GitHub
 - [ ] Project deployed to Vercel
 - [ ] Database migrations run
+- [ ] Rooms seeded: `npm run seed:rooms`
 - [ ] Cron job verified in Vercel dashboard
 - [ ] First data rebuild completed
 - [ ] Frontend tested at `/daily`
+- [ ] Frontend tested at `/rooms`
 - [ ] API tested at `/api/ai-daily`
 
 ---

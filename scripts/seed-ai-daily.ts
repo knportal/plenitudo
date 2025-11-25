@@ -32,6 +32,7 @@ const prisma = new PrismaClient();
         },
       ]),
       score: 7,
+      updatedAt: new Date(),
     },
   });
   console.log("Seeded 1 item.");

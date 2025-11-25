@@ -83,17 +83,42 @@ export default function PlFeed() {
   return (
     <section aria-labelledby="feed-title" className="mt-16">
       <div className="flex items-center justify-between gap-4">
-        <h2
-          id="feed-title"
-          className="text-xl md:text-2xl font-semibold tracking-tight"
-        >
-          AI Daily Breakthroughs
-        </h2>
+        <div>
+          <h2
+            id="feed-title"
+            className="text-xl md:text-2xl font-semibold tracking-tight"
+          >
+            AI Daily Breakthroughs
+          </h2>
+          <p className="mt-1 text-sm text-slate-400">
+            Preview of today&apos;s curated stories. Get the full daily digest on{" "}
+            {process.env.NEXT_PUBLIC_SUBSTACK_URL ? (
+              <a
+                href={process.env.NEXT_PUBLIC_SUBSTACK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-400 hover:text-emerald-300 underline"
+              >
+                Substack
+              </a>
+            ) : (
+              <a
+                href="/substack"
+                className="text-emerald-400 hover:text-emerald-300 underline"
+              >
+                our newsletter
+              </a>
+            )}
+            .
+          </p>
+        </div>
         <a
-          href="/daily"
+          href={process.env.NEXT_PUBLIC_SUBSTACK_URL || "/substack"}
+          target={process.env.NEXT_PUBLIC_SUBSTACK_URL ? "_blank" : undefined}
+          rel={process.env.NEXT_PUBLIC_SUBSTACK_URL ? "noopener noreferrer" : undefined}
           className="text-sm underline underline-offset-4 focus:outline-none focus-visible:ring ring-emerald-400 rounded px-2 py-1 hover:text-emerald-300 transition-colors"
         >
-          View all &rarr;
+          Subscribe &rarr;
         </a>
       </div>
 

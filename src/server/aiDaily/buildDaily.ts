@@ -41,7 +41,28 @@ function publisherFromUrl(url: string) {
     return "unknown";
   }
 }
-function publisherLabel(host: string) {
+function publisherLabel(host: string, url?: string) {
+  // Substack publications - extract publication name from URL
+  if (host.includes("substack.com") && url) {
+    const substackMatch = url.match(/https?:\/\/([^.]+)\.substack\.com/);
+    if (substackMatch) {
+      const pubName = substackMatch[1]
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (l) => l.toUpperCase());
+      return pubName;
+    }
+    return "Substack";
+  }
+
+  // Special cases for well-known publications
+  if (host.includes("deeplearning.ai")) return "The Batch";
+  if (host.includes("stratechery.com")) return "Stratechery";
+  if (host.includes("notboring.co")) return "Not Boring";
+  if (host.includes("platformer.news")) return "Platformer";
+  if (host.includes("theneuron.ai")) return "The Neuron";
+  if (host.includes("thegradient.pub")) return "The Gradient";
+  if (host.includes("lastweekin.ai")) return "Last Week In AI";
+
   if (host.includes("reuters")) return "Reuters";
   if (host.includes("technologyreview")) return "MIT Technology Review";
   if (host.includes("nature.com")) return "Nature";
@@ -206,7 +227,7 @@ export async function buildDaily({ limit = 10 }: { limit?: number } = {}) {
   const mapped = all.map((it) => {
     const url = it.link;
     const host = publisherFromUrl(url);
-    const pub = publisherLabel(host);
+    const pub = publisherLabel(host, url);
     return {
       title: it.title,
       url,

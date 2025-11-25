@@ -251,6 +251,47 @@ export const FEEDS: { label: string; url: string; genre?: string }[] = [
     label: "Android Authority",
     url: "https://www.androidauthority.com/feed/",
   },
+  // Substack newsletters
+  {
+    label: "The Batch (DeepLearning.AI)",
+    url: "https://www.deeplearning.ai/the-batch/feed",
+  },
+  {
+    label: "Stratechery",
+    url: "https://stratechery.com/feed/",
+  },
+  {
+    label: "Not Boring",
+    url: "https://www.notboring.co/feed",
+  },
+  {
+    label: "Platformer",
+    url: "https://www.platformer.news/feed",
+  },
+  {
+    label: "AI Breakfast",
+    url: "https://aibreakfast.substack.com/feed",
+  },
+  {
+    label: "The Neuron",
+    url: "https://www.theneuron.ai/feed",
+  },
+  {
+    label: "AI Tool Report",
+    url: "https://aitoolreport.substack.com/feed",
+  },
+  {
+    label: "Last Week in AI",
+    url: "https://lastweekin.ai/feed",
+  },
+  {
+    label: "The Gradient",
+    url: "https://thegradient.pub/feed",
+  },
+  {
+    label: "AI Explained",
+    url: "https://aiexplained.substack.com/feed",
+  },
 ];
 export const PUBLISHER_REP = new Map<string, number>([
   // Tier 3 - High reputation (general tech news)
@@ -320,6 +361,17 @@ export const PUBLISHER_REP = new Map<string, number>([
   ["arXiv", 3], // High reputation for academic
   ["9to5Mac", 2],
   ["Android Authority", 2],
+  // Substack publications
+  ["The Batch", 3], // DeepLearning.AI - Andrew Ng
+  ["Stratechery", 3], // Ben Thompson - highly respected
+  ["Not Boring", 3], // Packy McCormick - popular tech newsletter
+  ["Platformer", 3], // Casey Newton - tech journalism
+  ["The Neuron", 2], // AI newsletter
+  ["AI Breakfast", 2],
+  ["AI Tool Report", 2],
+  ["Last Week In AI", 2],
+  ["The Gradient", 2], // Academic AI publication
+  ["AI Explained", 2],
 ]);
 export const GENRE_KEYWORDS: Record<string, string[]> = {
   policy: [

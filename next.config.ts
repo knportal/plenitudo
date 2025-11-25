@@ -14,6 +14,8 @@ const nextConfig: NextConfig = {
     '/api/**/*': ['./node_modules/.prisma/client/**/*'],
     '/*': ['./node_modules/.prisma/client/**/*'],
   },
+  // Ensure Resend is properly bundled for serverless functions
+  serverComponentsExternalPackages: ['resend'],
   // Image optimization configuration
   images: {
     formats: ['image/avif', 'image/webp'],

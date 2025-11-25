@@ -13,6 +13,16 @@ pkill -f "next dev" || true
 pkill -f "auto-watch" || true
 sleep 2
 
+# Clear cache if .next exists and is older than 1 day (optional auto-cleanup)
+# Uncomment the lines below to enable automatic cache clearing
+# if [ -d ".next" ]; then
+#   CACHE_AGE=$(find .next -type f -name "*.js" -mtime +1 2>/dev/null | wc -l)
+#   if [ "$CACHE_AGE" -gt 0 ]; then
+#     echo "🧹 Clearing stale cache (older than 1 day)..."
+#     rm -rf .next node_modules/.cache
+#   fi
+# fi
+
 # Start the development server in background
 echo "🌐 Starting Next.js development server..."
 npm run dev &

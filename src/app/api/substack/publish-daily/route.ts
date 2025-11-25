@@ -59,6 +59,16 @@ export async function POST(request: Request) {
     // Publish to Substack
     // Option 1: Email-to-post (recommended)
     const substackEmail = process.env.SUBSTACK_EMAIL_ADDRESS;
+    const resendApiKey = process.env.RESEND_API_KEY;
+
+    // Debug logging (without exposing values)
+    console.log("🔍 Environment check:", {
+      hasSubstackEmail: !!substackEmail,
+      hasResendKey: !!resendApiKey,
+      substackEmailLength: substackEmail?.length || 0,
+      resendKeyLength: resendApiKey?.length || 0,
+    });
+
     if (substackEmail) {
       const emailResult = await sendPostViaEmail(
         {
@@ -75,6 +85,17 @@ export async function POST(request: Request) {
           method: "email",
           itemsCount: items.length,
         });
+      } else {
+        // Email sending failed, return error
+        return NextResponse.json(
+          {
+            success: false,
+            error: emailResult.error || "Failed to send email to Substack",
+            method: "email",
+            itemsCount: items.length,
+          },
+          { status: 500 }
+        );
       }
     }
 
@@ -105,10 +126,19 @@ export async function POST(request: Request) {
       }
     }
 
-    // If no method configured, return the formatted post
+    // If no method configured, return the formatted post with diagnostic info
     return NextResponse.json({
       success: false,
       error: "No Substack publishing method configured",
+      diagnostic: {
+        hasSubstackEmail: !!substackEmail,
+        hasResendKey: !!resendApiKey,
+        message: !substackEmail
+          ? "SUBSTACK_EMAIL_ADDRESS environment variable is not set. Please add it in Vercel and redeploy."
+          : !resendApiKey
+          ? "RESEND_API_KEY environment variable is not set. Please add it in Vercel and redeploy."
+          : "Environment variables are set but email sending failed. Check Vercel logs for details.",
+      },
       formattedPost: postBody,
       itemsCount: items.length,
     });

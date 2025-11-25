@@ -81,13 +81,7 @@ export async function POST(request: NextRequest) {
       { status: 201 }
     );
   } catch (error) {
-    // Log full error details for debugging
     console.error("Beta signup error:", error);
-    if (error instanceof Error) {
-      console.error("Error name:", error.name);
-      console.error("Error message:", error.message);
-      console.error("Error stack:", error.stack);
-    }
 
     // Provide more specific error messages
     if (error instanceof Error) {
