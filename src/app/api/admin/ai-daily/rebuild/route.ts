@@ -16,7 +16,67 @@ export async function GET() {
       // Don't fail the whole rebuild if thread creation fails
     }
 
-    return NextResponse.json({ ok: true, count, threadId });
+    // Publish to Substack (if configured)
+    // This combines the daily rebuild and publish into one cron job
+    let substackResult: { success: boolean; error?: string } | null = null;
+    try {
+      const substackEmail = process.env.SUBSTACK_EMAIL_ADDRESS;
+      if (substackEmail) {
+        // Import and call the publish function
+        const { sendPostViaEmail } = await import("@/server/substack/publish");
+        const { dailyAITemplate } = await import("@/server/substack/templates");
+        const { toETDateISO } = await import("@/server/aiDaily/text");
+        const { PrismaClient } = await import("@prisma/client");
+
+        const prisma = new PrismaClient();
+        const dateISO = toETDateISO();
+
+        // Fetch today's items
+        const items = await prisma.aIDailyItem.findMany({
+          where: { dateISO },
+          orderBy: { score: "desc" },
+          take: 10,
+        });
+
+        if (items.length > 0) {
+          const postBody = dailyAITemplate(
+            items.map((item) => ({
+              title: item.title,
+              summary: item.summary,
+              genre: item.genre,
+              mood: item.mood as "uplift" | "opportunity" | "caution",
+              sources: JSON.parse(item.sources as string),
+            })),
+            new Date(dateISO)
+          );
+
+          substackResult = await sendPostViaEmail(
+            {
+              title: `AI Daily — ${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}`,
+              body: postBody,
+              sendEmail: true,
+            },
+            substackEmail
+          );
+        }
+
+        await prisma.$disconnect();
+      }
+    } catch (error) {
+      console.error("Failed to publish to Substack:", error);
+      // Don't fail the whole rebuild if Substack publish fails
+      substackResult = {
+        success: false,
+        error: error instanceof Error ? error.message : String(error),
+      };
+    }
+
+    return NextResponse.json({
+      ok: true,
+      count,
+      threadId,
+      substack: substackResult,
+    });
   } catch (e: unknown) {
     if (e instanceof Error) {
       return NextResponse.json(
