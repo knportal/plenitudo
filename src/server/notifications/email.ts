@@ -240,8 +240,54 @@ export async function sendSummaryEmail(
 }
 
 /**
+ * Convert HTML to plain text for email clients that don't parse HTML well.
+ * Strips HTML tags and converts common elements to plain text.
+ */
+function htmlToPlainText(html: string): string {
+  let text = html
+    // Remove style blocks
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+    // Convert headings
+    .replace(/<h1[^>]*>(.*?)<\/h1>/gi, '\n\n# $1\n\n')
+    .replace(/<h2[^>]*>(.*?)<\/h2>/gi, '\n\n## $1\n\n')
+    .replace(/<h3[^>]*>(.*?)<\/h3>/gi, '\n\n### $1\n\n')
+    // Convert paragraphs
+    .replace(/<p[^>]*>(.*?)<\/p>/gi, '$1\n\n')
+    // Convert line breaks
+    .replace(/<br\s*\/?>/gi, '\n')
+    // Convert links: <a href="url">text</a> -> text (url)
+    .replace(/<a[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/gi, '$2 ($1)')
+    // Convert strong/bold
+    .replace(/<(strong|b)[^>]*>(.*?)<\/(strong|b)>/gi, '**$2**')
+    // Convert emphasis/italic
+    .replace(/<(em|i)[^>]*>(.*?)<\/(em|i)>/gi, '*$2*')
+    // Convert horizontal rules
+    .replace(/<hr[^>]*>/gi, '\n---\n')
+    // Remove divs but keep content
+    .replace(/<div[^>]*>/gi, '\n')
+    .replace(/<\/div>/gi, '')
+    // Remove all other HTML tags
+    .replace(/<[^>]+>/g, '')
+    // Decode HTML entities
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    // Clean up extra whitespace
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+
+  return text;
+}
+
+/**
  * Send formatted post to Substack via email-to-post.
  * This is the easiest way to automate Substack publishing.
+ *
+ * Note: Substack email-to-post works better with plain text than HTML.
+ * We send both text and HTML versions for maximum compatibility.
  */
 export async function sendSubstackPost(
   title: string,
@@ -251,6 +297,9 @@ export async function sendSubstackPost(
   // Format as email with proper subject line
   // Substack email-to-post uses the subject as the post title
   const subject = title;
+
+  // Convert HTML to plain text for better Substack compatibility
+  const plainText = htmlToPlainText(htmlBody);
 
   // Wrap HTML body in email-friendly format
   const emailHtml = `
@@ -265,5 +314,79 @@ export async function sendSubstackPost(
     </html>
   `;
 
-  await sendEmail(to, subject, emailHtml);
+  // Send email with both text and HTML versions
+  // Substack email-to-post prefers plain text
+  await sendEmailWithText(to, subject, plainText, emailHtml);
+}
+
+/**
+ * Send email with both text and HTML versions.
+ * Some email clients (like Substack) parse plain text better than HTML.
+ */
+async function sendEmailWithText(
+  to: string,
+  subject: string,
+  text: string,
+  html: string
+): Promise<void> {
+  const client = await getResendClient();
+
+  if (!client) {
+    if (process.env.NODE_ENV === "development") {
+      console.log("=".repeat(60));
+      console.log("📧 EMAIL STUB (RESEND_API_KEY not configured)");
+      console.log("=".repeat(60));
+      console.log(`To: ${to}`);
+      console.log(`Subject: ${subject}`);
+      console.log("---");
+      console.log("Text version:", text.substring(0, 200) + "...");
+      console.log("=".repeat(60));
+      return;
+    } else {
+      throw new Error(
+        "RESEND_API_KEY is not configured. Cannot send email in production."
+      );
+    }
+  }
+
+  const fromEmail = getFromEmail();
+
+  console.log("📧 Sending email (text + HTML):", {
+    from: fromEmail,
+    to,
+    subject,
+    textLength: text.length,
+    htmlLength: html.length,
+  });
+
+  try {
+    const { data, error } = await client.emails.send({
+      from: fromEmail,
+      to: [to],
+      subject,
+      text, // Plain text version (Substack prefers this)
+      html, // HTML version (fallback)
+    });
+
+    if (error) {
+      console.error("❌ Resend error:", error);
+      throw new Error(`Failed to send email: ${error.message}`);
+    }
+
+    console.log("✅ Email sent successfully:", {
+      from: fromEmail,
+      to,
+      subject,
+      id: data?.id,
+    });
+
+    return;
+  } catch (error) {
+    console.error("❌ Failed to send email:", {
+      from: fromEmail,
+      to,
+      error: error instanceof Error ? error.message : String(error),
+    });
+    throw error;
+  }
 }
