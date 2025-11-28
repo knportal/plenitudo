@@ -20,7 +20,7 @@ export async function GET() {
     // This combines the daily rebuild and publish into one cron job
     let substackResult: { success: boolean; error?: string } | null = null;
     try {
-      const substackEmail = process.env.SUBSTACK_EMAIL_ADDRESS;
+      const substackEmail = process.env["SUBSTACK_EMAIL_ADDRESS"];
       if (substackEmail) {
         // Import and call the publish function
         const { sendPostViaEmail } = await import("@/server/substack/publish");

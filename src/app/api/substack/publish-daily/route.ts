@@ -4,9 +4,12 @@
  * This endpoint:
  * 1. Fetches today's AI Daily items
  * 2. Formats them as a Substack post
- * 3. Publishes to Substack (via email or API)
+ * 3. Sends to Substack via email-to-post (arrives as DRAFT)
  *
- * Call this via cron job daily at 11 AM ET
+ * IMPORTANT: Posts arrive as drafts for manual curation.
+ * You must review, set tier (free/paid), and publish manually in Substack.
+ *
+ * Call this via cron job daily at 11 AM ET (or manually)
  */
 
 import { NextResponse } from "next/server";
@@ -24,7 +27,7 @@ export async function GET() {
   });
 }
 
-export async function POST(request: Request) {
+export async function POST() {
   try {
     // Get today's date in ET
     const dateISO = toETDateISO();
@@ -58,7 +61,7 @@ export async function POST(request: Request) {
 
     // Publish to Substack
     // Option 1: Email-to-post (recommended)
-    const substackEmail = process.env.SUBSTACK_EMAIL_ADDRESS;
+    const substackEmail = process.env["SUBSTACK_EMAIL_ADDRESS"];
     if (substackEmail) {
       const emailResult = await sendPostViaEmail(
         {
@@ -79,8 +82,8 @@ export async function POST(request: Request) {
     }
 
     // Option 2: API (if implemented)
-    const substackApiKey = process.env.SUBSTACK_API_KEY;
-    const substackPublicationId = process.env.SUBSTACK_PUBLICATION_ID;
+    const substackApiKey = process.env["SUBSTACK_API_KEY"];
+    const substackPublicationId = process.env["SUBSTACK_PUBLICATION_ID"];
 
     if (substackApiKey && substackPublicationId) {
       const apiResult = await publishToSubstack(

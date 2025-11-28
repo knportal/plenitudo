@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 interface SubstackCTAProps {
   variant?: "button" | "link" | "banner";
   size?: "sm" | "md" | "lg";
@@ -22,7 +20,7 @@ export default function SubstackCTA({
   className = "",
   showIcon = true,
 }: SubstackCTAProps) {
-  const substackUrl = process.env.NEXT_PUBLIC_SUBSTACK_URL || "#";
+  const substackUrl = process.env["NEXT_PUBLIC_SUBSTACK_URL"] || "#";
 
   // Add UTM parameters for tracking
   const getSubstackUrl = (campaign: string) => {

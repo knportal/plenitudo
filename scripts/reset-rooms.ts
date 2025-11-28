@@ -24,10 +24,10 @@ async function main() {
     timestamp: new Date().toISOString(),
     rooms: await prisma.room.findMany({
       include: {
-        threads: {
+        Thread: {
           include: {
-            posts: true,
-            chatMessages: true,
+            Post: true,
+            ChatMessage: true,
           },
         },
       },
@@ -48,13 +48,13 @@ async function main() {
   console.log(`✅ Backup saved: ${backupFile}`);
   console.log(`   Rooms: ${backup.rooms.length}`);
   console.log(
-    `   Threads: ${backup.rooms.reduce((sum: number, r: any) => sum + r.threads.length, 0)}`
+    `   Threads: ${backup.rooms.reduce((sum: number, r: any) => sum + r.Thread.length, 0)}`
   );
   console.log(
-    `   Posts: ${backup.rooms.reduce((sum: number, r: any) => sum + r.threads.reduce((s: number, t: any) => s + t.posts.length, 0), 0)}`
+    `   Posts: ${backup.rooms.reduce((sum: number, r: any) => sum + r.Thread.reduce((s: number, t: any) => s + t.Post.length, 0), 0)}`
   );
   console.log(
-    `   Messages: ${backup.rooms.reduce((sum: number, r: any) => sum + r.threads.reduce((s: number, t: any) => s + t.chatMessages.length, 0), 0)}`
+    `   Messages: ${backup.rooms.reduce((sum: number, r: any) => sum + r.Thread.reduce((s: number, t: any) => s + t.ChatMessage.length, 0), 0)}`
   );
   console.log("");
 

@@ -88,7 +88,7 @@ export async function summarizeRecentChat(
     where: { id: validated.threadId },
     select: {
       title: true,
-      room: {
+      Room: {
         select: {
           slug: true,
         },
@@ -108,7 +108,7 @@ export async function summarizeRecentChat(
   });
 
   // Index summary Post for search (fire and forget - don't block)
-  if (thread?.room?.slug) {
+  if (thread?.Room?.slug) {
     const searchDoc: PostSearchDoc = {
       id: post.id,
       type: "post",
@@ -117,7 +117,7 @@ export async function summarizeRecentChat(
       createdAt: post.createdAt.toISOString(),
       threadId: validated.threadId,
       threadTitle: thread.title,
-      roomSlug: thread.room.slug,
+      roomSlug: thread.Room.slug,
       pinned: true,
     };
 
@@ -127,15 +127,15 @@ export async function summarizeRecentChat(
   }
 
   // Revalidate thread page
-  if (thread?.room?.slug) {
-    revalidatePath(`/rooms/${thread.room.slug}/thread/${validated.threadId}`);
+  if (thread?.Room?.slug) {
+    revalidatePath(`/rooms/${thread.Room.slug}/thread/${validated.threadId}`);
   }
 
   // Send summary notification emails to thread participants
   // TODO: In production, fetch actual user emails from participants
   // For now, stub: log intended emails
-  if (thread?.room?.slug) {
-    const threadUrl = `https://yourdomain.com/rooms/${thread.room.slug}/thread/${validated.threadId}`;
+  if (thread?.Room?.slug) {
+    const threadUrl = `https://yourdomain.com/rooms/${thread.Room.slug}/thread/${validated.threadId}`;
 
     // Get unique participants from recent messages
     const participants = Array.from(

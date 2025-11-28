@@ -15,7 +15,7 @@ export function getSubstackUrl(
   source: string = "plenitudo_app",
   medium: string = "web"
 ): string {
-  const baseUrl = process.env.NEXT_PUBLIC_SUBSTACK_URL;
+  const baseUrl = process.env["NEXT_PUBLIC_SUBSTACK_URL"];
 
   if (!baseUrl) {
     // Fallback to local page if Substack URL not configured
@@ -45,7 +45,7 @@ export function getRoomLinkWithTracking(
   roomSlug: string,
   campaign: string
 ): string {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://plenitudo.ai";
+  const baseUrl = process.env["NEXT_PUBLIC_APP_URL"] || "https://plenitudo.ai";
   const url = new URL(`${baseUrl}/rooms/${roomSlug}`);
   url.searchParams.set("utm_source", "substack");
   url.searchParams.set("utm_medium", "email");
@@ -66,7 +66,7 @@ export function getThreadLinkWithTracking(
   threadId: string,
   campaign: string
 ): string {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://plenitudo.ai";
+  const baseUrl = process.env["NEXT_PUBLIC_APP_URL"] || "https://plenitudo.ai";
   const url = new URL(`${baseUrl}/rooms/${roomSlug}/thread/${threadId}`);
   url.searchParams.set("utm_source", "substack");
   url.searchParams.set("utm_medium", "email");

@@ -57,7 +57,7 @@ export default function SubstackPage() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
-              href={process.env.NEXT_PUBLIC_SUBSTACK_URL || "#"}
+              href={process.env["NEXT_PUBLIC_SUBSTACK_URL"] || "#"}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gradient-to-r from-emerald-500 to-blue-500 text-white font-semibold hover:from-emerald-400 hover:to-blue-400 transition-all min-h-[44px] text-base"

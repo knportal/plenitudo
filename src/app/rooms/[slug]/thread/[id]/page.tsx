@@ -40,7 +40,7 @@ export default async function ThreadPage({ params }: PageProps) {
       content: true,
       authorName: true,
       createdAt: true,
-      posts: {
+      Post: {
         orderBy: [{ pinned: "desc" }, { createdAt: "asc" }], // Pinned posts first, then chronological
         select: {
           id: true,
@@ -50,7 +50,7 @@ export default async function ThreadPage({ params }: PageProps) {
           createdAt: true,
         },
       },
-      chatMessages: {
+      ChatMessage: {
         orderBy: { createdAt: "asc" },
         take: 50,
         where: {
@@ -74,7 +74,7 @@ export default async function ThreadPage({ params }: PageProps) {
     content: string;
     authorName: string | null;
     createdAt: Date;
-    posts: Array<{
+    Post: Array<{
       id: string;
       content: string;
       authorName: string | null;
@@ -143,7 +143,7 @@ export default async function ThreadPage({ params }: PageProps) {
                 <h2 className="text-xl font-semibold">Replies</h2>
                 <ThreadReplies
                   threadId={thread.id}
-                  initialPosts={thread.posts}
+                  initialPosts={thread.Post}
                 />
                 <ReplyForm roomSlug={room.slug} threadId={thread.id} />
               </section>
@@ -200,7 +200,7 @@ async function replyAction(formData: FormData) {
     where: { id: threadId },
     select: {
       title: true,
-      room: {
+      Room: {
         select: {
           slug: true,
           title: true,
@@ -215,7 +215,7 @@ async function replyAction(formData: FormData) {
   });
 
   // Index for search (fire and forget - don't block)
-  if (thread?.room?.slug) {
+  if (thread?.Room?.slug) {
     const searchDoc: PostSearchDoc = {
       id: post.id,
       type: "post",
@@ -224,7 +224,7 @@ async function replyAction(formData: FormData) {
       createdAt: post.createdAt.toISOString(),
       threadId: threadId,
       threadTitle: thread.title,
-      roomSlug: thread.room.slug,
+      roomSlug: thread.Room.slug,
       pinned: false,
     };
 

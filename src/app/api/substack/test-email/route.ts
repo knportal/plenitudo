@@ -8,7 +8,7 @@ import { sendSubstackPost } from "@/server/notifications/email";
 
 export async function POST() {
   try {
-    const substackEmail = process.env.SUBSTACK_EMAIL_ADDRESS;
+    const substackEmail = process.env["SUBSTACK_EMAIL_ADDRESS"];
 
     if (!substackEmail) {
       return NextResponse.json(
@@ -50,7 +50,8 @@ export async function GET() {
   return NextResponse.json({
     message: "Send a POST request to test Substack email",
     usage: "curl -X POST https://your-domain.com/api/substack/test-email",
-    substackEmail: process.env.SUBSTACK_EMAIL_ADDRESS || "not configured",
+    substackEmail: process.env["SUBSTACK_EMAIL_ADDRESS"] || "not configured",
   });
 }
+
 

@@ -50,12 +50,13 @@ export function formatAIDailyAsPost(
   post += `Today's top AI breakthroughs, curated from 40+ trusted sources.\n\n`;
   post += `---\n\n`;
 
-  items.slice(0, 10).forEach((item, index) => {
-    const moodEmoji = {
-      uplift: "✨",
-      opportunity: "💡",
-      caution: "⚠️",
-    }[item.mood] || "📰";
+  items.slice(0, 10).forEach((item) => {
+    const moodEmoji =
+      {
+        uplift: "✨",
+        opportunity: "💡",
+        caution: "⚠️",
+      }[item.mood] || "📰";
 
     post += `## ${moodEmoji} ${item.title}\n\n`;
     post += `${item.summary}\n\n`;
@@ -75,7 +76,7 @@ export function formatAIDailyAsPost(
     post += `---\n\n`;
   });
 
-  post += `**Want more?** [Subscribe for weekly deep dives →](${process.env.NEXT_PUBLIC_SUBSTACK_URL || "#"})\n\n`;
+  post += `**Want more?** [Subscribe for weekly deep dives →](${process.env["NEXT_PUBLIC_SUBSTACK_URL"] || "#"})\n\n`;
   post += `**Join the discussion:** [AI Rooms →](https://plenitudo.ai/rooms/ai)\n\n`;
 
   return post;
@@ -113,11 +114,12 @@ export function formatWeeklyNewsletterAsPost(
   post += `## 🎯 Top 5 Stories\n\n`;
 
   weeklyItems.slice(0, 5).forEach((item, index) => {
-    const moodEmoji = {
-      uplift: "✨",
-      opportunity: "💡",
-      caution: "⚠️",
-    }[item.mood] || "📰";
+    const moodEmoji =
+      {
+        uplift: "✨",
+        opportunity: "💡",
+        caution: "⚠️",
+      }[item.mood] || "📰";
 
     post += `### ${index + 1}. ${moodEmoji} ${item.title}\n\n`;
 
@@ -167,7 +169,7 @@ export function formatWeeklyNewsletterAsPost(
  */
 export async function publishToSubstack(
   post: SubstackPost,
-  config: SubstackConfig
+  _config: SubstackConfig // eslint-disable-line @typescript-eslint/no-unused-vars
 ): Promise<{ success: boolean; postId?: string; error?: string }> {
   // TODO: Implement actual Substack publishing
   // Options:
@@ -189,7 +191,15 @@ export async function publishToSubstack(
 
 /**
  * Send post via email (Substack email-to-post feature)
- * This is the easiest way to auto-publish to Substack
+ *
+ * IMPORTANT: Posts arrive as DRAFTS in Substack for manual curation.
+ * This ensures ethical content review before publishing.
+ *
+ * Manual curation workflow:
+ * 1. Post arrives in Substack dashboard as a draft
+ * 2. Review content, edit if needed
+ * 3. Set subscription tier (free or paid)
+ * 4. Publish when ready
  */
 export async function sendPostViaEmail(
   post: SubstackPost,
@@ -218,4 +228,3 @@ export async function sendPostViaEmail(
     };
   }
 }
-

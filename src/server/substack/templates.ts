@@ -30,7 +30,7 @@ export function dailyAITemplate(
   html += `<p style="font-size: 1.1em; color: #64748b; margin-bottom: 2em;">Today's top AI breakthroughs, curated from 40+ trusted sources.</p>\n\n`;
   html += `<hr style="border: none; border-top: 2px solid #1e293b; margin: 2em 0;">\n\n`;
 
-  items.slice(0, 10).forEach((item, index) => {
+  items.slice(0, 10).forEach((item) => {
     const moodConfig = {
       uplift: { emoji: "✨", color: "#10b981", label: "Uplift" },
       opportunity: { emoji: "💡", color: "#3b82f6", label: "Opportunity" },
@@ -61,7 +61,7 @@ export function dailyAITemplate(
   html += `<div style="text-align: center; padding: 2em; background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%); border-radius: 12px; margin: 2em 0;">\n`;
   html += `<p style="color: white; font-size: 1.1em; margin-bottom: 1em;"><strong>Want more?</strong></p>\n`;
   html += `<p style="color: rgba(255,255,255,0.9); margin-bottom: 1.5em;">Subscribe for weekly deep dives, exclusive analysis, and community access.</p>\n`;
-  html += `<a href="${process.env.NEXT_PUBLIC_SUBSTACK_URL || "#"}" style="display: inline-block; padding: 0.75em 2em; background: white; color: #10b981; text-decoration: none; border-radius: 8px; font-weight: 600;">Subscribe Now →</a>\n`;
+  html += `<a href="${process.env["NEXT_PUBLIC_SUBSTACK_URL"] || "#"}" style="display: inline-block; padding: 0.75em 2em; background: white; color: #10b981; text-decoration: none; border-radius: 8px; font-weight: 600;">Subscribe Now →</a>\n`;
   html += `</div>\n\n`;
   html += `<p style="text-align: center; color: #64748b; margin-top: 2em;"><a href="https://plenitudo.ai/rooms/ai" style="color: #10b981; text-decoration: none;">💬 Join the discussion in our AI Rooms →</a></p>\n`;
 
@@ -143,7 +143,7 @@ export function weeklyNewsletterTemplate(
   html += `<div style="text-align: center; padding: 2em; background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%); border-radius: 12px; margin: 2em 0;">\n`;
   html += `<p style="color: white; font-size: 1.1em; margin-bottom: 1em;"><strong>Join our community</strong></p>\n`;
   html += `<a href="https://plenitudo.ai/rooms/ai" style="display: inline-block; padding: 0.75em 2em; background: white; color: #10b981; text-decoration: none; border-radius: 8px; font-weight: 600; margin-right: 1em;">AI Rooms →</a>\n`;
-  html += `<a href="${process.env.NEXT_PUBLIC_SUBSTACK_URL || "#"}" style="display: inline-block; padding: 0.75em 2em; background: rgba(255,255,255,0.2); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; border: 2px solid white;">Share This →</a>\n`;
+  html += `<a href="${process.env["NEXT_PUBLIC_SUBSTACK_URL"] || "#"}" style="display: inline-block; padding: 0.75em 2em; background: rgba(255,255,255,0.2); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; border: 2px solid white;">Share This →</a>\n`;
   html += `</div>\n`;
 
   return html;

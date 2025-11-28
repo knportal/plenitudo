@@ -85,7 +85,7 @@ export default function PlHeader() {
           setStatus("idle");
         }, 2000);
       }
-    } catch (error) {
+    } catch {
       setStatus("error");
       setErrorMessage("Failed to submit. Please try again.");
     }

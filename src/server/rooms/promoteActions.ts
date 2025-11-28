@@ -43,9 +43,9 @@ export async function promoteChatToPost(
       content: true,
       authorName: true,
       createdAt: true,
-      thread: {
+      Thread: {
         select: {
-          room: {
+          Room: {
             select: {
               slug: true,
             },
@@ -90,9 +90,9 @@ export async function promoteChatToPost(
   });
 
   // Revalidate thread page to refresh Posts section
-  if (chatMessage.thread?.room?.slug) {
+  if (chatMessage.Thread?.Room?.slug) {
     revalidatePath(
-      `/rooms/${chatMessage.thread.room.slug}/thread/${chatMessage.threadId}`
+      `/rooms/${chatMessage.Thread.Room.slug}/thread/${chatMessage.threadId}`
     );
   }
 

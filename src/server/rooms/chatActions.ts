@@ -127,7 +127,7 @@ export async function sendChatMessage(
     where: { id: validated.threadId },
     select: {
       title: true,
-      room: {
+      Room: {
         select: {
           slug: true,
         },
@@ -139,8 +139,8 @@ export async function sendChatMessage(
   if (mentions.length > 0 && thread) {
     // TODO: In production, look up user emails from database using mentions
     // For now, stub: log intended emails
-    const threadUrl = thread.room?.slug
-      ? `https://yourdomain.com/rooms/${thread.room.slug}/thread/${validated.threadId}`
+    const threadUrl = thread.Room?.slug
+      ? `https://yourdomain.com/rooms/${thread.Room.slug}/thread/${validated.threadId}`
       : "#";
 
     // Stub: In production, fetch user emails from User table
@@ -169,8 +169,8 @@ export async function sendChatMessage(
   }
 
   // Revalidate thread page
-  if (thread?.room?.slug) {
-    revalidatePath(`/rooms/${thread.room.slug}/thread/${validated.threadId}`);
+  if (thread?.Room?.slug) {
+    revalidatePath(`/rooms/${thread.Room.slug}/thread/${validated.threadId}`);
   }
 
   return { message, mentions };

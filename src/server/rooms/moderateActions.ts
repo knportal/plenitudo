@@ -61,10 +61,10 @@ export async function toggleMessageHidden(messageId: string, hidden: boolean) {
     where: { id: validated.messageId },
     data: { hidden: validated.hidden },
     select: {
-      thread: {
+      Thread: {
         select: {
           id: true,
-          room: {
+          Room: {
             select: {
               slug: true,
             },
@@ -75,9 +75,9 @@ export async function toggleMessageHidden(messageId: string, hidden: boolean) {
   });
 
   // Revalidate thread page
-  if (message.thread?.room?.slug) {
+  if (message.Thread?.Room?.slug) {
     revalidatePath(
-      `/rooms/${message.thread.room.slug}/thread/${message.thread.id}`
+      `/rooms/${message.Thread.Room.slug}/thread/${message.Thread.id}`
     );
   }
 

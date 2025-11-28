@@ -42,7 +42,7 @@ async function getResendClass() {
  * Creates a new instance each time to avoid issues with serverless functions.
  */
 async function getResendClient() {
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = process.env["RESEND_API_KEY"];
   if (!apiKey) {
     return null;
   }
@@ -63,7 +63,7 @@ async function getResendClient() {
  */
 function getFromEmail(): string {
   // Check if a custom from address is configured
-  const customFrom = process.env.RESEND_FROM_EMAIL;
+  const customFrom = process.env["RESEND_FROM_EMAIL"];
   if (customFrom) {
     return customFrom;
   }
@@ -115,7 +115,7 @@ export async function sendEmail(
     from: fromEmail,
     to,
     subject,
-    hasCustomFrom: !!process.env.RESEND_FROM_EMAIL,
+    hasCustomFrom: !!process.env["RESEND_FROM_EMAIL"],
   });
 
   try {
@@ -244,7 +244,7 @@ export async function sendSummaryEmail(
  * Strips HTML tags and converts common elements to plain text.
  */
 function htmlToPlainText(html: string): string {
-  let text = html
+  const text = html
     // Remove style blocks
     .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
     // Convert headings

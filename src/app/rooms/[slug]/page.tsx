@@ -29,7 +29,7 @@ export default async function RoomPage({ params, searchParams }: PageProps) {
             title: true,
             authorName: true,
             createdAt: true,
-            _count: { select: { posts: true } },
+            _count: { select: { Post: true } },
           },
           orderBy: { createdAt: "desc" },
           skip: (page - 1) * pageSize,
@@ -96,7 +96,7 @@ export default async function RoomPage({ params, searchParams }: PageProps) {
                             {t.title}
                           </Link>
                           <span className="text-xs text-slate-400">
-                            · {t._count.posts} replies
+                            · {t._count.Post} replies
                           </span>
                         </div>
                         <span className="text-xs text-slate-400">

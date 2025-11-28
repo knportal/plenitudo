@@ -432,11 +432,64 @@ POST 405 - INVALID_REQUEST_METHOD
 
 ---
 
-## ⏭️ Next: Step 5 - Set Up Cron Jobs (Automation)
+---
 
-**Don't proceed to Step 5 until Step 4 is complete and working!**
+## ✅ STEP 5: Manual Curation Workflow
 
-Once Step 4 is working (you see the post in Substack), let me know and I'll give you Step 5 instructions (setting up automatic daily/weekly publishing).
+### What You'll Do:
+
+Review and curate posts in Substack before publishing. This ensures ethical content review.
+
+### How It Works:
+
+1. **Posts Arrive as Drafts**
+   - When the automation sends a post, it arrives in your Substack dashboard as a **draft**
+   - You'll see it in the "Drafts" section
+
+2. **Review & Edit**
+   - Open the draft post
+   - Review the content for accuracy and appropriateness
+   - Edit if needed (add context, fix formatting, remove items)
+   - Ensure all sources are properly attributed
+
+3. **Set Subscription Tier**
+   - **Daily Posts:** Leave as **Free** (default) - accessible to all subscribers
+   - **Weekly Newsletters:** Set as **Paid** - only for paid subscribers
+   - To set tier: Click the post → Settings → "Subscription tier" → Select "Paid subscribers only" (for weekly) or "Free" (for daily)
+
+4. **Publish**
+   - Once reviewed and tier is set, click "Publish"
+   - Or schedule for a specific time
+
+### Daily Workflow:
+
+1. **11:15 AM ET:** Daily post automation runs (after AI Daily rebuild at 11 AM)
+2. **Check Substack:** Draft appears in your dashboard
+3. **Review:** Quick review of top 10 stories
+4. **Publish:** Set as free tier and publish (usually takes 2-5 minutes)
+
+### Weekly Workflow:
+
+1. **Monday 9 AM ET:** Weekly newsletter automation runs
+2. **Check Substack:** Draft appears in your dashboard
+3. **Review:** Deep review of top 5 curated stories
+4. **Edit:** Add analysis, insights, or context if needed
+5. **Publish:** Set as paid tier and publish (usually takes 10-15 minutes)
+
+### ⚠️ Important Notes:
+
+- **All posts arrive as drafts** - nothing publishes automatically
+- **You control the tier** - set free vs paid manually
+- **Ethical curation** - review content before it goes live
+- **No rush** - take your time to ensure quality
+
+---
+
+## ⏭️ Next: Step 6 - Set Up Cron Jobs (Automation)
+
+**Don't proceed to Step 6 until Step 5 workflow is understood!**
+
+Once you're comfortable with the manual curation workflow, we can set up automated scheduling (Step 6).
 
 ---
 

@@ -4,20 +4,23 @@
  * This endpoint:
  * 1. Fetches the week's top AI Daily items
  * 2. Formats them as a weekly newsletter
- * 3. Publishes to Substack (paid subscribers only)
+ * 3. Sends to Substack via email-to-post (arrives as DRAFT)
  *
- * Call this via cron job weekly on Monday at 9 AM ET
+ * IMPORTANT: Posts arrive as drafts for manual curation.
+ * You must review, set as paid tier, and publish manually in Substack.
+ *
+ * Call this via cron job weekly on Monday at 9 AM ET (or manually)
  */
 
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { formatWeeklyNewsletterAsPost, publishToSubstack, sendPostViaEmail } from "@/server/substack/publish";
+import { publishToSubstack, sendPostViaEmail } from "@/server/substack/publish";
 import { toETDateISO } from "@/server/aiDaily/text";
-import { startOfWeek, subDays } from "date-fns";
+import { startOfWeek } from "date-fns";
 
 const prisma = new PrismaClient();
 
-export async function POST(request: Request) {
+export async function POST() {
   try {
     // Get this week's date range (Monday to Sunday)
     const today = new Date();
@@ -59,16 +62,16 @@ export async function POST(request: Request) {
       weekStart
     );
 
-    // Publish to Substack (paid subscribers only)
+    // Send to Substack (arrives as draft for manual curation)
     // Option 1: Email-to-post
-    const substackEmail = process.env.SUBSTACK_EMAIL_ADDRESS;
+    const substackEmail = process.env["SUBSTACK_EMAIL_ADDRESS"];
     if (substackEmail) {
       const emailResult = await sendPostViaEmail(
         {
           title: `Weekly AI Digest — Week of ${weekStart.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}`,
           body: postBody,
           sendEmail: true,
-          // Note: You'll need to mark this as paid-only in Substack settings
+          // Note: Post arrives as draft. Manually set as paid tier in Substack before publishing.
         },
         substackEmail
       );
@@ -84,8 +87,8 @@ export async function POST(request: Request) {
     }
 
     // Option 2: API (if implemented)
-    const substackApiKey = process.env.SUBSTACK_API_KEY;
-    const substackPublicationId = process.env.SUBSTACK_PUBLICATION_ID;
+    const substackApiKey = process.env["SUBSTACK_API_KEY"];
+    const substackPublicationId = process.env["SUBSTACK_PUBLICATION_ID"];
 
     if (substackApiKey && substackPublicationId) {
       const apiResult = await publishToSubstack(
