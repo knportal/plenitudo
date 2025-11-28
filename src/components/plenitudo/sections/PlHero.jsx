@@ -18,12 +18,13 @@ export default function PlHero() {
     <section className="mt-8 sm:mt-14 relative">
       <div className="max-w-3xl">
         <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
-          Daily AI insights,{" "}
-          <span className="text-emerald-400">curated for you</span>.
+          Stop doomscrolling,{" "}
+          <span className="text-emerald-400">start idea scrolling</span>.
         </h1>
         <p className="mt-3 sm:mt-4 text-slate-300 max-w-2xl text-sm sm:text-base">
-          Get the day's top AI breakthroughs delivered to your inbox. Plus weekly
-          deep dives, exclusive analysis, and access to our community discussions.
+          A home for uplifting AI breakthroughs, mindful prompts, and rooms where
+          builders connect. Get the day's top insights delivered daily, plus weekly
+          deep dives and exclusive analysis.
         </p>
         <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-2 sm:gap-3">
           {substackUrl ? (
