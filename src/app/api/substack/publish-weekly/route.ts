@@ -1,20 +1,17 @@
 /**
- * API route to publish weekly newsletter to Substack
+ * API route to send weekly newsletter to personal email
  *
  * This endpoint:
  * 1. Fetches the week's top AI Daily items
  * 2. Formats them as a weekly newsletter
- * 3. Sends to Substack via email-to-post (arrives as DRAFT)
- *
- * IMPORTANT: Posts arrive as drafts for manual curation.
- * You must review, set as paid tier, and publish manually in Substack.
+ * 3. Sends directly to personal email
  *
  * Call this via cron job weekly on Monday at 9 AM ET (or manually)
  */
 
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { publishToSubstack, sendPostViaEmail } from "@/server/substack/publish";
+import { sendNewsletterToEmail } from "@/server/substack/publish";
 import { toETDateISO } from "@/server/aiDaily/text";
 import { startOfWeek } from "date-fns";
 
@@ -49,7 +46,9 @@ export async function POST() {
     const topItems = items.slice(0, 5);
 
     // Format as weekly newsletter (use HTML template for better formatting)
-    const { weeklyNewsletterTemplate } = await import("@/server/substack/templates");
+    const { weeklyNewsletterTemplate } = await import(
+      "@/server/substack/templates"
+    );
     const postBody = weeklyNewsletterTemplate(
       topItems.map((item) => ({
         title: item.title,
@@ -62,76 +61,63 @@ export async function POST() {
       weekStart
     );
 
-    // Send to Substack (arrives as draft for manual curation)
-    // Option 1: Email-to-post
-    const substackEmail = process.env["SUBSTACK_EMAIL_ADDRESS"];
-    if (substackEmail) {
-      const emailResult = await sendPostViaEmail(
+    const postTitle = `Weekly AI Digest — Week of ${weekStart.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}`;
+
+    // Send to personal email address
+    const personalEmail = process.env["PERSONAL_EMAIL"] || process.env["MANUAL_SUBSTACK_EMAIL"];
+    if (!personalEmail) {
+      return NextResponse.json(
         {
-          title: `Weekly AI Digest — Week of ${weekStart.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}`,
-          body: postBody,
-          sendEmail: true,
-          // Note: Post arrives as draft. Manually set as paid tier in Substack before publishing.
+          error: "PERSONAL_EMAIL or MANUAL_SUBSTACK_EMAIL not configured",
+          hint: "Set PERSONAL_EMAIL=your-email@example.com in environment variables",
         },
-        substackEmail
+        { status: 400 }
+      );
+    }
+
+    try {
+      const emailResult = await sendNewsletterToEmail(
+        postTitle,
+        postBody,
+        personalEmail,
+        "weekly"
       );
 
       if (emailResult.success) {
         return NextResponse.json({
           success: true,
-          method: "email",
+          message: "Weekly newsletter sent to personal email",
+          to: personalEmail,
           itemsCount: topItems.length,
           weekOf: weekStartISO,
         });
+      } else {
+        return NextResponse.json(
+          {
+            error: "Failed to send newsletter email",
+            details: emailResult.error,
+          },
+          { status: 500 }
+        );
       }
-    }
-
-    // Option 2: API (if implemented)
-    const substackApiKey = process.env["SUBSTACK_API_KEY"];
-    const substackPublicationId = process.env["SUBSTACK_PUBLICATION_ID"];
-
-    if (substackApiKey && substackPublicationId) {
-      const apiResult = await publishToSubstack(
+    } catch (error) {
+      console.error("❌ Failed to send newsletter email:", error);
+      return NextResponse.json(
         {
-          title: `Weekly AI Digest — Week of ${weekStart.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}`,
-          body: postBody,
-          sendEmail: true,
-          // Mark as paid-only in Substack
+          error: "Failed to send newsletter email",
+          message: error instanceof Error ? error.message : String(error),
         },
-        {
-          publicationId: substackPublicationId,
-          apiKey: substackApiKey,
-        }
+        { status: 500 }
       );
-
-      if (apiResult.success) {
-        return NextResponse.json({
-          success: true,
-          method: "api",
-          postId: apiResult.postId,
-          itemsCount: topItems.length,
-          weekOf: weekStartISO,
-        });
-      }
     }
-
-    // If no method configured, return the formatted post
-    return NextResponse.json({
-      success: false,
-      error: "No Substack publishing method configured",
-      formattedPost: postBody,
-      itemsCount: topItems.length,
-      weekOf: weekStartISO,
-    });
   } catch (error) {
-    console.error("Error publishing weekly newsletter:", error);
+    console.error("Error sending weekly newsletter:", error);
     return NextResponse.json(
       {
-        error: "Failed to publish weekly newsletter",
+        error: "Failed to send weekly newsletter",
         message: error instanceof Error ? error.message : String(error),
       },
       { status: 500 }
     );
   }
 }
-

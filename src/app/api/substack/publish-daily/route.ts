@@ -1,29 +1,28 @@
 /**
- * API route to publish daily AI Daily to Substack
+ * API route to send daily AI Daily newsletter to personal email
  *
  * This endpoint:
  * 1. Fetches today's AI Daily items
- * 2. Formats them as a Substack post
- * 3. Sends to Substack via email-to-post (arrives as DRAFT)
- *
- * IMPORTANT: Posts arrive as drafts for manual curation.
- * You must review, set tier (free/paid), and publish manually in Substack.
+ * 2. Formats them as a newsletter
+ * 3. Sends directly to personal email
  *
  * Call this via cron job daily at 11 AM ET (or manually)
  */
 
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { publishToSubstack, sendPostViaEmail } from "@/server/substack/publish";
+import { sendNewsletterToEmail } from "@/server/substack/publish";
 import { toETDateISO } from "@/server/aiDaily/text";
 
 const prisma = new PrismaClient();
 
 // Add GET handler for testing (returns status without publishing)
 export async function GET() {
+  const personalEmail = process.env["PERSONAL_EMAIL"] || process.env["MANUAL_SUBSTACK_EMAIL"];
   return NextResponse.json({
-    message: "This endpoint requires a POST request to publish to Substack",
+    message: "This endpoint requires a POST request to send daily newsletter",
     usage: "curl -X POST https://your-domain.com/api/substack/publish-daily",
+    personalEmail: personalEmail || "❌ NOT CONFIGURED",
   });
 }
 
@@ -59,71 +58,62 @@ export async function POST() {
       new Date(dateISO)
     );
 
-    // Publish to Substack
-    // Option 1: Email-to-post (recommended)
-    const substackEmail = process.env["SUBSTACK_EMAIL_ADDRESS"];
-    if (substackEmail) {
-      const emailResult = await sendPostViaEmail(
+    const postTitle = `AI Daily — ${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}`;
+
+    // Send to personal email address
+    const personalEmail = process.env["PERSONAL_EMAIL"] || process.env["MANUAL_SUBSTACK_EMAIL"];
+    if (!personalEmail) {
+      return NextResponse.json(
         {
-          title: `AI Daily — ${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}`,
-          body: postBody,
-          sendEmail: true,
+          error: "PERSONAL_EMAIL or MANUAL_SUBSTACK_EMAIL not configured",
+          hint: "Set PERSONAL_EMAIL=your-email@example.com in environment variables",
         },
-        substackEmail
+        { status: 400 }
+      );
+    }
+
+    try {
+      const emailResult = await sendNewsletterToEmail(
+        postTitle,
+        postBody,
+        personalEmail,
+        "daily"
       );
 
       if (emailResult.success) {
         return NextResponse.json({
           success: true,
-          method: "email",
+          message: "Daily newsletter sent to personal email",
+          to: personalEmail,
           itemsCount: items.length,
         });
+      } else {
+        return NextResponse.json(
+          {
+            error: "Failed to send newsletter email",
+            details: emailResult.error,
+          },
+          { status: 500 }
+        );
       }
-    }
-
-    // Option 2: API (if implemented)
-    const substackApiKey = process.env["SUBSTACK_API_KEY"];
-    const substackPublicationId = process.env["SUBSTACK_PUBLICATION_ID"];
-
-    if (substackApiKey && substackPublicationId) {
-      const apiResult = await publishToSubstack(
+    } catch (error) {
+      console.error("❌ Failed to send newsletter email:", error);
+      return NextResponse.json(
         {
-          title: `AI Daily — ${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}`,
-          body: postBody,
-          sendEmail: true,
+          error: "Failed to send newsletter email",
+          message: error instanceof Error ? error.message : String(error),
         },
-        {
-          publicationId: substackPublicationId,
-          apiKey: substackApiKey,
-        }
+        { status: 500 }
       );
-
-      if (apiResult.success) {
-        return NextResponse.json({
-          success: true,
-          method: "api",
-          postId: apiResult.postId,
-          itemsCount: items.length,
-        });
-      }
     }
-
-    // If no method configured, return the formatted post
-    return NextResponse.json({
-      success: false,
-      error: "No Substack publishing method configured",
-      formattedPost: postBody,
-      itemsCount: items.length,
-    });
   } catch (error) {
-    console.error("Error publishing to Substack:", error);
+    console.error("Error sending daily newsletter:", error);
     return NextResponse.json(
       {
-        error: "Failed to publish to Substack",
+        error: "Failed to send daily newsletter",
         message: error instanceof Error ? error.message : String(error),
       },
       { status: 500 }
     );
   }
 }
-

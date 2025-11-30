@@ -132,12 +132,32 @@ export default function PlHeader() {
           type="button"
         >
           {isMobileMenuOpen ? (
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           ) : (
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           )}
         </button>
@@ -190,88 +210,97 @@ export default function PlHeader() {
         </nav>
       )}
 
-      {mounted && isModalOpen && createPortal(
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-3 sm:p-4"
-          style={{ top: 0, left: 0, right: 0, bottom: 0 }}
-          onClick={() => {
-            if (status !== "loading") {
-              setIsModalOpen(false);
-              setEmail("");
-              setStatus("idle");
-              setErrorMessage("");
-            }
-          }}
-        >
+      {mounted &&
+        isModalOpen &&
+        createPortal(
           <div
-            className="bg-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 max-w-md w-full ring-1 ring-white/10 shadow-2xl relative mx-auto"
-            onClick={(e) => e.stopPropagation()}
-            style={{ maxHeight: '90vh', overflowY: 'auto' }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-3 sm:p-4"
+            style={{ top: 0, left: 0, right: 0, bottom: 0 }}
+            onClick={() => {
+              if (status !== "loading") {
+                setIsModalOpen(false);
+                setEmail("");
+                setStatus("idle");
+                setErrorMessage("");
+              }
+            }}
           >
-            <h2 className="text-lg sm:text-xl font-semibold mb-2">Join the Beta</h2>
-            <p className="text-slate-300 text-xs sm:text-sm mb-4">
-              Get early access to new features and help shape the future of
-              Plenitudo.ai
-            </p>
+            <div
+              className="bg-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 max-w-md w-full ring-1 ring-white/10 shadow-2xl relative mx-auto"
+              onClick={(e) => e.stopPropagation()}
+              style={{ maxHeight: "90vh", overflowY: "auto" }}
+            >
+              <h2 className="text-lg sm:text-xl font-semibold mb-2">
+                Join the Beta
+              </h2>
+              <p className="text-slate-300 text-xs sm:text-sm mb-4">
+                Get early access to new features and help shape the future of
+                Plenitudo.ai
+              </p>
 
-            {status === "success" ? (
-              <div className="text-center py-3 sm:py-4">
-                <div className="text-emerald-400 text-base sm:text-lg font-semibold mb-2">
-                  ✓ Check your email!
+              {status === "success" ? (
+                <div className="text-center py-3 sm:py-4">
+                  <div className="text-emerald-400 text-base sm:text-lg font-semibold mb-2">
+                    ✓ Check your email!
+                  </div>
+                  <p className="text-slate-300 text-xs sm:text-sm mb-2">
+                    We&apos;ve sent you a verification email. Please click the
+                    link in the email to confirm your address and complete your
+                    signup.
+                  </p>
+                  <p className="text-slate-400 text-[10px] sm:text-xs">
+                    Didn&apos;t receive it? Check your spam folder.
+                  </p>
                 </div>
-                <p className="text-slate-300 text-xs sm:text-sm mb-2">
-                  We&apos;ve sent you a verification email. Please click the
-                  link in the email to confirm your address and complete your
-                  signup.
-                </p>
-                <p className="text-slate-400 text-[10px] sm:text-xs">
-                  Didn&apos;t receive it? Check your spam folder.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
-                <div>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="your@email.com"
-                    required
-                    disabled={status === "loading"}
-                    className="w-full px-3 sm:px-4 py-3 sm:py-2.5 rounded-lg bg-slate-800/60 ring-1 ring-white/10 text-white text-sm sm:text-base placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/50 disabled:opacity-50 min-h-[44px]"
-                  />
-                </div>
-                {status === "error" && errorMessage && (
-                  <div className="text-red-400 text-xs sm:text-sm">{errorMessage}</div>
-                )}
-                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsModalOpen(false);
-                      setEmail("");
-                      setStatus("idle");
-                      setErrorMessage("");
-                    }}
-                    disabled={status === "loading"}
-                    className="w-full sm:flex-1 px-4 py-3 sm:py-2.5 rounded-lg bg-slate-800/60 ring-1 ring-white/10 text-white hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors min-h-[44px] text-sm sm:text-base font-medium"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={status === "loading"}
-                    className="w-full sm:flex-1 px-4 py-3 sm:py-2.5 rounded-lg bg-gradient-to-r from-emerald-500 to-blue-500 text-white font-semibold hover:from-emerald-400 hover:to-blue-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all min-h-[44px] text-sm sm:text-base"
-                  >
-                    {status === "loading" ? "Joining..." : "Join"}
-                  </button>
-                </div>
-              </form>
-            )}
-          </div>
-        </div>,
-        document.body
-      )}
+              ) : (
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-3 sm:space-y-4"
+                >
+                  <div>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="your@email.com"
+                      required
+                      disabled={status === "loading"}
+                      className="w-full px-3 sm:px-4 py-3 sm:py-2.5 rounded-lg bg-slate-800/60 ring-1 ring-white/10 text-white text-sm sm:text-base placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/50 disabled:opacity-50 min-h-[44px]"
+                    />
+                  </div>
+                  {status === "error" && errorMessage && (
+                    <div className="text-red-400 text-xs sm:text-sm">
+                      {errorMessage}
+                    </div>
+                  )}
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsModalOpen(false);
+                        setEmail("");
+                        setStatus("idle");
+                        setErrorMessage("");
+                      }}
+                      disabled={status === "loading"}
+                      className="w-full sm:flex-1 px-4 py-3 sm:py-2.5 rounded-lg bg-slate-800/60 ring-1 ring-white/10 text-white hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors min-h-[44px] text-sm sm:text-base font-medium"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={status === "loading"}
+                      className="w-full sm:flex-1 px-4 py-3 sm:py-2.5 rounded-lg bg-gradient-to-r from-emerald-500 to-blue-500 text-white font-semibold hover:from-emerald-400 hover:to-blue-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all min-h-[44px] text-sm sm:text-base"
+                    >
+                      {status === "loading" ? "Joining..." : "Join"}
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>,
+          document.body
+        )}
     </>
   );
 }

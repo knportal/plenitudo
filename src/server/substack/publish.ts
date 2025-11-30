@@ -1,30 +1,7 @@
 /**
- * Substack API integration for publishing posts
- *
- * Note: Substack doesn't have an official public API.
- * This uses the unofficial Substack API or webhook approach.
- *
- * For production, you may need to:
- * 1. Use Substack's RSS import feature
- * 2. Use browser automation (Puppeteer/Playwright)
- * 3. Use Substack's email-to-post feature
- * 4. Use a third-party service
+ * Newsletter formatting and email sending
+ * Formats AI Daily content and sends directly to personal email
  */
-
-interface SubstackPost {
-  title: string;
-  subtitle?: string;
-  body: string;
-  isPreview?: boolean;
-  sendEmail?: boolean;
-  tags?: string[];
-}
-
-interface SubstackConfig {
-  publicationId: string;
-  apiKey: string;
-  baseUrl?: string;
-}
 
 /**
  * Format AI Daily items as Substack post
@@ -157,74 +134,48 @@ export function formatWeeklyNewsletterAsPost(
 }
 
 /**
- * Publish post to Substack
- *
- * Note: This is a placeholder. Substack doesn't have an official API.
- * You'll need to implement one of these approaches:
- *
- * 1. Email-to-post: Send formatted email to Substack's email address
- * 2. Browser automation: Use Puppeteer/Playwright to automate posting
- * 3. RSS import: Use Substack's RSS import feature
- * 4. Third-party service: Use a service that integrates with Substack
+ * Send newsletter content directly to personal email
  */
-export async function publishToSubstack(
-  post: SubstackPost,
-  _config: SubstackConfig // eslint-disable-line @typescript-eslint/no-unused-vars
-): Promise<{ success: boolean; postId?: string; error?: string }> {
-  // TODO: Implement actual Substack publishing
-  // Options:
-  // 1. Email-to-post (easiest)
-  // 2. Browser automation
-  // 3. Unofficial API wrapper
-
-  console.log("📝 Would publish to Substack:", {
-    title: post.title,
-    bodyLength: post.body.length,
-  });
-
-  // Placeholder implementation
-  return {
-    success: false,
-    error: "Substack API not implemented. See comments in code.",
-  };
-}
-
-/**
- * Send post via email (Substack email-to-post feature)
- *
- * IMPORTANT: Posts arrive as DRAFTS in Substack for manual curation.
- * This ensures ethical content review before publishing.
- *
- * Manual curation workflow:
- * 1. Post arrives in Substack dashboard as a draft
- * 2. Review content, edit if needed
- * 3. Set subscription tier (free or paid)
- * 4. Publish when ready
- */
-export async function sendPostViaEmail(
-  post: SubstackPost,
-  emailAddress: string
+export async function sendNewsletterToEmail(
+  title: string,
+  htmlBody: string,
+  emailAddress: string,
+  postType: "daily" | "weekly" = "daily"
 ): Promise<{ success: boolean; error?: string }> {
   try {
     // Import email service
-    const { sendSubstackPost } = await import("../notifications/email");
+    const { sendNewsletterEmail } = await import("../notifications/email");
 
-    // Send formatted HTML to Substack
-    await sendSubstackPost(post.title, post.body, emailAddress);
+    // Send formatted HTML to personal email
+    await sendNewsletterEmail(title, htmlBody, emailAddress, postType);
 
-    console.log("✅ Sent post to Substack via email:", {
+    console.log("✅ Sent newsletter to email:", {
       to: emailAddress,
-      title: post.title,
+      title,
+      postType,
     });
 
     return {
       success: true,
     };
   } catch (error) {
-    console.error("❌ Failed to send post to Substack:", error);
+    console.error("❌ Failed to send newsletter email:", error);
     return {
       success: false,
       error: error instanceof Error ? error.message : String(error),
     };
   }
+}
+
+/**
+ * Send newsletter content directly to personal email.
+ * This is an alias for sendNewsletterToEmail for backward compatibility.
+ */
+export async function sendManualSubstackEmail(
+  title: string,
+  htmlBody: string,
+  to: string,
+  postType: "daily" | "weekly" = "daily"
+): Promise<{ success: boolean; error?: string }> {
+  return sendNewsletterToEmail(title, htmlBody, to, postType);
 }

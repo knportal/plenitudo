@@ -156,12 +156,16 @@ npm run cache:clear && npm run dev
 
 ### Substack Integration (Optional)
 
-| Variable                   | Description                   | Required   | Example                          |
-| -------------------------- | ----------------------------- | ---------- | -------------------------------- |
-| `NEXT_PUBLIC_SUBSTACK_URL` | Substack publication URL      | No\*\*\*\* | `https://plenitudo.substack.com` |
-| `NEXT_PUBLIC_APP_URL`      | Your app URL for UTM tracking | No\*\*\*\* | `https://plenitudo.ai`           |
+| Variable                   | Description                                           | Required   | Example                                |
+| -------------------------- | ----------------------------------------------------- | ---------- | -------------------------------------- |
+| `NEXT_PUBLIC_SUBSTACK_URL` | Substack publication URL                              | No\*\*\*\* | `https://plenitudo.substack.com`       |
+| `NEXT_PUBLIC_APP_URL`      | Your app URL for UTM tracking                         | No\*\*\*\* | `https://plenitudo.ai`                 |
+| `SUBSTACK_EMAIL_ADDRESS`   | Substack email-to-post address (for auto-publishing)  | No\*\*\*\* | `your-publication+post@substack.com`   |
+| `MANUAL_SUBSTACK_EMAIL`    | Your email address (for manual copy/paste workflow)   | No\*\*\*\* | `your-email@example.com`               |
 
 \*\*\*\* Required for Substack newsletter integration. See [SUBSTACK-GROWTH-STRATEGY.md](./SUBSTACK-GROWTH-STRATEGY.md) for setup.
+
+**Note:** If `MANUAL_SUBSTACK_EMAIL` is set, you'll receive formatted emails with markdown content ready to copy/paste into Substack when daily/weekly posts are generated.
 
 ---
 

@@ -16,14 +16,14 @@ export async function GET() {
       // Don't fail the whole rebuild if thread creation fails
     }
 
-    // Publish to Substack (if configured)
-    // This combines the daily rebuild and publish into one cron job
-    let substackResult: { success: boolean; error?: string } | null = null;
+    // Send newsletter email (if configured)
+    // This combines the daily rebuild and email sending into one cron job
+    let emailResult: { success: boolean; error?: string } | null = null;
     try {
-      const substackEmail = process.env["SUBSTACK_EMAIL_ADDRESS"];
-      if (substackEmail) {
-        // Import and call the publish function
-        const { sendPostViaEmail } = await import("@/server/substack/publish");
+      const personalEmail = process.env["PERSONAL_EMAIL"] || process.env["MANUAL_SUBSTACK_EMAIL"];
+      if (personalEmail) {
+        // Import and call the email function
+        const { sendNewsletterToEmail } = await import("@/server/substack/publish");
         const { dailyAITemplate } = await import("@/server/substack/templates");
         const { toETDateISO } = await import("@/server/aiDaily/text");
         const { PrismaClient } = await import("@prisma/client");
@@ -50,22 +50,22 @@ export async function GET() {
             new Date(dateISO)
           );
 
-          substackResult = await sendPostViaEmail(
-            {
-              title: `AI Daily — ${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}`,
-              body: postBody,
-              sendEmail: true,
-            },
-            substackEmail
+          const postTitle = `AI Daily — ${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}`;
+
+          emailResult = await sendNewsletterToEmail(
+            postTitle,
+            postBody,
+            personalEmail,
+            "daily"
           );
         }
 
         await prisma.$disconnect();
       }
     } catch (error) {
-      console.error("Failed to publish to Substack:", error);
-      // Don't fail the whole rebuild if Substack publish fails
-      substackResult = {
+      console.error("Failed to send newsletter email:", error);
+      // Don't fail the whole rebuild if email sending fails
+      emailResult = {
         success: false,
         error: error instanceof Error ? error.message : String(error),
       };
@@ -75,7 +75,7 @@ export async function GET() {
       ok: true,
       count,
       threadId,
-      substack: substackResult,
+      email: emailResult,
     });
   } catch (e: unknown) {
     if (e instanceof Error) {

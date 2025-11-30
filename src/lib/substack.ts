@@ -85,5 +85,3 @@ export function isFromSubstack(searchParams: URLSearchParams): boolean {
     searchParams.get("utm_medium") === "email"
   );
 }
-
-

@@ -26,8 +26,10 @@ async function getResendClass() {
     const resendModule = await import("resend");
     ResendClass = resendModule.Resend;
 
-    if (!ResendClass || typeof ResendClass !== 'function') {
-      throw new Error(`Resend class not found or not a function. Got: ${typeof ResendClass}`);
+    if (!ResendClass || typeof ResendClass !== "function") {
+      throw new Error(
+        `Resend class not found or not a function. Got: ${typeof ResendClass}`
+      );
     }
 
     return ResendClass;
@@ -130,7 +132,10 @@ export async function sendEmail(
       console.error("❌ Resend error:", error);
 
       // Provide helpful error message for domain verification issues
-      if (error.message?.includes("verify a domain") || error.message?.includes("testing emails")) {
+      if (
+        error.message?.includes("verify a domain") ||
+        error.message?.includes("testing emails")
+      ) {
         const helpfulMessage = `Domain verification required. ${error.message} To fix: 1) Go to resend.com/domains, 2) Verify plenitudo.ai domain, 3) Set RESEND_FROM_EMAIL=notifications@plenitudo.ai in Vercel, or 4) Use the email address Resend allows (check error message above).`;
         throw new Error(helpfulMessage);
       }
@@ -246,59 +251,56 @@ export async function sendSummaryEmail(
 function htmlToPlainText(html: string): string {
   const text = html
     // Remove style blocks
-    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
     // Convert headings
-    .replace(/<h1[^>]*>(.*?)<\/h1>/gi, '\n\n# $1\n\n')
-    .replace(/<h2[^>]*>(.*?)<\/h2>/gi, '\n\n## $1\n\n')
-    .replace(/<h3[^>]*>(.*?)<\/h3>/gi, '\n\n### $1\n\n')
+    .replace(/<h1[^>]*>(.*?)<\/h1>/gi, "\n\n# $1\n\n")
+    .replace(/<h2[^>]*>(.*?)<\/h2>/gi, "\n\n## $1\n\n")
+    .replace(/<h3[^>]*>(.*?)<\/h3>/gi, "\n\n### $1\n\n")
     // Convert paragraphs
-    .replace(/<p[^>]*>(.*?)<\/p>/gi, '$1\n\n')
+    .replace(/<p[^>]*>(.*?)<\/p>/gi, "$1\n\n")
     // Convert line breaks
-    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<br\s*\/?>/gi, "\n")
     // Convert links: <a href="url">text</a> -> text (url)
-    .replace(/<a[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/gi, '$2 ($1)')
+    .replace(/<a[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/gi, "$2 ($1)")
     // Convert strong/bold
-    .replace(/<(strong|b)[^>]*>(.*?)<\/(strong|b)>/gi, '**$2**')
+    .replace(/<(strong|b)[^>]*>(.*?)<\/(strong|b)>/gi, "**$2**")
     // Convert emphasis/italic
-    .replace(/<(em|i)[^>]*>(.*?)<\/(em|i)>/gi, '*$2*')
+    .replace(/<(em|i)[^>]*>(.*?)<\/(em|i)>/gi, "*$2*")
     // Convert horizontal rules
-    .replace(/<hr[^>]*>/gi, '\n---\n')
+    .replace(/<hr[^>]*>/gi, "\n---\n")
     // Remove divs but keep content
-    .replace(/<div[^>]*>/gi, '\n')
-    .replace(/<\/div>/gi, '')
+    .replace(/<div[^>]*>/gi, "\n")
+    .replace(/<\/div>/gi, "")
     // Remove all other HTML tags
-    .replace(/<[^>]+>/g, '')
+    .replace(/<[^>]+>/g, "")
     // Decode HTML entities
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
     // Clean up extra whitespace
-    .replace(/\n{3,}/g, '\n\n')
+    .replace(/\n{3,}/g, "\n\n")
     .trim();
 
   return text;
 }
 
 /**
- * Send formatted post to Substack via email-to-post.
- * This is the easiest way to automate Substack publishing.
- *
- * Note: Substack email-to-post works better with plain text than HTML.
- * We send both text and HTML versions for maximum compatibility.
+ * Send formatted newsletter content directly to personal email.
+ * Sends both HTML and plain text versions for maximum compatibility.
  */
-export async function sendSubstackPost(
+export async function sendNewsletterEmail(
   title: string,
   htmlBody: string,
-  to: string
+  to: string,
+  postType: "daily" | "weekly" = "daily"
 ): Promise<void> {
-  // Format as email with proper subject line
-  // Substack email-to-post uses the subject as the post title
-  const subject = title;
+  const postTypeLabel = postType === "daily" ? "Daily" : "Weekly";
+  const subject = `${postTypeLabel} Newsletter - ${title}`;
 
-  // Convert HTML to plain text for better Substack compatibility
+  // Convert HTML to plain text
   const plainText = htmlToPlainText(htmlBody);
 
   // Wrap HTML body in email-friendly format
@@ -315,7 +317,6 @@ export async function sendSubstackPost(
   `;
 
   // Send email with both text and HTML versions
-  // Substack email-to-post prefers plain text
   await sendEmailWithText(to, subject, plainText, emailHtml);
 }
 
@@ -389,4 +390,22 @@ async function sendEmailWithText(
     });
     throw error;
   }
+}
+
+/**
+ * Send formatted newsletter content directly to personal email.
+ * This is a simplified version that just sends the content without Substack-specific instructions.
+ *
+ * @param title Post title
+ * @param htmlBody HTML formatted body
+ * @param to Email recipient
+ * @param postType Type of post ("daily" or "weekly") for context
+ */
+export async function sendNewsletterEmailDirect(
+  title: string,
+  htmlBody: string,
+  to: string,
+  postType: "daily" | "weekly" = "daily"
+): Promise<void> {
+  await sendNewsletterEmail(title, htmlBody, to, postType);
 }

@@ -1,37 +1,40 @@
 /**
- * Test endpoint to send a simple email to Substack
- * This helps verify the email-to-post address is working
+ * Test endpoint to send a simple email to personal email
+ * This helps verify the email configuration is working
  */
 
 import { NextResponse } from "next/server";
-import { sendSubstackPost } from "@/server/notifications/email";
+import { sendNewsletterEmail } from "@/server/notifications/email";
 
 export async function POST() {
   try {
-    const substackEmail = process.env["SUBSTACK_EMAIL_ADDRESS"];
+    const personalEmail = process.env["PERSONAL_EMAIL"] || process.env["MANUAL_SUBSTACK_EMAIL"];
 
-    if (!substackEmail) {
+    if (!personalEmail) {
       return NextResponse.json(
-        { error: "SUBSTACK_EMAIL_ADDRESS not configured" },
+        {
+          error: "PERSONAL_EMAIL or MANUAL_SUBSTACK_EMAIL not configured",
+          hint: "Set PERSONAL_EMAIL=your-email@example.com in environment variables",
+        },
         { status: 400 }
       );
     }
 
     // Send a simple test email
-    const testTitle = "Test Post - " + new Date().toISOString();
+    const testTitle = "Test Newsletter - " + new Date().toISOString();
     const testBody = `
-      <h1>Test Post</h1>
-      <p>This is a test email to verify Substack email-to-post is working.</p>
-      <p>If you see this in Substack, the email address is correct!</p>
+      <h1>Test Newsletter</h1>
+      <p>This is a test email to verify the newsletter email configuration is working.</p>
+      <p>If you receive this, the email address is correct!</p>
       <p>Sent at: ${new Date().toLocaleString()}</p>
     `;
 
-    await sendSubstackPost(testTitle, testBody, substackEmail);
+    await sendNewsletterEmail(testTitle, testBody, personalEmail, "daily");
 
     return NextResponse.json({
       success: true,
       message: "Test email sent",
-      to: substackEmail,
+      to: personalEmail,
       title: testTitle,
     });
   } catch (error) {
@@ -47,11 +50,10 @@ export async function POST() {
 }
 
 export async function GET() {
+  const personalEmail = process.env["PERSONAL_EMAIL"] || process.env["MANUAL_SUBSTACK_EMAIL"];
   return NextResponse.json({
-    message: "Send a POST request to test Substack email",
+    message: "Send a POST request to test newsletter email",
     usage: "curl -X POST https://your-domain.com/api/substack/test-email",
-    substackEmail: process.env["SUBSTACK_EMAIL_ADDRESS"] || "not configured",
+    personalEmail: personalEmail || "❌ NOT CONFIGURED",
   });
 }
-
-

@@ -15,10 +15,7 @@ export interface NewsletterItem {
 /**
  * Daily AI Daily template with beautiful formatting
  */
-export function dailyAITemplate(
-  items: NewsletterItem[],
-  date: Date
-): string {
+export function dailyAITemplate(items: NewsletterItem[], date: Date): string {
   const dateFormatted = date.toLocaleDateString("en-US", {
     weekday: "long",
     year: "numeric",
@@ -148,5 +145,3 @@ export function weeklyNewsletterTemplate(
 
   return html;
 }
-
-

@@ -22,9 +22,9 @@ export default function PlHero() {
           <span className="text-emerald-400">start idea scrolling</span>.
         </h1>
         <p className="mt-3 sm:mt-4 text-slate-300 max-w-2xl text-sm sm:text-base">
-          A home for uplifting AI breakthroughs, mindful prompts, and rooms where
-          builders connect. Get the day&apos;s top insights delivered daily, plus weekly
-          deep dives and exclusive analysis.
+          A home for uplifting AI breakthroughs, mindful prompts, and rooms
+          where builders connect. Get the day&apos;s top insights delivered
+          daily, plus weekly deep dives and exclusive analysis.
         </p>
         <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-2 sm:gap-3">
           {substackUrl ? (
