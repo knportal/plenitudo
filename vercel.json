@@ -1,7 +1,6 @@
 {
   "crons": [
     { "path": "/api/admin/ai-daily/rebuild", "schedule": "0 11 * * *" },
-    { "path": "/api/substack/publish-daily", "schedule": "0 11 * * *" },
     { "path": "/api/substack/publish-weekly", "schedule": "0 9 * * 1" }
   ]
 }
