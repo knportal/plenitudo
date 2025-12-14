@@ -26,6 +26,13 @@ export default function PlFooter() {
           {new Date().getFullYear()} Plenitudo.ai
         </p>
         <div className="flex items-center gap-4">
+          <Link
+            href="/privacy-policy"
+            className="text-slate-400 hover:text-emerald-400 transition-colors focus:outline-none focus-visible:ring ring-emerald-400 rounded px-2 py-1 text-xs sm:text-sm"
+            aria-label="Privacy Policy"
+          >
+            Privacy Policy
+          </Link>
           {substackUrl && (
             <a
               href={getSubstackUrl()}
