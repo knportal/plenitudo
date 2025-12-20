@@ -671,15 +671,13 @@ export default function PrivacyPolicyPage() {
                     hello@plenitudo.ai
                   </a>
                   <br />
-                  Support URL:{" "}
-                  <a
-                    href="https://github.com/knportal/Plena/tree/main/support"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  Support:{" "}
+                  <Link
+                    href="/app/plena/support"
                     className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2"
                   >
-                    https://github.com/knportal/Plena/tree/main/support
-                  </a>
+                    Visit Support Page
+                  </Link>
                 </p>
               </div>
             </section>
@@ -817,5 +815,7 @@ export default function PrivacyPolicyPage() {
     </div>
   );
 }
+
+
 
 
