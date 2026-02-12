@@ -3,9 +3,9 @@ import Link from "next/link";
 import PlFooter from "@/components/plenitudo/layout/PlFooter";
 
 export const metadata: Metadata = {
-  title: "App Store Privacy Disclosure | Plenitudo AI",
+  title: "Privacy Policy | Plenitudo AI",
   description:
-    "App Store Privacy Disclosure for Plena - mapping data collection practices to Apple's App Store Privacy requirements. Learn how we handle health and fitness data.",
+    "Privacy Policy for Plena - a mindfulness tracking application. Learn how we collect, use, and protect your health data through Apple's HealthKit framework.",
 };
 
 export default function PrivacyPolicyPage() {
@@ -16,7 +16,7 @@ export default function PrivacyPolicyPage() {
         <div className="mt-8 mb-8">
           <div className="flex items-center justify-between gap-4 mb-4">
             <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight">
-              App Store Privacy Disclosure for Plena
+              Plena Privacy Policy
             </h1>
             <Link
               href="/"
@@ -26,574 +26,644 @@ export default function PrivacyPolicyPage() {
             </Link>
           </div>
           <p className="text-xs sm:text-sm text-slate-400">
-            <strong>Last Updated:</strong> December 18, 2025
-          </p>
-          <p className="text-xs sm:text-sm text-slate-400 mt-2">
-            This document maps Plena&apos;s data collection practices to
-            Apple&apos;s App Store Privacy Disclosure requirements.
+            <strong>Last Updated:</strong> February 12, 2026
+            <br />
+            <strong>Effective Date:</strong> February 12, 2026
           </p>
         </div>
 
-        {/* Privacy Disclosure Content */}
+        {/* Privacy Policy Content */}
         <div className="prose prose-invert prose-slate max-w-none mb-12">
           <div className="space-y-8 text-sm sm:text-base text-slate-300 leading-relaxed">
-            {/* Summary */}
+            {/* Introduction */}
             <section>
               <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                Summary
+                Introduction
               </h2>
               <p>
-                Plena collects health and fitness data through Apple&apos;s
-                HealthKit framework. All data is stored locally on the
-                user&apos;s device and is not transmitted to external servers.
-                No third-party analytics, advertising, or tracking services are
-                used.
+                Plena (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is
+                committed to protecting your privacy. This Privacy Policy
+                explains how we collect, use, disclose, and safeguard your
+                information when you use our mindfulness tracking application
+                (&quot;App&quot;) and related services.
+              </p>
+              <p className="mt-3 text-emerald-300 font-medium">
+                <strong>Important:</strong> This app uses Apple&apos;s HealthKit
+                framework to access health data. Your health information is
+                sensitive, and we take its protection seriously.
               </p>
             </section>
 
-            {/* Data Types Collected */}
+            {/* Information We Collect */}
             <section>
               <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                Data Types Collected
+                Information We Collect
               </h2>
 
-              {/* Health Data */}
-              <div className="mt-4 p-4 bg-slate-900/50 rounded-lg border border-slate-800">
-                <h3 className="text-base sm:text-lg font-semibold text-slate-200 mb-3">
-                  1. Health & Fitness
-                </h3>
+              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
+                Health Data (via HealthKit)
+              </h3>
+              <p>
+                Plena accesses the following health data types through
+                Apple&apos;s HealthKit framework:
+              </p>
 
-                <h4 className="text-sm sm:text-base font-semibold text-emerald-400 mb-2">
-                  Health Data
-                </h4>
-                <p className="text-slate-400 text-sm mb-2">
-                  <strong>Data Type:</strong> Health (Health & Fitness category)
-                </p>
-
+              <div className="mt-3">
                 <p className="font-medium text-slate-200 mb-2">
-                  <strong>What is collected:</strong>
+                  <strong>Data We Read:</strong>
                 </p>
                 <ul className="list-disc list-inside space-y-1 ml-4">
                   <li>Heart Rate (beats per minute)</li>
                   <li>Heart Rate Variability (HRV/SDNN) in milliseconds</li>
                   <li>Respiratory Rate (breaths per minute)</li>
-                  <li>Body Temperature (wrist temperature, when available)</li>
-                  <li>VO₂ Max (estimated fitness level, when available)</li>
-                  <li>
-                    Sleep Analysis data (sleep duration, sleep periods, and
-                    sleep stages)
-                  </li>
-                  <li>Resting Heart Rate (for readiness score calculation)</li>
+                  <li>Body Temperature</li>
+                  <li>VO₂ Max (maximum oxygen consumption)</li>
                 </ul>
-
-                <p className="font-medium text-slate-200 mt-3 mb-2">
-                  <strong>How it&apos;s collected:</strong>
-                </p>
-                <ul className="list-disc list-inside space-y-1 ml-4">
-                  <li>Read from Apple HealthKit framework</li>
-                  <li>
-                    Collected during meditation sessions via Apple Watch sensors
-                  </li>
-                  <li>
-                    Historical data may be read from HealthKit for trend
-                    analysis
-                  </li>
-                </ul>
-
-                <p className="font-medium text-slate-200 mt-3 mb-2">
-                  <strong>Purpose:</strong>
-                </p>
-                <ul className="list-none space-y-1 ml-4">
-                  <li>
-                    <span className="text-emerald-400">✅</span>{" "}
-                    <strong>App Functionality</strong>
-                  </li>
-                  <li className="ml-6">
-                    - Display real-time biometric readings during meditation
-                    sessions
-                  </li>
-                  <li className="ml-6">
-                    - Calculate stress zone classifications (Calm, Optimal,
-                    Elevated Stress)
-                  </li>
-                  <li className="ml-6">
-                    - Generate session summaries and statistics
-                  </li>
-                  <li className="ml-6">
-                    - Create data visualizations and trend analysis
-                  </li>
-                  <li className="ml-6">- Calculate readiness scores</li>
-                  <li className="ml-6">- Provide personalized insights</li>
-                </ul>
-
-                <div className="mt-3 space-y-1">
-                  <p>
-                    <strong>Linked to User:</strong>{" "}
-                    <span className="text-emerald-400">✅ Yes</span> - Health
-                    data is inherently linked to the user&apos;s identity
-                  </p>
-                  <p>
-                    <strong>Used for Tracking:</strong>{" "}
-                    <span className="text-red-400">❌ No</span> - Health data is
-                    not used for tracking purposes
-                  </p>
-                  <p>
-                    <strong>Third-Party Sharing:</strong>{" "}
-                    <span className="text-red-400">❌ No</span> - Health data is
-                    not shared with third parties
-                  </p>
-                </div>
               </div>
 
-              {/* Fitness Data */}
-              <div className="mt-4 p-4 bg-slate-900/50 rounded-lg border border-slate-800">
-                <h4 className="text-sm sm:text-base font-semibold text-emerald-400 mb-2">
-                  Fitness Data
-                </h4>
-                <p className="text-slate-400 text-sm mb-2">
-                  <strong>Data Type:</strong> Fitness (Health & Fitness
-                  category)
-                </p>
-
+              <div className="mt-3">
                 <p className="font-medium text-slate-200 mb-2">
-                  <strong>What is collected:</strong>
+                  <strong>Data We Write:</strong>
                 </p>
                 <ul className="list-disc list-inside space-y-1 ml-4">
-                  <li>Meditation session duration and timestamps</li>
-                  <li>Session frequency and patterns</li>
-                  <li>Mindfulness session data (written to HealthKit)</li>
+                  <li>Mindfulness session data (mindfulness sessions)</li>
+                  <li>Session duration and timestamps</li>
                 </ul>
-
-                <p className="font-medium text-slate-200 mt-3 mb-2">
-                  <strong>How it&apos;s collected:</strong>
-                </p>
-                <ul className="list-disc list-inside space-y-1 ml-4">
-                  <li>Generated by the app during meditation sessions</li>
-                  <li>
-                    Written to HealthKit for integration with Apple Health app
-                  </li>
-                  <li>Stored locally in CoreData</li>
-                </ul>
-
-                <p className="font-medium text-slate-200 mt-3 mb-2">
-                  <strong>Purpose:</strong>
-                </p>
-                <ul className="list-none space-y-1 ml-4">
-                  <li>
-                    <span className="text-emerald-400">✅</span>{" "}
-                    <strong>App Functionality</strong>
-                  </li>
-                  <li className="ml-6">- Track meditation practice</li>
-                  <li className="ml-6">- Calculate session statistics</li>
-                  <li className="ml-6">- Generate progress insights</li>
-                  <li className="ml-6">- Sync between iPhone and Apple Watch</li>
-                </ul>
-
-                <div className="mt-3 space-y-1">
-                  <p>
-                    <strong>Linked to User:</strong>{" "}
-                    <span className="text-emerald-400">✅ Yes</span> - Session
-                    data is linked to the user
-                  </p>
-                  <p>
-                    <strong>Used for Tracking:</strong>{" "}
-                    <span className="text-red-400">❌ No</span> - Session data
-                    is not used for tracking
-                  </p>
-                  <p>
-                    <strong>Third-Party Sharing:</strong>{" "}
-                    <span className="text-red-400">❌ No</span> - Session data
-                    is not shared with third parties
-                  </p>
-                </div>
               </div>
-            </section>
 
-            {/* Data NOT Collected */}
-            <section>
-              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                Data NOT Collected
-              </h2>
-              <p className="mb-3">
-                The following data types are <strong>NOT</strong> collected by
-                Plena:
+              <div className="mt-3">
+                <p className="font-medium text-slate-200 mb-2">
+                  <strong>How HealthKit Works:</strong>
+                </p>
+                <ul className="list-disc list-inside space-y-1 ml-4">
+                  <li>
+                    HealthKit is Apple&apos;s secure health data storage system
+                  </li>
+                  <li>You control what data Plena can access</li>
+                  <li>You can revoke access at any time</li>
+                  <li>
+                    HealthKit data is stored locally on your device or in your
+                    iCloud account
+                  </li>
+                </ul>
+              </div>
+
+              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
+                Device Information
+              </h3>
+              <p>We may collect information about your device, including:</p>
+              <ul className="list-disc list-inside space-y-1 ml-4 mt-2">
+                <li>Device model and operating system version</li>
+                <li>App version</li>
+                <li>
+                  Unique device identifiers (when necessary for app
+                  functionality)
+                </li>
+              </ul>
+
+              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
+                Usage Data
+              </h3>
+              <p>
+                We may collect information about how you use the App, including:
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                <div className="space-y-1">
-                  <p>
-                    <span className="text-red-400">❌</span> Contact Info (Name,
-                    Email, Phone, Address)
-                  </p>
-                  <p>
-                    <span className="text-red-400">❌</span> Financial Info
-                    (Payment, Credit, etc.)
-                  </p>
-                  <p>
-                    <span className="text-red-400">❌</span> Location Data
-                    (Precise or Coarse)
-                  </p>
-                  <p>
-                    <span className="text-red-400">❌</span> Sensitive Info
-                    (Race, Sexual Orientation, etc.)
-                  </p>
-                  <p>
-                    <span className="text-red-400">❌</span> User Content
-                    (Photos, Videos, Audio, etc.)
-                  </p>
-                  <p>
-                    <span className="text-red-400">❌</span> Browsing History
-                  </p>
-                </div>
-                <div className="space-y-1">
-                  <p>
-                    <span className="text-red-400">❌</span> Search History
-                  </p>
-                  <p>
-                    <span className="text-red-400">❌</span> User ID (no user
-                    accounts or authentication)
-                  </p>
-                  <p>
-                    <span className="text-red-400">❌</span> Device ID (no
-                    advertising identifiers)
-                  </p>
-                  <p>
-                    <span className="text-red-400">❌</span> Product Interaction
-                    (no in-app purchases tracked)
-                  </p>
-                  <p>
-                    <span className="text-red-400">❌</span> Advertising Data
-                  </p>
-                  <p>
-                    <span className="text-red-400">❌</span> Other Usage Data
-                    (no analytics services)
-                  </p>
-                </div>
-              </div>
+              <ul className="list-disc list-inside space-y-1 ml-4 mt-2">
+                <li>Session start and stop times</li>
+                <li>Features used within the app</li>
+                <li>
+                  Crash reports and performance data (automatically collected by
+                  Apple)
+                </li>
+              </ul>
             </section>
 
-            {/* Data Use Purposes */}
+            {/* How We Use Your Information */}
             <section>
               <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                Data Use Purposes
+                How We Use Your Information
               </h2>
 
               <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                App Functionality{" "}
-                <span className="text-emerald-400 text-sm">✅</span>
+                Primary Uses
               </h3>
-              <p className="mb-2">
-                All collected data is used <strong>exclusively</strong> for app
-                functionality:
+
+              <p className="font-medium text-slate-200 mb-2">
+                <strong>Health Data:</strong>
               </p>
               <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>Real-time sensor data display</li>
-                <li>Stress zone calculations</li>
-                <li>Session tracking and statistics</li>
-                <li>Data visualizations and trend analysis</li>
-                <li>Readiness score calculations</li>
-                <li>Device synchronization (iPhone ↔ Apple Watch)</li>
+                <li>
+                  Display real-time biometric readings during mindfulness
+                  sessions
+                </li>
+                <li>Calculate stress zone classifications</li>
+                <li>Generate session summaries and statistics</li>
+                <li>Create data visualizations and trend analysis</li>
+                <li>
+                  Provide personalized insights about your mindfulness practice
+                </li>
+              </ul>
+
+              <p className="font-medium text-slate-200 mt-3 mb-2">
+                <strong>Device Information:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Ensure app compatibility</li>
+                <li>Troubleshoot technical issues</li>
+                <li>Improve app performance</li>
+              </ul>
+
+              <p className="font-medium text-slate-200 mt-3 mb-2">
+                <strong>Usage Data:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Understand how features are used</li>
+                <li>Improve user experience</li>
+                <li>Identify and fix bugs</li>
               </ul>
 
               <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                NOT Used For:
+                We Do NOT:
               </h3>
-              <ul className="list-none space-y-1 ml-4">
+              <ul className="list-disc list-inside space-y-1 ml-4">
                 <li>
-                  <span className="text-red-400">❌</span> Third-Party
-                  Advertising
+                  <strong>Sell your data</strong> to third parties
                 </li>
                 <li>
-                  <span className="text-red-400">❌</span> Developer&apos;s
-                  Advertising or Marketing
+                  <strong>Share your health data</strong> with advertisers
                 </li>
                 <li>
-                  <span className="text-red-400">❌</span> Analytics (no
-                  analytics services integrated)
+                  <strong>Use your data</strong> for marketing purposes without
+                  consent
                 </li>
                 <li>
-                  <span className="text-red-400">❌</span> Product
-                  Personalization (beyond app functionality)
+                  <strong>Access your data</strong> for purposes other than app
+                  functionality
                 </li>
                 <li>
-                  <span className="text-red-400">❌</span> Tracking
-                </li>
-                <li>
-                  <span className="text-red-400">❌</span> Other Purposes
+                  <strong>Store your data</strong> on our servers
                 </li>
               </ul>
             </section>
 
-            {/* Data Storage & Transmission */}
+            {/* Data Storage & Security */}
             <section>
               <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                Data Storage & Transmission
+                Data Storage & Security
               </h2>
 
               <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
                 Local Storage
               </h3>
-              <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>
-                  All data is stored locally on the user&apos;s device using
-                  CoreData
-                </li>
-                <li>
-                  Data is stored in an App Group container for sharing between
-                  iPhone and Apple Watch
-                </li>
-                <li>
-                  HealthKit data remains in Apple&apos;s HealthKit system
-                  (managed by Apple)
-                </li>
-              </ul>
-
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Cloud Storage (Optional)
-              </h3>
-              <p className="mb-2">
-                If the user enables iCloud/CloudKit sync:
+              <p className="font-medium text-slate-200 mb-2">
+                <strong>Primary Storage:</strong>
               </p>
               <ul className="list-disc list-inside space-y-1 ml-4">
                 <li>
-                  Session data may sync between devices via the user&apos;s
-                  iCloud account
+                  Health data is stored locally on your device using CoreData
                 </li>
-                <li>Data is encrypted by Apple</li>
                 <li>
-                  Data remains in the user&apos;s personal iCloud account
+                  All health data remains on your device unless you enable
+                  iCloud sync
                 </li>
-                <li>This is managed by Apple, not by Plena</li>
+              </ul>
+
+              <p className="font-medium text-slate-200 mt-3 mb-2">
+                <strong>What is Stored Locally:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Session summaries and statistics</li>
+                <li>App preferences and settings</li>
+                <li>Historical data visualizations</li>
+                <li>Cache and temporary files</li>
               </ul>
 
               <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Data Transmission
+                iCloud Sync (Optional)
               </h3>
-              <div className="p-4 bg-slate-900/50 rounded-lg border border-emerald-800/50">
-                <ul className="list-none space-y-2">
-                  <li>
-                    <span className="text-red-400">❌</span>{" "}
-                    <strong>
-                      No data is transmitted to Plena&apos;s servers
-                    </strong>
-                  </li>
-                  <li>
-                    <span className="text-red-400">❌</span>{" "}
-                    <strong>
-                      No data is transmitted to third-party servers
-                    </strong>
-                  </li>
-                  <li>
-                    <span className="text-red-400">❌</span>{" "}
-                    <strong>No data is shared with analytics services</strong>
-                  </li>
-                  <li>
-                    <span className="text-red-400">❌</span>{" "}
-                    <strong>
-                      No data is shared with advertising networks
-                    </strong>
-                  </li>
-                </ul>
-              </div>
+              <p className="font-medium text-slate-200 mb-2">
+                <strong>If You Enable CloudKit/iCloud:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Data syncs between your iPhone and Apple Watch</li>
+                <li>Data is stored in your personal iCloud account</li>
+                <li>Sync is encrypted end-to-end by Apple</li>
+                <li>You can disable iCloud sync anytime in Settings</li>
+              </ul>
+
+              <p className="font-medium text-slate-200 mt-3 mb-2">
+                <strong>What Syncs:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Session data</li>
+                <li>Statistics and summaries</li>
+                <li>App settings and preferences</li>
+              </ul>
+
+              <p className="font-medium text-slate-200 mt-3 mb-2">
+                <strong>What Does NOT Sync:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Raw HealthKit data (stays in HealthKit)</li>
+                <li>Your HealthKit permissions (device-specific)</li>
+              </ul>
+
+              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
+                Security Measures
+              </h3>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>
+                  <strong>HealthKit Integration:</strong> All health data access
+                  uses Apple&apos;s secure HealthKit framework
+                </li>
+                <li>
+                  <strong>Local Storage:</strong> Data is encrypted at rest on
+                  your device
+                </li>
+                <li>
+                  <strong>iCloud Encryption:</strong> If using iCloud, data is
+                  encrypted by Apple
+                </li>
+                <li>
+                  <strong>No Third-Party Servers:</strong> We do not transmit
+                  your health data to our servers
+                </li>
+                <li>
+                  <strong>Device Security:</strong> Your device&apos;s built-in
+                  security protects your data
+                </li>
+              </ul>
             </section>
 
-            {/* Data Linked to User */}
+            {/* Data Sharing */}
             <section>
               <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                Data Linked to User
+                Data Sharing
               </h2>
 
               <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Health Data
+                Third-Party Services
+              </h3>
+              <p className="font-medium text-slate-200 mb-2">
+                <strong>Apple HealthKit:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>We read and write data to HealthKit</li>
+                <li>HealthKit is managed by Apple, not by us</li>
+                <li>See Apple&apos;s Privacy Policy for HealthKit data handling</li>
+                <li>You control HealthKit permissions in iOS Settings</li>
+              </ul>
+
+              <p className="font-medium text-slate-200 mt-3 mb-2">
+                <strong>Apple CloudKit (if enabled):</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Used for syncing data between your devices</li>
+                <li>Managed by Apple</li>
+                <li>Data remains in your iCloud account</li>
+                <li>Encrypted by Apple</li>
+              </ul>
+
+              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
+                What We Do NOT Share
+              </h3>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>
+                  We do <strong>NOT</strong> share your health data with third
+                  parties
+                </li>
+                <li>
+                  We do <strong>NOT</strong> sell your data
+                </li>
+                <li>
+                  We do <strong>NOT</strong> use analytics services that collect
+                  health data
+                </li>
+                <li>
+                  We do <strong>NOT</strong> share data with advertisers
+                </li>
+                <li>
+                  We do <strong>NOT</strong> share data with social media
+                  platforms
+                </li>
+              </ul>
+
+              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
+                Legal Requirements
               </h3>
               <p>
-                <span className="text-emerald-400">✅</span>{" "}
-                <strong>Yes, linked to user</strong>
+                We may disclose your information if required by law, such as:
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4 mt-2">
+                <li>To comply with legal obligations</li>
+                <li>To respond to valid legal requests</li>
+                <li>To protect our rights or the rights of others</li>
+                <li>
+                  In emergency situations to protect health or safety
+                </li>
+              </ul>
+            </section>
+
+            {/* Your Rights */}
+            <section>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
+                Your Rights
+              </h2>
+
+              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
+                Access to Your Data
+              </h3>
+              <p className="font-medium text-slate-200 mb-2">
+                <strong>View Your Health Data:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Open the Health app on your iPhone</li>
+                <li>
+                  Browse → View your heart rate, HRV, respiratory rate, etc.
+                </li>
+                <li>All health data is accessible in the Health app</li>
+              </ul>
+
+              <p className="font-medium text-slate-200 mt-3 mb-2">
+                <strong>View App Data:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Open Plena app</li>
+                <li>Go to Dashboard tab to view your statistics</li>
+                <li>Go to Data tab to view historical visualizations</li>
+              </ul>
+
+              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
+                Data Deletion
+              </h3>
+              <p className="font-medium text-slate-200 mb-2">
+                <strong>Delete HealthKit Data:</strong>
+              </p>
+              <ol className="list-decimal list-inside space-y-1 ml-4">
+                <li>Open Health app on iPhone</li>
+                <li>Browse → Find the data type (e.g., Heart Rate)</li>
+                <li>Tap &quot;Show All Data&quot;</li>
+                <li>Tap &quot;Edit&quot; → Delete specific entries or all data</li>
+              </ol>
+
+              <p className="font-medium text-slate-200 mt-3 mb-2">
+                <strong>Delete App Data:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Delete the Plena app from your device</li>
+                <li>This removes local app data</li>
+                <li>HealthKit data remains (delete separately if desired)</li>
+                <li>iCloud data may remain (delete in iCloud settings)</li>
+              </ul>
+
+              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
+                HealthKit Permissions
+              </h3>
+              <p className="font-medium text-slate-200 mb-2">
+                <strong>Manage Permissions:</strong>
+              </p>
+              <ol className="list-decimal list-inside space-y-1 ml-4">
+                <li>Settings → Privacy & Security → Health</li>
+                <li>Tap &quot;Plena&quot;</li>
+                <li>Toggle ON/OFF for each data type</li>
+                <li>Changes take effect immediately</li>
+              </ol>
+
+              <p className="font-medium text-slate-200 mt-3 mb-2">
+                <strong>Revoke All Permissions:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Turn OFF all data types in Settings</li>
+                <li>App will not be able to access health data</li>
+                <li>App functionality will be limited</li>
+              </ul>
+            </section>
+
+            {/* Health Data Specific Information */}
+            <section>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
+                Health Data Specific Information
+              </h2>
+
+              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
+                HealthKit Integration
+              </h3>
+              <p className="font-medium text-slate-200 mb-2">
+                <strong>What is HealthKit?</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>HealthKit is Apple&apos;s secure framework for health data</li>
+                <li>It acts as a central repository for health information</li>
+                <li>Apps can read and write data with your permission</li>
+                <li>All HealthKit data is encrypted and secure</li>
+              </ul>
+
+              <p className="font-medium text-slate-200 mt-3 mb-2">
+                <strong>Our Use of HealthKit:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>We read biometric data during mindfulness sessions</li>
+                <li>We write mindfulness session data back to HealthKit</li>
+                <li>We do not read or write data outside of app usage</li>
+                <li>
+                  We only access data types necessary for app functionality
+                </li>
+              </ul>
+
+              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
+                Health Data Privacy
+              </h3>
+              <p className="font-medium text-slate-200 mb-2">
+                <strong>Your Health Data is Private:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>
+                  Stored securely on your device or in your iCloud account
+                </li>
+                <li>Encrypted by Apple&apos;s security systems</li>
+                <li>Not transmitted to our servers</li>
+                <li>Not shared with third parties</li>
+                <li>Under your control at all times</li>
+              </ul>
+
+              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
+                Medical Disclaimer
+              </h3>
+              <p className="text-emerald-300 font-medium">
+                <strong>Important:</strong> Plena is not a medical device and
+                does not provide medical advice, diagnosis, or treatment. The
+                information provided by Plena is for wellness and
+                self-improvement purposes only.
               </p>
               <ul className="list-disc list-inside space-y-1 ml-4 mt-2">
                 <li>
-                  Health data is inherently personal and linked to the
-                  user&apos;s identity
+                  Do not use Plena data to diagnose, treat, or prevent any
+                  disease
+                </li>
+                <li>Consult healthcare professionals for medical advice</li>
+                <li>Do not rely on Plena data for medical decisions</li>
+                <li>
+                  Plena data is not a substitute for professional medical care
+                </li>
+              </ul>
+            </section>
+
+            {/* Children's Privacy */}
+            <section>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
+                Children&apos;s Privacy
+              </h2>
+              <p>
+                Plena is not intended for children under the age of 13. We do
+                not knowingly collect personal information from children under
+                13.
+              </p>
+              <p className="font-medium text-slate-200 mt-3 mb-2">
+                <strong>If you are a parent or guardian:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>HealthKit requires users to be 13+ to use health apps</li>
+                <li>
+                  Children&apos;s health data should be managed through Family
+                  Sharing features
                 </li>
                 <li>
-                  Data is stored in HealthKit, which is tied to the user&apos;s
-                  Apple ID
+                  Contact us if you believe we have inadvertently collected data
+                  from a child under 13
                 </li>
-                <li>No anonymization or de-identification is performed</li>
+              </ul>
+            </section>
+
+            {/* Changes to This Privacy Policy */}
+            <section>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
+                Changes to This Privacy Policy
+              </h2>
+              <p>
+                We may update this Privacy Policy from time to time. Changes
+                will be effective when posted in the app or on our website.
+              </p>
+              <p className="font-medium text-slate-200 mt-3 mb-2">
+                <strong>We will notify you of significant changes by:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Posting the updated policy in the app</li>
+                <li>Updating the &quot;Last Updated&quot; date</li>
+                <li>
+                  Providing notification through the app (for major changes)
+                </li>
+              </ul>
+              <p className="mt-3">
+                <strong>
+                  Continued use of the app after changes constitutes acceptance
+                  of the updated policy.
+                </strong>
+              </p>
+            </section>
+
+            {/* Data Retention */}
+            <section>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
+                Data Retention
+              </h2>
+              <p className="font-medium text-slate-200 mb-2">
+                <strong>Local Data:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Stored on your device until you delete the app</li>
+                <li>You can delete data anytime by deleting the app</li>
               </ul>
 
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Session Data
-              </h3>
-              <p>
-                <span className="text-emerald-400">✅</span>{" "}
-                <strong>Yes, linked to user</strong>
+              <p className="font-medium text-slate-200 mt-3 mb-2">
+                <strong>iCloud Data:</strong>
               </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Stored in your iCloud account until you delete it</li>
+                <li>Follows your iCloud storage settings</li>
+                <li>Can be deleted in iCloud settings</li>
+              </ul>
+
+              <p className="font-medium text-slate-200 mt-3 mb-2">
+                <strong>HealthKit Data:</strong>
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Managed by Apple&apos;s HealthKit system</li>
+                <li>Follows your Health app settings</li>
+                <li>You control retention in the Health app</li>
+              </ul>
+            </section>
+
+            {/* International Users */}
+            <section>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
+                International Users
+              </h2>
+              <p>If you are using Plena outside the United States:</p>
               <ul className="list-disc list-inside space-y-1 ml-4 mt-2">
                 <li>
-                  Session data is stored locally and associated with the
-                  device/user
+                  Your data may be processed and stored in your country or
+                  region
                 </li>
                 <li>
-                  No user accounts are created, but data is device-specific
+                  iCloud data is stored according to your iCloud account region
                 </li>
+                <li>
+                  HealthKit data is stored according to Apple&apos;s regional
+                  policies
+                </li>
+                <li>We comply with applicable data protection laws</li>
               </ul>
             </section>
 
-            {/* Tracking */}
+            {/* Contact Us */}
             <section>
               <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                Tracking
+                Contact Us
               </h2>
-
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Is Data Used for Tracking?
-              </h3>
-              <p className="text-lg">
-                <span className="text-red-400">❌</span> <strong>No</strong>
+              <p>
+                If you have questions, concerns, or requests regarding this
+                Privacy Policy or your data:
               </p>
-
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Definition Compliance
-              </h3>
-              <p className="mb-2">
-                According to Apple&apos;s definition, &quot;tracking&quot;
-                refers to:
-              </p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>
-                  Linking data with Third-Party Data for targeted advertising or
-                  advertising measurement
-                </li>
-                <li>Sharing data with a data broker</li>
-              </ul>
-
-              <p className="mt-3 mb-2">
-                Plena does <strong>NOT</strong>:
-              </p>
-              <ul className="list-none space-y-1 ml-4">
-                <li>
-                  <span className="text-red-400">❌</span> Link data with
-                  third-party data
-                </li>
-                <li>
-                  <span className="text-red-400">❌</span> Share data with data
-                  brokers
-                </li>
-                <li>
-                  <span className="text-red-400">❌</span> Use data for targeted
-                  advertising
-                </li>
-                <li>
-                  <span className="text-red-400">❌</span> Use data for
-                  advertising measurement
-                </li>
-                <li>
-                  <span className="text-red-400">❌</span> Share data with
-                  advertising networks
-                </li>
-              </ul>
-
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Data Processing Location
-              </h3>
-              <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>
-                  All data processing occurs <strong>on-device</strong>
-                </li>
-                <li>
-                  HealthKit data is processed by Apple&apos;s HealthKit
-                  framework
-                </li>
-                <li>No data is sent off-device for processing</li>
-              </ul>
-            </section>
-
-            {/* Third-Party Partners */}
-            <section>
-              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                Third-Party Partners
-              </h2>
-
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Apple Services Used
-              </h3>
-
-              <div className="space-y-4">
-                <div className="p-3 bg-slate-900/50 rounded-lg border border-slate-800">
-                  <p className="font-medium text-emerald-400">
-                    1. HealthKit (Apple)
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 ml-4 mt-2 text-sm">
-                    <li>Framework for accessing health data</li>
-                    <li>Managed by Apple</li>
-                    <li>Data remains in Apple&apos;s HealthKit system</li>
-                    <li>User controls permissions in iOS Settings</li>
-                  </ul>
-                </div>
-
-                <div className="p-3 bg-slate-900/50 rounded-lg border border-slate-800">
-                  <p className="font-medium text-emerald-400">
-                    2. CloudKit/iCloud (Apple, Optional)
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 ml-4 mt-2 text-sm">
-                    <li>Used for device synchronization if enabled by user</li>
-                    <li>Managed by Apple</li>
-                    <li>Data encrypted by Apple</li>
-                    <li>User controls in iCloud settings</li>
-                  </ul>
-                </div>
-              </div>
-
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Third-Party SDKs
-              </h3>
-              <ul className="list-none space-y-1 ml-4">
-                <li>
-                  <span className="text-red-400">❌</span>{" "}
-                  <strong>None</strong> - No third-party SDKs are integrated
-                </li>
-                <li>
-                  <span className="text-red-400">❌</span>{" "}
-                  <strong>No analytics SDKs</strong> (Firebase, Amplitude,
-                  Mixpanel, etc.)
-                </li>
-                <li>
-                  <span className="text-red-400">❌</span>{" "}
-                  <strong>No advertising SDKs</strong>
-                </li>
-                <li>
-                  <span className="text-red-400">❌</span>{" "}
-                  <strong>No crash reporting SDKs</strong> (Crashlytics, etc.)
-                </li>
-              </ul>
-            </section>
-
-            {/* Privacy Policy & Contact */}
-            <section>
-              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                Privacy Policy & Contact
-              </h2>
-              <div className="p-4 bg-slate-900/50 rounded-lg border border-slate-800">
-                <p className="mb-2">
-                  <strong>Privacy Policy URL:</strong>{" "}
+              <div className="mt-3 space-y-2">
+                <p className="font-medium text-slate-200">
+                  <strong>Privacy Policy:</strong>
+                </p>
+                <p>
                   <a
-                    href="https://plenitudo.ai/privacy-policy"
+                    href="https://www.plenitudo.ai/privacy-policy"
                     className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2"
                   >
-                    https://plenitudo.ai/privacy-policy
+                    https://www.plenitudo.ai/privacy-policy
                   </a>
                 </p>
-                <p className="mb-2">
-                  <strong>Contact Email:</strong>{" "}
+
+                <p className="font-medium text-slate-200 mt-3">
+                  <strong>Privacy Inquiries:</strong>
+                </p>
+                <p>
+                  Email:{" "}
                   <a
-                    href="mailto:info@plenitudo.ai"
+                    href="mailto:info@plenitudo.ai?subject=Privacy Policy Inquiry"
                     className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2"
                   >
                     info@plenitudo.ai
                   </a>
+                  <br />
+                  Subject: Privacy Policy Inquiry
+                </p>
+
+                <p className="font-medium text-slate-200 mt-3">
+                  <strong>General Support:</strong>
                 </p>
                 <p>
-                  <strong>Support:</strong>{" "}
+                  Email:{" "}
+                  <a
+                    href="mailto:hello@plenitudo.ai"
+                    className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2"
+                  >
+                    hello@plenitudo.ai
+                  </a>
+                  <br />
+                  Support:{" "}
                   <Link
                     href="/app/plena/support"
                     className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2"
@@ -601,337 +671,138 @@ export default function PrivacyPolicyPage() {
                     Visit Support Page
                   </Link>
                 </p>
+
+                <p className="font-medium text-slate-200 mt-3">
+                  <strong>Mailing Address (if applicable):</strong>
+                </p>
+                <p className="text-slate-400 italic">
+                  [Add your business address if required]
+                </p>
               </div>
             </section>
 
-            {/* App Store Connect Configuration */}
+            {/* California Privacy Rights */}
             <section>
               <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                App Store Connect Configuration
+                California Privacy Rights
               </h2>
-
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Step-by-Step Guide
-              </h3>
-
-              <div className="space-y-4">
-                <div className="p-3 bg-slate-900/50 rounded-lg border border-slate-800">
-                  <p className="font-medium text-emerald-400 mb-2">
-                    1. Go to App Store Connect
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 ml-4 text-sm">
-                    <li>Navigate to your app</li>
-                    <li>
-                      Select &quot;App Privacy&quot; in the left sidebar
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="p-3 bg-slate-900/50 rounded-lg border border-slate-800">
-                  <p className="font-medium text-emerald-400 mb-2">
-                    2. Data Collection
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 ml-4 text-sm">
-                    <li>
-                      Click &quot;Get Started&quot; or &quot;Edit&quot;
-                    </li>
-                    <li>
-                      Select &quot;Yes&quot; for &quot;Does your app collect
-                      data?&quot;
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="p-3 bg-slate-900/50 rounded-lg border border-slate-800">
-                  <p className="font-medium text-emerald-400 mb-2">
-                    3. Add Data Types
-                  </p>
-                  <div className="ml-4 text-sm space-y-3">
-                    <div>
-                      <p className="font-medium text-slate-200">
-                        For Health Data:
-                      </p>
-                      <ul className="list-disc list-inside space-y-1 ml-4">
-                        <li>
-                          Select: <strong>Health & Fitness</strong> →{" "}
-                          <strong>Health</strong>
-                        </li>
-                        <li>
-                          Purpose:{" "}
-                          <span className="text-emerald-400">
-                            ✅ App Functionality
-                          </span>{" "}
-                          (only)
-                        </li>
-                        <li>
-                          Linked to User:{" "}
-                          <span className="text-emerald-400">✅ Yes</span>
-                        </li>
-                        <li>
-                          Used for Tracking:{" "}
-                          <span className="text-red-400">❌ No</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <p className="font-medium text-slate-200">
-                        For Fitness Data:
-                      </p>
-                      <ul className="list-disc list-inside space-y-1 ml-4">
-                        <li>
-                          Select: <strong>Health & Fitness</strong> →{" "}
-                          <strong>Fitness</strong>
-                        </li>
-                        <li>
-                          Purpose:{" "}
-                          <span className="text-emerald-400">
-                            ✅ App Functionality
-                          </span>{" "}
-                          (only)
-                        </li>
-                        <li>
-                          Linked to User:{" "}
-                          <span className="text-emerald-400">✅ Yes</span>
-                        </li>
-                        <li>
-                          Used for Tracking:{" "}
-                          <span className="text-red-400">❌ No</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-3 bg-slate-900/50 rounded-lg border border-slate-800">
-                  <p className="font-medium text-emerald-400 mb-2">
-                    4. Third-Party Data Collection
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 ml-4 text-sm">
-                    <li>
-                      Select: <strong>No</strong> (unless you add third-party
-                      services in the future)
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="p-3 bg-slate-900/50 rounded-lg border border-slate-800">
-                  <p className="font-medium text-emerald-400 mb-2">
-                    5. Privacy Policy
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 ml-4 text-sm">
-                    <li>
-                      Enter:{" "}
-                      <code className="bg-slate-800 px-1 rounded">
-                        https://plenitudo.ai/privacy-policy
-                      </code>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="p-3 bg-slate-900/50 rounded-lg border border-slate-800">
-                  <p className="font-medium text-emerald-400 mb-2">
-                    6. Review and Save
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 ml-4 text-sm">
-                    <li>Review all entries</li>
-                    <li>Save changes</li>
-                  </ul>
-                </div>
-              </div>
+              <p>
+                If you are a California resident, you have additional rights
+                under the California Consumer Privacy Act (CCPA):
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4 mt-2">
+                <li>Right to know what personal information is collected</li>
+                <li>Right to delete personal information</li>
+                <li>
+                  Right to opt-out of sale of personal information (we do not
+                  sell data)
+                </li>
+                <li>
+                  Right to non-discrimination for exercising privacy rights
+                </li>
+              </ul>
+              <p className="mt-3">
+                <strong>Note:</strong> We do not sell personal information. We
+                do not share health data with third parties for commercial
+                purposes.
+              </p>
             </section>
 
-            {/* Important Notes */}
+            {/* European Union (GDPR) Rights */}
             <section>
               <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                Important Notes
+                European Union (GDPR) Rights
               </h2>
-
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Health Data Disclosure Requirements
-              </h3>
-              <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>
-                  Health data collected through HealthKit{" "}
-                  <strong>must</strong> be disclosed
-                </li>
-                <li>
-                  Even if data is only used for app functionality, it must be
-                  declared
-                </li>
-                <li>
-                  Health data is always considered &quot;linked to user&quot;
-                </li>
+              <p>
+                If you are located in the European Union, you have additional
+                rights under the General Data Protection Regulation (GDPR):
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4 mt-2">
+                <li>Right of access to your personal data</li>
+                <li>Right to rectification of inaccurate data</li>
+                <li>Right to erasure (&quot;right to be forgotten&quot;)</li>
+                <li>Right to restrict processing</li>
+                <li>Right to data portability</li>
+                <li>Right to object to processing</li>
+                <li>Right to withdraw consent</li>
               </ul>
+              <p className="mt-3">
+                To exercise these rights, contact us at{" "}
+                <a
+                  href="mailto:info@plenitudo.ai"
+                  className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2"
+                >
+                  info@plenitudo.ai
+                </a>
+                .
+              </p>
+            </section>
 
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Optional Disclosure Criteria
-              </h3>
-              <p className="mb-2">
-                Health data does <strong>NOT</strong> meet optional disclosure
-                criteria because:
+            {/* Consent */}
+            <section>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
+                Consent
+              </h2>
+              <p>By using Plena, you consent to:</p>
+              <ul className="list-disc list-inside space-y-1 ml-4 mt-2">
+                <li>
+                  The collection and use of information as described in this
+                  Privacy Policy
+                </li>
+                <li>HealthKit data access as described</li>
+                <li>Local storage of session data on your device</li>
+                <li>Optional iCloud sync (if enabled)</li>
+              </ul>
+              <p className="font-medium text-slate-200 mt-3 mb-2">
+                <strong>You can withdraw consent by:</strong>
               </p>
               <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>
-                  It is part of the app&apos;s primary functionality (not
-                  infrequent/optional)
-                </li>
-                <li>
-                  It is collected on an ongoing basis (not just during initial
-                  setup)
-                </li>
-                <li>It is used for core app features</li>
+                <li>Revoking HealthKit permissions in Settings</li>
+                <li>Disabling iCloud sync</li>
+                <li>Deleting the app</li>
               </ul>
+            </section>
 
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Data Collection Definition
-              </h3>
-              <p className="mb-2">
-                According to Apple, &quot;collect&quot; means:
-              </p>
-              <blockquote className="border-l-4 border-emerald-400 pl-4 py-2 my-3 bg-slate-900/30 rounded-r italic">
-                &quot;Transmitting data off the device in a way that allows you
-                and/or your third-party partners to access it for a period
-                longer than what is necessary to service the transmitted request
-                in real time.&quot;
-              </blockquote>
-
+            {/* Summary */}
+            <section>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
+                Summary
+              </h2>
               <p className="font-medium text-slate-200 mb-2">
-                <strong>Plena&apos;s Status:</strong>
+                <strong>In Simple Terms:</strong>
               </p>
               <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>Health data is read from HealthKit (on-device)</li>
-                <li>Session data is stored locally (on-device)</li>
+                <li>We only access health data you explicitly permit</li>
                 <li>
-                  No data is transmitted off-device to Plena&apos;s servers
+                  Your data stays on your device or in your iCloud account
                 </li>
-                <li>
-                  iCloud sync (if enabled) is managed by Apple, not Plena
-                </li>
+                <li>We don&apos;t share your data with anyone</li>
+                <li>You control all permissions</li>
+                <li>You can delete your data anytime</li>
               </ul>
-
-              <p className="mt-3 p-3 bg-amber-900/20 border border-amber-700/50 rounded-lg text-amber-200">
-                <strong>However:</strong> Since HealthKit data is accessed by
-                the app and stored locally in CoreData, it is considered
-                &quot;collected&quot; for disclosure purposes, even though
-                it&apos;s not transmitted to external servers.
+              <p className="mt-3 text-emerald-300">
+                <strong>Your Privacy Matters:</strong> We built Plena with
+                privacy in mind. Your health data is yours, and we&apos;re just
+                here to help you understand it better.
               </p>
-            </section>
-
-            {/* Compliance Checklist */}
-            <section>
-              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                Compliance Checklist
-              </h2>
-              <div className="p-4 bg-slate-900/50 rounded-lg border border-emerald-800/50">
-                <ul className="list-none space-y-2">
-                  <li>
-                    <span className="text-emerald-400">✅</span> All HealthKit
-                    data types are identified
-                  </li>
-                  <li>
-                    <span className="text-emerald-400">✅</span> All data
-                    purposes are correctly categorized
-                  </li>
-                  <li>
-                    <span className="text-emerald-400">✅</span> Data linking
-                    status is accurate
-                  </li>
-                  <li>
-                    <span className="text-emerald-400">✅</span> Tracking status
-                    is correctly set to &quot;No&quot;
-                  </li>
-                  <li>
-                    <span className="text-emerald-400">✅</span> Third-party
-                    sharing is correctly set to &quot;No&quot;
-                  </li>
-                  <li>
-                    <span className="text-emerald-400">✅</span> Privacy policy
-                    URL is provided
-                  </li>
-                  <li>
-                    <span className="text-emerald-400">✅</span> No optional data
-                    types are incorrectly omitted
-                  </li>
-                  <li>
-                    <span className="text-emerald-400">✅</span> All data
-                    collection is disclosed
-                  </li>
-                </ul>
-              </div>
-            </section>
-
-            {/* Future Considerations */}
-            <section>
-              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                Future Considerations
-              </h2>
-              <p className="mb-3">
-                If you plan to add any of the following in the future,
-                you&apos;ll need to update your privacy disclosure:
+              <p className="mt-3 text-slate-400 text-sm">
+                For support, see our{" "}
+                <Link
+                  href="/app/plena/support"
+                  className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2"
+                >
+                  Support Page
+                </Link>
+                .
               </p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>Analytics services (Firebase Analytics, etc.)</li>
-                <li>Crash reporting (Crashlytics, etc.)</li>
-                <li>User accounts or authentication</li>
-                <li>Cloud storage on your own servers</li>
-                <li>Advertising or marketing services</li>
-                <li>Social media integration</li>
-                <li>In-app purchases tracking</li>
-              </ul>
-              <p className="mt-3 p-3 bg-amber-900/20 border border-amber-700/50 rounded-lg text-amber-200">
-                <strong>Remember:</strong> You must update your privacy
-                disclosure in App Store Connect whenever your data collection
-                practices change, even if you don&apos;t submit an app update.
-              </p>
-            </section>
-
-            {/* References */}
-            <section>
-              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                References
-              </h2>
-              <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>
-                  <a
-                    href="https://developer.apple.com/app-store/app-privacy-details/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2"
-                  >
-                    Apple App Privacy Details Documentation
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://developer.apple.com/documentation/healthkit"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2"
-                  >
-                    HealthKit Documentation
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://developer.apple.com/app-store/review/guidelines/#privacy"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2"
-                  >
-                    App Store Review Guidelines - Privacy
-                  </a>
-                </li>
-              </ul>
             </section>
 
             {/* Footer Note */}
             <div className="mt-8 pt-6 border-t border-white/10 text-xs text-slate-400">
               <p>
-                <strong>Document Version:</strong> 1.1
+                <strong>Last Updated:</strong> February 12, 2026
                 <br />
-                <strong>Last Updated:</strong> January 1, 2026
-                <br />
-                <strong>For App Store Connect Submission</strong>
+                <strong>Version:</strong> 1.0
               </p>
             </div>
           </div>
