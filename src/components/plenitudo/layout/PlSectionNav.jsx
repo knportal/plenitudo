@@ -3,6 +3,8 @@
  */
 "use client";
 
+import Link from "next/link";
+
 export default function PlSectionNav() {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -38,6 +40,12 @@ export default function PlSectionNav() {
       >
         Prompts
       </button>
+      <Link
+        href="/app"
+        className="text-slate-400 hover:text-emerald-300 transition-colors"
+      >
+        Apps
+      </Link>
     </nav>
   );
 }

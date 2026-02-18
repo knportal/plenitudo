@@ -114,6 +114,9 @@ export default function PlHeader() {
           <Link className="navlink" href="/#prompts-title">
             Prompts
           </Link>
+          <Link className="navlink" href="/app">
+            Apps
+          </Link>
           <button
             className="btn-primary"
             onClick={() => setIsModalOpen(true)}
@@ -195,6 +198,13 @@ export default function PlHeader() {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Prompts
+            </Link>
+            <Link
+              className="block px-4 py-3 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors min-h-[44px] flex items-center"
+              href="/app"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Apps
             </Link>
             <button
               className="w-full px-4 py-3 rounded-lg font-semibold text-sm bg-gradient-to-r from-emerald-500/20 to-blue-500/20 border border-emerald-400/30 text-emerald-300 hover:from-emerald-500/30 hover:to-blue-500/30 transition-all min-h-[44px] flex items-center justify-center"
