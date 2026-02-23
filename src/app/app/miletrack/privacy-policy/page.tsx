@@ -5,7 +5,7 @@ import PlFooter from "@/components/plenitudo/layout/PlFooter";
 export const metadata: Metadata = {
   title: "MileTrack Privacy Policy | Plenitudo AI",
   description:
-    "Privacy Policy for MileTrack — how we collect, use, disclose, and safeguard your information when you use our mobile application and related services.",
+    "MileTrack privacy policy — your mileage data stays on your device. No account required, no backend servers, no personal information collection.",
 };
 
 export default function MileTrackPrivacyPolicyPage() {
@@ -16,7 +16,7 @@ export default function MileTrackPrivacyPolicyPage() {
         <div className="mt-8 mb-8">
           <div className="flex items-center justify-between gap-4 mb-4">
             <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight">
-              Privacy Policy
+              MileTrack Privacy Policy
             </h1>
             <Link
               href="/app"
@@ -26,250 +26,289 @@ export default function MileTrackPrivacyPolicyPage() {
             </Link>
           </div>
           <p className="text-xs sm:text-sm text-slate-400">
-            <strong>Last Updated:</strong> February 23, 2026
+            <strong>Last Updated:</strong> 2/23/2026
           </p>
         </div>
 
         {/* Privacy Policy Content */}
         <div className="prose prose-invert prose-slate max-w-none mb-12">
           <div className="space-y-8 text-sm sm:text-base text-slate-300 leading-relaxed">
-            {/* Intro */}
+            {/* Overview */}
             <section>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
+                Overview
+              </h2>
               <p>
-                MileTrack (&quot;we,&quot; &quot;us,&quot; &quot;our,&quot; or &quot;Company&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application and related services (the &quot;Service&quot;).
+                MileTrack is designed with privacy as a core principle. We believe your mileage data is yours and should stay on your device. We do not operate backend servers for your trip data, and we do not collect personal information to create accounts.
               </p>
             </section>
 
-            {/* 1. Information We Collect */}
+            {/* No Account Required */}
             <section>
               <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                1. Information We Collect
-              </h2>
-
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Trip and Mileage Data
-              </h3>
-              <p className="mb-2">
-                The primary purpose of MileTrack is to track your vehicle trips and mileage. When you use our Service, we collect:
-              </p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>Trip details (date, time, distance, starting location, ending location)</li>
-                <li>Mileage information</li>
-                <li>Trip purpose or category (if you choose to add this)</li>
-                <li>GPS coordinates and route information</li>
-              </ul>
-
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Account Information
-              </h3>
-              <p className="mb-2">
-                To create and maintain your MileTrack account, we collect:
-              </p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>Email address</li>
-                <li>Name</li>
-                <li>Account credentials (password)</li>
-                <li>Profile information you voluntarily provide</li>
-              </ul>
-
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Device Information
-              </h3>
-              <p className="mb-2">
-                We automatically collect certain information about your device when you use our Service:
-              </p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>Device type and model</li>
-                <li>Operating system version</li>
-                <li>App version</li>
-                <li>Unique device identifiers</li>
-              </ul>
-
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Usage Information
-              </h3>
-              <p className="mb-2">
-                We collect analytics data about how you interact with our Service to improve functionality:
-              </p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>Features you use</li>
-                <li>Actions you take</li>
-                <li>Error logs and crash reports</li>
-              </ul>
-            </section>
-
-            {/* 2. How We Use Your Information */}
-            <section>
-              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                2. How We Use Your Information
+                No Account Required
               </h2>
               <p className="mb-2">
-                We use the information we collect for the following purposes:
-              </p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
-                <li><strong>Service Delivery:</strong> To provide, maintain, and improve MileTrack and its features</li>
-                <li><strong>Account Management:</strong> To create and manage your account, authenticate users, and provide customer support</li>
-                <li><strong>Analytics:</strong> To understand how users interact with our Service and optimize performance</li>
-                <li><strong>Communication:</strong> To send you technical updates, security alerts, and customer support messages</li>
-                <li><strong>Legal Compliance:</strong> To comply with applicable laws, regulations, and legal processes</li>
-                <li><strong>Safety and Security:</strong> To detect and prevent fraud, security incidents, and other harmful activities</li>
-                <li><strong>Marketing (with consent):</strong> To send promotional materials (only if you opt-in)</li>
-              </ul>
-            </section>
-
-            {/* 3. Sharing Your Information */}
-            <section>
-              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                3. Sharing Your Information
-              </h2>
-              <p className="mb-3">
-                We do not sell, trade, or rent your personal information to third parties. However, we may share information in the following circumstances:
-              </p>
-              <ul className="list-disc list-inside space-y-1 ml-4">
-                <li><strong>Service Providers:</strong> We may share information with vendors who assist us in operating our Service (cloud hosting, analytics, payment processing)</li>
-                <li><strong>Legal Requirements:</strong> We may disclose information if required by law or if we believe in good faith that disclosure is necessary to protect our rights, your safety, or the safety of others</li>
-                <li><strong>Business Transfers:</strong> If MileTrack is involved in a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction</li>
-                <li><strong>User Consent:</strong> We may share information when you explicitly consent to such sharing</li>
-              </ul>
-            </section>
-
-            {/* 4. Data Retention */}
-            <section>
-              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                4. Data Retention
-              </h2>
-              <p className="mb-2">
-                We retain your personal information for as long as necessary to provide our Service and fulfill the purposes outlined in this Privacy Policy. Specifically:
-              </p>
-              <ul className="list-disc list-inside space-y-1 ml-4 mb-2">
-                <li>Trip and mileage data are retained for your account lifetime, unless you request deletion</li>
-                <li>Account information is retained while your account is active</li>
-                <li>Deleted trips and closed accounts are purged from our active systems within 30 days</li>
-                <li>Backup copies may be retained for up to 90 days for disaster recovery purposes</li>
-              </ul>
-              <p>
-                You may request deletion of your data at any time by contacting us (see Section 10).
-              </p>
-            </section>
-
-            {/* 5. Data Security */}
-            <section>
-              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                5. Data Security
-              </h2>
-              <p className="mb-2">
-                We implement appropriate technical and organizational measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction. These include:
+                MileTrack does not require account creation. There is no:
               </p>
               <ul className="list-disc list-inside space-y-1 ml-4 mb-3">
-                <li>End-to-end encryption for sensitive data in transit</li>
-                <li>Secure authentication mechanisms</li>
-                <li>Regular security audits and vulnerability assessments</li>
-                <li>Employee access controls and confidentiality agreements</li>
-                <li>Secure data storage and backup systems</li>
+                <li>Email address collection</li>
+                <li>Password or authentication system</li>
+                <li>User profiles or personal information storage</li>
+                <li>Login or sign-up process</li>
               </ul>
               <p>
-                While we implement safeguards, no system is completely secure. Please protect your account credentials and notify us immediately if you suspect unauthorized access.
+                You can start using MileTrack immediately after download without providing any personal information.
               </p>
             </section>
 
-            {/* 6. Your Privacy Rights */}
+            {/* Data Collection and Storage */}
             <section>
               <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                6. Your Privacy Rights
+                Data Collection and Storage
               </h2>
 
               <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                GDPR Rights (European Users)
+                What We Access (On Your Device Only)
               </h3>
               <p className="mb-2">
-                If you are located in the European Union or European Economic Area, you have the following rights:
+                To provide automatic trip detection, MileTrack requests access to:
               </p>
-              <ul className="list-disc list-inside space-y-1 ml-4 mb-4">
-                <li><strong>Right of Access:</strong> You can request a copy of your personal data</li>
-                <li><strong>Right to Correction:</strong> You can request correction of inaccurate information</li>
-                <li><strong>Right to Deletion:</strong> You can request deletion of your data (&quot;Right to be Forgotten&quot;)</li>
-                <li><strong>Right to Data Portability:</strong> You can request your data in a portable format</li>
-                <li><strong>Right to Restrict Processing:</strong> You can limit how we use your data</li>
-                <li><strong>Right to Object:</strong> You can object to certain processing activities</li>
-                <li><strong>Right to Lodge a Complaint:</strong> You can file a complaint with your local data protection authority</li>
+
+              <h4 className="text-sm font-semibold text-slate-200 mt-3 mb-1">
+                Motion Activity
+              </h4>
+              <ul className="list-disc list-inside space-y-1 ml-4 mb-3">
+                <li><strong>Purpose:</strong> Detect when you&apos;re driving vs. not driving</li>
+                <li><strong>Used for:</strong> Auto Mode trip detection</li>
+                <li><strong>Storage:</strong> Processed locally, not stored permanently</li>
               </ul>
 
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                CCPA Rights (California Residents)
-              </h3>
-              <p className="mb-2">
-                If you are a California resident, you have the right to:
-              </p>
-              <ul className="list-disc list-inside space-y-1 ml-4 mb-4">
-                <li><strong>Know What Data We Collect:</strong> Request information about the categories and specific personal information we collect</li>
-                <li><strong>Delete Your Data:</strong> Request deletion of personal information we collected from you</li>
-                <li><strong>Opt-Out of Data Sales:</strong> Instruct us not to sell or share your personal information (MileTrack does not currently sell personal data)</li>
-                <li><strong>Non-Discrimination:</strong> You will not receive discriminatory treatment for exercising your CCPA rights</li>
-              </ul>
-
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                General Rights
-              </h3>
-              <p className="mb-2">You may also:</p>
+              <h4 className="text-sm font-semibold text-slate-200 mt-3 mb-1">
+                Location Services
+              </h4>
               <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>Update or correct your account information at any time through the app</li>
-                <li>Download your data in a standard format</li>
-                <li>Opt out of marketing communications</li>
-                <li>Delete your account, which will remove your data from our active systems</li>
+                <li><strong>Purpose:</strong> Calculate trip distance and estimate start/end locations</li>
+                <li><strong>Used for:</strong> Distance measurement during detected drives, optional address labels</li>
+                <li><strong>Storage:</strong> Only start/end coordinates and calculated distance are saved locally</li>
+                <li><strong>Note:</strong> Continuous location tracking only occurs during detected drives</li>
               </ul>
-              <p className="mt-3">
-                To exercise any of these rights, please contact us using the information in Section 10.
+
+              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-6 mb-2">
+                What We Store (Locally on Your Device)
+              </h3>
+              <p className="mb-2">
+                All data is stored exclusively on your device in local files:
+              </p>
+
+              <h4 className="text-sm font-semibold text-slate-200 mt-3 mb-1">
+                Trip Data
+              </h4>
+              <ul className="list-disc list-inside space-y-1 ml-4 mb-3">
+                <li>Trip distance (miles/kilometers)</li>
+                <li>Trip date and duration</li>
+                <li>Optional start/end location labels (city/area names)</li>
+                <li>Optional category, client, project code, and notes you enter</li>
+                <li>Source (auto-detected or manual)</li>
+                <li>Confirmation status</li>
+              </ul>
+
+              <h4 className="text-sm font-semibold text-slate-200 mt-3 mb-1">
+                User Preferences
+              </h4>
+              <ul className="list-disc list-inside space-y-1 ml-4 mb-3">
+                <li>Categories, clients, and rules you create</li>
+                <li>Unit preferences (miles/kilometers)</li>
+                <li>Auto Mode settings</li>
+              </ul>
+
+              <p className="text-slate-200">
+                <strong>Important:</strong> Auto-detected trips are only considered &quot;confirmed&quot; after you review and categorize them in the Inbox. Unconfirmed trips can be deleted without affecting your records.
               </p>
             </section>
 
-            {/* 7. Cookies and Tracking Technologies */}
+            {/* What We Do NOT Collect or Transmit */}
             <section>
               <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                7. Cookies and Tracking Technologies
+                What We Do NOT Collect or Transmit
               </h2>
               <p className="mb-2">
-                MileTrack may use cookies and similar tracking technologies to enhance your experience. Specifically:
+                MileTrack does not collect, store, or transmit to external servers:
               </p>
-              <ul className="list-disc list-inside space-y-1 ml-4 mb-2">
-                <li>We use analytics cookies to understand how users interact with our Service</li>
-                <li>We use session cookies to maintain your login state</li>
-                <li>You can disable cookies through your device settings, though this may impact functionality</li>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Your name, email, phone number, or any personal identifiers</li>
+                <li>Your precise location coordinates (beyond start/end of trips stored locally)</li>
+                <li>Your complete location history or route paths</li>
+                <li>Your device identifiers for tracking</li>
+                <li>Your trip data or mileage records</li>
+                <li>Analytics or usage data</li>
               </ul>
-              <p>
-                We do not use tracking technologies to track your location outside the app (only within the app for trip tracking purposes you authorize).
-              </p>
             </section>
 
-            {/* 8. Third-Party Links */}
+            {/* Subscriptions */}
             <section>
               <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                8. Third-Party Links
-              </h2>
-              <p>
-                Our Service may contain links to third-party websites and services that are not operated by MileTrack. This Privacy Policy does not apply to third-party services, and we are not responsible for their privacy practices. We encourage you to review their privacy policies before providing personal information.
-              </p>
-            </section>
-
-            {/* 9. Children's Privacy */}
-            <section>
-              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                9. Children&apos;s Privacy
+                Subscriptions
               </h2>
               <p className="mb-2">
-                MileTrack is not intended for users under the age of 13 (or the applicable minimum age in your jurisdiction). We do not knowingly collect personal information from children under 13. If we become aware that a child under 13 has provided us with personal information, we will take steps to delete such information and terminate the child&apos;s account.
+                If you choose to subscribe to MileTrack Pro:
               </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Subscriptions are managed entirely by Apple via the App Store</li>
+                <li>Apple handles all payment processing using your existing Apple ID</li>
+                <li>We receive only anonymized subscription status from Apple (active/expired)</li>
+                <li>We do not have access to your payment information, credit card details, or Apple ID</li>
+                <li>Subscription management is done through your Apple ID settings</li>
+              </ul>
+            </section>
+
+            {/* Data Export */}
+            <section>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
+                Data Export
+              </h2>
+              <p className="mb-2">
+                MileTrack allows you to export your trip data:
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4 mb-3">
+                <li><strong>CSV Export:</strong> Available on free tier for all confirmed trips</li>
+                <li><strong>PDF Export:</strong> Available with Pro subscription for summary reports</li>
+              </ul>
+              <p className="mb-2">When you export:</p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Files are temporarily saved to your device&apos;s storage</li>
+                <li>You share them using the standard iOS share sheet</li>
+                <li>No data is uploaded to our servers during export</li>
+                <li>Exported files remain entirely under your control</li>
+              </ul>
+            </section>
+
+            {/* Data Deletion */}
+            <section>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
+                Data Deletion
+              </h2>
+              <p className="mb-2">
+                You can delete your data at any time:
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Delete individual trips from within the app</li>
+                <li>Delete all data via Settings &gt; Privacy &gt; &quot;Delete all data&quot;</li>
+                <li>Deleting the app removes all locally stored data</li>
+                <li>There are no remote backups to delete since no data is transmitted to servers</li>
+              </ul>
+            </section>
+
+            {/* Third-Party Services */}
+            <section>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
+                Third-Party Services
+              </h2>
+
+              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
+                Apple StoreKit (Subscriptions Only)
+              </h3>
+              <ul className="list-disc list-inside space-y-1 ml-4 mb-4">
+                <li>Used solely for in-app subscription management</li>
+                <li>
+                  Apple&apos;s Privacy Policy applies:{" "}
+                  <a
+                    href="https://www.apple.com/legal/privacy/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2"
+                  >
+                    https://www.apple.com/legal/privacy/
+                  </a>
+                </li>
+              </ul>
+
+              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
+                MapKit (Reverse Geocoding)
+              </h3>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Used to convert coordinates to city/area names (e.g., &quot;Cupertino, CA&quot;)</li>
+                <li>Processed by Apple&apos;s MapKit framework</li>
+                <li>
+                  Apple&apos;s Privacy Policy applies:{" "}
+                  <a
+                    href="https://www.apple.com/legal/privacy/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2"
+                  >
+                    https://www.apple.com/legal/privacy/
+                  </a>
+                </li>
+              </ul>
+            </section>
+
+            {/* Children's Privacy */}
+            <section>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
+                Children&apos;s Privacy
+              </h2>
               <p>
-                Parents or guardians who believe their child has provided information to MileTrack should contact us immediately.
+                MileTrack does not knowingly collect any data from children under 13. Since we don&apos;t collect personal information from anyone, our service is inherently compliant with children&apos;s privacy requirements.
               </p>
             </section>
 
-            {/* 10. Contact Us */}
+            {/* Your Rights */}
             <section>
               <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                10. Contact Us
+                Your Rights
+              </h2>
+              <p className="mb-2">
+                Since all data is stored locally on your device:
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li><strong>Access:</strong> You have complete access to all your data within the app</li>
+                <li><strong>Correction:</strong> You can edit any trip details directly in the app</li>
+                <li><strong>Deletion:</strong> You can delete individual trips or all data at any time</li>
+                <li><strong>Export:</strong> You can export your data to CSV or PDF formats</li>
+              </ul>
+            </section>
+
+            {/* Changes to This Policy */}
+            <section>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
+                Changes to This Policy
+              </h2>
+              <p>
+                We may update this privacy policy to reflect changes in our practices or for legal reasons. We will notify you of any material changes by updating the &quot;Last Updated&quot; date and, where appropriate, through the app or App Store update notes.
+              </p>
+            </section>
+
+            {/* Data Security */}
+            <section>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
+                Data Security
+              </h2>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>All data is stored locally using iOS&apos;s secure file system</li>
+                <li>Files are protected by iOS device encryption</li>
+                <li>No data transmission to external servers eliminates most remote security risks</li>
+                <li>Regular app updates address any discovered vulnerabilities</li>
+              </ul>
+            </section>
+
+            {/* International Users */}
+            <section>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
+                International Users
+              </h2>
+              <p>
+                Since MileTrack stores all data locally on your device and does not transmit data to servers, there are no international data transfers to disclose.
+              </p>
+            </section>
+
+            {/* Contact Us */}
+            <section>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
+                Contact Us
               </h2>
               <p className="mb-3">
-                If you have questions about this Privacy Policy, wish to exercise your privacy rights, or have concerns about our privacy practices, please contact us:
+                If you have questions about this privacy policy or MileTrack&apos;s privacy practices:
               </p>
               <div className="space-y-2">
                 <p>
@@ -282,62 +321,20 @@ export default function MileTrackPrivacyPolicyPage() {
                   </a>
                 </p>
                 <p>
-                  <strong className="text-slate-200">Company Name:</strong> MileTrack
-                </p>
-                <p>
-                  We will respond to your inquiry within 30 days or as required by applicable law.
+                  <strong className="text-slate-200">Website:</strong>{" "}
+                  <Link
+                    href="/app/miletrack"
+                    className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2"
+                  >
+                    https://www.plenitudo.ai/app/miletrack
+                  </Link>
                 </p>
               </div>
             </section>
 
-            {/* 11. Changes to This Privacy Policy */}
-            <section>
-              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                11. Changes to This Privacy Policy
-              </h2>
-              <p className="mb-2">
-                We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or other factors. We will notify you of any material changes by updating the &quot;Last Updated&quot; date at the top of this policy. Your continued use of MileTrack following the posting of revised Privacy Policy means that you accept and agree to the changes.
-              </p>
-              <p>
-                <strong>Note:</strong> We encourage you to review this Privacy Policy periodically to stay informed about how we are protecting your information.
-              </p>
-            </section>
-
-            {/* 12. Additional Information by Jurisdiction */}
-            <section>
-              <h2 className="text-lg sm:text-xl font-semibold text-slate-100 mb-3">
-                12. Additional Information by Jurisdiction
-              </h2>
-
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                European Union (GDPR)
-              </h3>
-              <p className="mb-2">
-                Our legal basis for processing your personal information is primarily:
-              </p>
-              <ul className="list-disc list-inside space-y-1 ml-4 mb-4">
-                <li>Performance of our contract with you (providing the Service)</li>
-                <li>Your consent</li>
-                <li>Compliance with legal obligations</li>
-                <li>Our legitimate interests</li>
-              </ul>
-
-              <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-4 mb-2">
-                Data Processing Addendum
-              </h3>
-              <p>
-                For business users or those requiring a Data Processing Addendum (DPA) for GDPR compliance, please contact us.
-              </p>
-            </section>
-
-            {/* Footer Note */}
+            {/* Footer */}
             <div className="mt-8 pt-6 border-t border-white/10 text-xs text-slate-400">
-              <p>
-                © 2026 MileTrack. All rights reserved. This Privacy Policy is effective as of February 23, 2026.
-              </p>
-              <p className="mt-1">
-                <strong>Last Updated:</strong> February 23, 2026
-              </p>
+              <p><strong>Last Updated:</strong> 2/23/2026</p>
             </div>
           </div>
         </div>
