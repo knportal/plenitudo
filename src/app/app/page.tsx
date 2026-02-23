@@ -70,16 +70,43 @@ export default function AppsPage() {
           </div>
 
           {/* MileTrack */}
-          <div className="rounded-xl p-6 sm:p-8 ring-1 ring-white/10 bg-slate-900/40 opacity-90">
+          <div className="rounded-xl p-6 sm:p-8 ring-1 ring-white/10 bg-slate-900/40">
             <h2 className="text-xl font-semibold text-slate-100 mb-2">
               MileTrack
             </h2>
             <p className="text-slate-300 mb-4">
-              Running and distance tracking — coming soon.
+              Running and distance tracking for runners. Track miles, pace, and
+              progress. Coming soon.
             </p>
-            <span className="inline-block px-3 py-1 rounded-full bg-slate-700/60 text-slate-400 text-sm font-medium">
-              Coming soon
-            </span>
+            <div className="flex flex-wrap gap-3 items-center">
+              <span className="inline-block px-3 py-1 rounded-full bg-slate-700/60 text-slate-400 text-sm font-medium">
+                Coming soon
+              </span>
+              <Link
+                href="/app/miletrack/overview"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 ring-1 ring-white/10 text-slate-200 hover:bg-slate-700 hover:text-white transition-colors text-sm font-medium"
+              >
+                Overview
+              </Link>
+              <Link
+                href="/app/miletrack/support"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 ring-1 ring-white/10 text-slate-200 hover:bg-slate-700 hover:text-white transition-colors text-sm font-medium"
+              >
+                Support
+              </Link>
+              <Link
+                href="/app/miletrack/privacy-policy"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 ring-1 ring-white/10 text-slate-200 hover:bg-slate-700 hover:text-white transition-colors text-sm font-medium"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="/app/miletrack/terms"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 ring-1 ring-white/10 text-slate-200 hover:bg-slate-700 hover:text-white transition-colors text-sm font-medium"
+              >
+                Terms
+              </Link>
+            </div>
           </div>
         </section>
 
