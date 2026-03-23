@@ -1,8 +1,6 @@
 "use client";
 
 // AI Daily Feed - Integrated with beautiful landing page
-import Link from "next/link";
-import PlSparklesIcon from "../icons/PlSparklesIcon";
 import PlShareIcon from "../icons/PlShareIcon";
 import { motion } from "framer-motion";
 import useSWR from "swr";
@@ -91,34 +89,16 @@ export default function PlFeed() {
             AI Daily Breakthroughs
           </h2>
           <p className="mt-1 text-sm text-slate-400">
-            Preview of today&apos;s curated stories. Get the full daily digest on{" "}
-            {process.env.NEXT_PUBLIC_SUBSTACK_URL ? (
-              <a
-                href={process.env.NEXT_PUBLIC_SUBSTACK_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-emerald-400 hover:text-emerald-300 underline"
-              >
-                Substack
-              </a>
-            ) : (
-              <a
-                href="/substack"
-                className="text-emerald-400 hover:text-emerald-300 underline"
-              >
-                our newsletter
-              </a>
-            )}
-            .
+            Today&apos;s curated AI stories — updated daily.
           </p>
         </div>
         <a
-          href={process.env.NEXT_PUBLIC_SUBSTACK_URL || "/substack"}
-          target={process.env.NEXT_PUBLIC_SUBSTACK_URL ? "_blank" : undefined}
-          rel={process.env.NEXT_PUBLIC_SUBSTACK_URL ? "noopener noreferrer" : undefined}
+          href="https://x.com/PlenitudoAI"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-sm underline underline-offset-4 focus:outline-none focus-visible:ring ring-emerald-400 rounded px-2 py-1 hover:text-emerald-300 transition-colors"
         >
-          Subscribe &rarr;
+          @PlenitudoAI &rarr;
         </a>
       </div>
 
@@ -185,24 +165,6 @@ export default function PlFeed() {
                 </div>
 
                 <div className="mt-auto flex items-center gap-1 sm:gap-2 pt-2 sm:pt-3 border-t border-white/5">
-                  {data?.discussUrl && (
-                    <a
-                      href={data.discussUrl}
-                      className="btn-ghost flex-1"
-                      aria-label="Discuss this breakthrough"
-                    >
-                      <span className="text-xs">💬</span>
-                      <span className="text-xs">Discuss</span>
-                    </a>
-                  )}
-                  <Link
-                    href="/rooms/ai"
-                    className="btn-ghost flex-1 relative z-10"
-                    aria-label="Explore in AI room"
-                  >
-                    <PlSparklesIcon className="size-4" />
-                    <span className="text-xs">Explore</span>
-                  </Link>
                   <a
                     href={item.sources?.[0]?.url || "#"}
                     target="_blank"

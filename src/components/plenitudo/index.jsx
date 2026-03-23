@@ -1,8 +1,6 @@
 import PlFooter from "./layout/PlFooter";
 import PlHero from "./sections/PlHero";
 import PlFeed from "./sections/PlFeed";
-import PlRooms from "./sections/PlRooms";
-import PlPrompts from "./sections/PlPrompts";
 
 export default function PlenitudoMVP() {
   return (
@@ -10,8 +8,6 @@ export default function PlenitudoMVP() {
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 py-6 sm:py-10">
         <PlHero />
         <PlFeed />
-        <PlRooms />
-        <PlPrompts />
         <PlFooter />
       </div>
       {/* Local utility styles (keep once globally or inline here) */}

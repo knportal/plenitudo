@@ -108,12 +108,6 @@ export default function PlHeader() {
           <Link className="navlink" href="/#feed-title">
             Feed
           </Link>
-          <Link className="navlink" href="/#rooms-title">
-            Rooms
-          </Link>
-          <Link className="navlink" href="/#prompts-title">
-            Prompts
-          </Link>
           <Link className="navlink" href="/app">
             Apps
           </Link>
@@ -122,7 +116,7 @@ export default function PlHeader() {
             onClick={() => setIsModalOpen(true)}
             type="button"
           >
-            Join beta
+            Get Updates
           </button>
         </nav>
 
@@ -187,20 +181,6 @@ export default function PlHeader() {
             </Link>
             <Link
               className="block px-4 py-3 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors min-h-[44px] flex items-center"
-              href="/#rooms-title"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Rooms
-            </Link>
-            <Link
-              className="block px-4 py-3 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors min-h-[44px] flex items-center"
-              href="/#prompts-title"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Prompts
-            </Link>
-            <Link
-              className="block px-4 py-3 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors min-h-[44px] flex items-center"
               href="/app"
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -214,7 +194,7 @@ export default function PlHeader() {
               }}
               type="button"
             >
-              Join beta
+              Get Updates
             </button>
           </div>
         </nav>
@@ -241,11 +221,10 @@ export default function PlHeader() {
               style={{ maxHeight: "90vh", overflowY: "auto" }}
             >
               <h2 className="text-lg sm:text-xl font-semibold mb-2">
-                Join the Beta
+                Get Launch Updates
               </h2>
               <p className="text-slate-300 text-xs sm:text-sm mb-4">
-                Get early access to new features and help shape the future of
-                Plenitudo.ai
+                Be the first to know when our apps go live on the App Store.
               </p>
 
               {status === "success" ? (
@@ -302,7 +281,7 @@ export default function PlHeader() {
                       disabled={status === "loading"}
                       className="w-full sm:flex-1 px-4 py-3 sm:py-2.5 rounded-lg bg-gradient-to-r from-emerald-500 to-blue-500 text-white font-semibold hover:from-emerald-400 hover:to-blue-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all min-h-[44px] text-sm sm:text-base"
                     >
-                      {status === "loading" ? "Joining..." : "Join"}
+                      {status === "loading" ? "Signing up..." : "Notify Me"}
                     </button>
                   </div>
                 </form>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import PlFooter from "@/components/plenitudo/layout/PlFooter";
 
 export const metadata: Metadata = {
-  title: "Plena Beta | Mindfulness Tracking with Real-Time Biometrics",
+  title: "Plena | Mindfulness Tracking with Real-Time Biometrics",
   description:
     "Plena is a mindfulness tracking application for iPhone and Apple Watch that monitors your biometric data in real time during mindfulness sessions.",
 };
@@ -290,44 +290,30 @@ export default function PlenaBetaPage() {
           </div>
         </section>
 
-        {/* Beta Testing Section */}
+        {/* What's New Section */}
         <section className="mb-12">
           <h2 className="text-xl sm:text-2xl font-semibold text-slate-100 mb-4">
-            What We're Testing
+            What&apos;s New in v2.0
           </h2>
           <div className="rounded-xl p-6 ring-1 ring-emerald-500/20 bg-emerald-500/5">
-            <p className="text-slate-300 mb-4">
-              During this beta, we're interested in feedback on:
-            </p>
             <ul className="space-y-2 text-slate-300">
               <li className="flex items-start gap-3">
                 <span className="text-emerald-400 mt-1">•</span>
-                <span>Sensor accuracy</span>
+                <span>Full biometrics dashboard: HRV, sleep stages, VO₂ Max, heart rate, respiratory rate</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-emerald-400 mt-1">•</span>
-                <span>Stress zone classification</span>
+                <span>Restored Purchases button for seamless device switching</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-emerald-400 mt-1">•</span>
-                <span>Dashboard clarity</span>
+                <span>Watch-to-iPhone subscription sync on first install</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-emerald-400 mt-1">•</span>
-                <span>Apple Watch performance</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-emerald-400 mt-1">•</span>
-                <span>Session syncing</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-emerald-400 mt-1">•</span>
-                <span>Overall user experience</span>
+                <span>Cleaner onboarding flow</span>
               </li>
             </ul>
-            <p className="mt-4 text-slate-300">
-              Your feedback helps us refine Plena before launch. Thank you!
-            </p>
           </div>
         </section>
 

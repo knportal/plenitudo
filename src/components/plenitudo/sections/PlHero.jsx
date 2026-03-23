@@ -1,55 +1,31 @@
 export default function PlHero() {
-  const substackUrl = process.env.NEXT_PUBLIC_SUBSTACK_URL;
-
-  const getSubstackUrl = () => {
-    if (!substackUrl) return "/substack";
-    try {
-      const url = new URL(substackUrl);
-      url.searchParams.set("utm_source", "plenitudo_landing");
-      url.searchParams.set("utm_medium", "web");
-      url.searchParams.set("utm_campaign", "hero_cta");
-      return url.toString();
-    } catch {
-      return substackUrl;
-    }
-  };
-
   return (
     <section className="mt-8 sm:mt-14 relative">
       <div className="max-w-3xl">
         <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
-          Stop doomscrolling,{" "}
-          <span className="text-emerald-400">start idea scrolling</span>.
+          Human-centered tech for
+          <br />
+          <span className="text-emerald-400">abundant living</span>
         </h1>
         <p className="mt-3 sm:mt-4 text-slate-300 max-w-2xl text-sm sm:text-base">
-          A home for uplifting AI breakthroughs, mindful prompts, and rooms
-          where builders connect. Get the day&apos;s top insights delivered
-          daily, plus weekly deep dives and exclusive analysis.
+          Building iOS apps with AI — mindfulness, productivity, and tools that matter.
         </p>
         <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-2 sm:gap-3">
-          {substackUrl ? (
-            <a
-              href={getSubstackUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-            >
-              📰 Subscribe on Substack
-            </a>
-          ) : (
-            <a href="/substack" className="btn-primary">
-              📰 Subscribe to Newsletter
-            </a>
-          )}
-          <a href="#feed-title" className="btn-secondary">
-            Preview Latest Stories
+          <a href="/app" className="btn-primary">
+            Our Apps
+          </a>
+          <a
+            href="https://x.com/PlenitudoAI"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-secondary"
+          >
+            Follow the journey →
           </a>
         </div>
-        {substackUrl && (
-          <p className="mt-3 text-xs text-slate-400">
-            Free daily digest • Paid weekly newsletter • Community access
-          </p>
-        )}
+        <p className="mt-3 text-xs text-slate-400">
+          AI insights • iOS apps • Built in public
+        </p>
       </div>
       <style>{`
         .fancy-underline { position: relative; }

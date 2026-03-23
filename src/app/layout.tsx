@@ -5,7 +5,7 @@ import PlBackgroundFX from "@/components/plenitudo/layout/PlBackgroundFX";
 
 export const metadata: Metadata = {
   title: "Plenitudo AI",
-  description: "AI-powered platform for intelligent solutions and automation",
+  description: "Plenitudo — human-centered iOS apps and AI tools for abundant living. By Kenneth Nygren.",
 };
 
 export const viewport: Viewport = {
