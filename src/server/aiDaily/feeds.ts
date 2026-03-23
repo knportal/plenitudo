@@ -55,7 +55,7 @@ export const FEEDS: { label: string; url: string; genre?: string }[] = [
   },
   {
     label: "OpenAI Blog",
-    url: "https://openai.com/blog/rss",
+    url: "https://openai.com/news/rss.xml",
   },
   {
     label: "Anthropic Blog",
@@ -63,7 +63,7 @@ export const FEEDS: { label: string; url: string; genre?: string }[] = [
   },
   {
     label: "Google AI Blog",
-    url: "https://ai.googleblog.com/atom.xml",
+    url: "https://blog.google/technology/ai/rss/",
   },
   {
     label: "Microsoft AI Blog",
@@ -231,8 +231,8 @@ export const FEEDS: { label: string; url: string; genre?: string }[] = [
     url: "https://www.tomshardware.com/feeds/all",
   },
   {
-    label: "AnandTech",
-    url: "https://www.anandtech.com/rss/",
+    label: "Chips and Cheese",
+    url: "https://chipsandcheese.com/feed/",
   },
   {
     label: "SemiAnalysis",
@@ -253,12 +253,8 @@ export const FEEDS: { label: string; url: string; genre?: string }[] = [
   },
   // Substack newsletters
   {
-    label: "The Batch (DeepLearning.AI)",
-    url: "https://www.deeplearning.ai/the-batch/feed",
-  },
-  {
-    label: "Stratechery",
-    url: "https://stratechery.com/feed/",
+    label: "Import AI",
+    url: "https://jack-clark.net/feed/",
   },
   {
     label: "Not Boring",
@@ -312,7 +308,6 @@ export const PUBLISHER_REP = new Map<string, number>([
   ["IEEE Spectrum", 3],
   ["Science Daily", 3],
   ["Tom's Hardware", 3],
-  ["AnandTech", 3],
   ["DeepMind", 3], // Google's AI lab
   ["Stanford HAI", 3], // Stanford University
   ["MIT CSAIL", 3], // MIT
@@ -362,8 +357,8 @@ export const PUBLISHER_REP = new Map<string, number>([
   ["9to5Mac", 2],
   ["Android Authority", 2],
   // Substack publications
-  ["The Batch", 3], // DeepLearning.AI - Andrew Ng
-  ["Stratechery", 3], // Ben Thompson - highly respected
+  ["Import AI", 3], // Jack Clark - ex-OpenAI, serious AI research newsletter
+  ["Chips and Cheese", 2], // Hardware analysis - open access
   ["Not Boring", 3], // Packy McCormick - popular tech newsletter
   ["Platformer", 3], // Casey Newton - tech journalism
   ["The Neuron", 2], // AI newsletter
