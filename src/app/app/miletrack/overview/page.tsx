@@ -579,12 +579,13 @@ export default function MileTrackOverviewPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
-                href="https://apps.apple.com/app/miletrack"
+                href="https://apps.apple.com/app/id6759682972"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 rounded-lg bg-gradient-to-r from-emerald-500 to-blue-500 text-white font-semibold hover:from-emerald-400 hover:to-blue-400 transition-all focus:outline-none focus-visible:ring ring-emerald-400"
+                aria-label="Download MileTrack on the App Store"
               >
-                Download on the App Store →
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/download-on-app-store.svg" alt="Download on the App Store" height="44" style={{ height: 44 }} />
               </a>
               <Link
                 href="/app/miletrack/support"

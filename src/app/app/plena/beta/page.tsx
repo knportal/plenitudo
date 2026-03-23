@@ -355,18 +355,19 @@ export default function PlenaBetaPage() {
               Ready to Transform Your Mindfulness Practice?
             </h2>
             <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
-              Join the Plena beta and discover the data behind your mindfulness
-              sessions. Track your progress, understand your body's response,
-              and build a more consistent practice.
+              Plena is now available on the App Store. Discover the data behind
+              your mindfulness sessions, track your progress, and understand
+              your body's response.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
-                href="https://testflight.apple.com/join/YOUR_CODE"
+                href="https://apps.apple.com/app/id6756549507"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 rounded-lg bg-gradient-to-r from-emerald-500 to-blue-500 text-white font-semibold hover:from-emerald-400 hover:to-blue-400 transition-all focus:outline-none focus-visible:ring ring-emerald-400"
+                aria-label="Download Plena on the App Store"
               >
-                Join TestFlight Beta
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/download-on-app-store.svg" alt="Download on the App Store" height="44" style={{ height: 44 }} />
               </a>
               <Link
                 href="/privacy-policy"
