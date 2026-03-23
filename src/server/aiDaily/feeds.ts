@@ -1,5 +1,14 @@
 // Start small; you can expand later.
 export const FEEDS: { label: string; url: string; genre?: string }[] = [
+  // Wire services — open access, high signal
+  {
+    label: "Reuters Technology",
+    url: "https://feeds.reuters.com/reuters/technologyNews",
+  },
+  {
+    label: "AP News Technology",
+    url: "https://feeds.apnews.com/rss/apf-technology",
+  },
   // Reliable tech news sources
   {
     label: "MIT Tech Review AI",
@@ -38,8 +47,8 @@ export const FEEDS: { label: string; url: string; genre?: string }[] = [
     url: "https://www.wired.com/feed/rss",
   },
   {
-    label: "VentureBeat AI",
-    url: "https://venturebeat.com/ai/feed/",
+    label: "VentureBeat",
+    url: "https://venturebeat.com/feed/",
   },
   {
     label: "ZDNet AI",
@@ -58,8 +67,8 @@ export const FEEDS: { label: string; url: string; genre?: string }[] = [
     url: "https://openai.com/news/rss.xml",
   },
   {
-    label: "Anthropic Blog",
-    url: "https://www.anthropic.com/news/feed.xml",
+    label: "Interconnects AI",
+    url: "https://www.interconnects.ai/feed",
   },
   {
     label: "Google AI Blog",
@@ -70,20 +79,20 @@ export const FEEDS: { label: string; url: string; genre?: string }[] = [
     url: "https://blogs.microsoft.com/ai/feed/",
   },
   {
-    label: "Meta AI Blog",
-    url: "https://ai.meta.com/blog/rss/",
+    label: "Meta AI Research",
+    url: "https://research.facebook.com/feed/",
   },
   {
     label: "DeepMind",
     url: "https://deepmind.google/discover/rss/",
   },
   {
-    label: "x.ai",
-    url: "https://x.ai/blog/rss",
+    label: "AI Edge",
+    url: "https://newsletter.theaiedge.io/feed",
   },
   {
-    label: "Stability AI",
-    url: "https://stability.ai/blog?format=rss",
+    label: "MarkTechPost",
+    url: "https://www.marktechpost.com/feed/",
   },
   // Additional major tech news sources (high overlap potential)
   {
@@ -120,8 +129,8 @@ export const FEEDS: { label: string; url: string; genre?: string }[] = [
     url: "https://syncedreview.com/feed/",
   },
   {
-    label: "Ben's Bites",
-    url: "https://bensbites.beehiiv.com/feed",
+    label: "Ahead of AI",
+    url: "https://magazine.sebastianraschka.com/feed",
   },
   {
     label: "The Decoder",
@@ -133,8 +142,8 @@ export const FEEDS: { label: string; url: string; genre?: string }[] = [
   },
   // Academic and research sources
   {
-    label: "Nature AI",
-    url: "https://www.nature.com/subjects/artificial-intelligence.rss",
+    label: "Nature Machine Intelligence",
+    url: "https://www.nature.com/natmachintell.rss",
   },
   {
     label: "IEEE Spectrum",
@@ -150,20 +159,20 @@ export const FEEDS: { label: string; url: string; genre?: string }[] = [
   },
   // Policy and regulation
   {
-    label: "EU Commission AI",
-    url: "https://ec.europa.eu/newsroom/sppa/rss.cfm?subweb=1018&lang=en",
+    label: "OECD AI Policy",
+    url: "https://oecd.ai/en/feed",
   },
   {
     label: "Brookings AI",
     url: "https://www.brookings.edu/topic/artificial-intelligence/feed/",
   },
   {
-    label: "AI Now Institute",
-    url: "https://ainowinstitute.org/feed.xml",
+    label: "Future of Life Institute",
+    url: "https://futureoflife.org/feed/",
   },
   {
-    label: "CAIDP",
-    url: "https://www.caidp.org/feed/",
+    label: "Tech Policy Press",
+    url: "https://techpolicy.press/feed/",
   },
   // Robotics
   {
@@ -175,8 +184,8 @@ export const FEEDS: { label: string; url: string; genre?: string }[] = [
     url: "https://roboticsandautomationnews.com/feed/",
   },
   {
-    label: "IEEE Robotics",
-    url: "https://ieeexplore.ieee.org/rss/TOC4068.XML",
+    label: "IEEE Spectrum Robotics",
+    url: "https://spectrum.ieee.org/feeds/robotics.rss",
   },
   {
     label: "The Robot Report",
@@ -184,8 +193,8 @@ export const FEEDS: { label: string; url: string; genre?: string }[] = [
   },
   // Health & Medical AI
   {
-    label: "Healthcare IT News AI",
-    url: "https://www.healthcareitnews.com/ai-powered-health/feed",
+    label: "STAT News",
+    url: "https://www.statnews.com/feed/",
   },
   {
     label: "Medical Futurist",
@@ -273,8 +282,8 @@ export const FEEDS: { label: string; url: string; genre?: string }[] = [
     url: "https://www.theneuron.ai/feed",
   },
   {
-    label: "AI Tool Report",
-    url: "https://aitoolreport.substack.com/feed",
+    label: "MLOps Community",
+    url: "https://mlops.community/feed/",
   },
   {
     label: "Last Week in AI",
@@ -292,7 +301,8 @@ export const FEEDS: { label: string; url: string; genre?: string }[] = [
 export const PUBLISHER_REP = new Map<string, number>([
   // Tier 3 - High reputation (general tech news)
   ["Reuters", 3],
-  ["Financial Times", 3],
+  ["AP News", 3],
+  ["Tech Policy Press", 3],
   ["Nature", 3],
   ["MIT Technology Review", 3],
   ["Ars Technica", 3],
@@ -311,7 +321,7 @@ export const PUBLISHER_REP = new Map<string, number>([
   ["DeepMind", 3], // Google's AI lab
   ["Stanford HAI", 3], // Stanford University
   ["MIT CSAIL", 3], // MIT
-  ["AI Now Institute", 3], // NYU research institute
+  ["Future of Life Institute", 3], // AI safety research
   ["IEEE Robotics", 3], // IEEE
   ["Nature Medicine", 3], // Nature journal
   ["Yale Climate Connections", 3], // Yale University
@@ -325,6 +335,16 @@ export const PUBLISHER_REP = new Map<string, number>([
   ["Meta", 2],
   ["HuggingFace", 2],
   ["VentureBeat", 2],
+  ["Interconnects AI", 2],
+  ["Meta AI Research", 2],
+  ["AI Edge", 2],
+  ["MarkTechPost", 2],
+  ["OECD AI Policy", 3],
+  ["STAT News", 3],
+  ["Ahead of AI", 3],
+  ["MLOps Community", 2],
+  ["IEEE Spectrum Robotics", 3],
+  ["Nature Machine Intelligence", 3],
   ["AI News", 2],
   ["Towards Data Science", 2],
   ["EU Commission", 2],
@@ -336,7 +356,7 @@ export const PUBLISHER_REP = new Map<string, number>([
   ["Interesting Engineering", 2],
   ["x.ai", 2],
   ["Stability AI", 2],
-  ["Ben's Bites", 2],
+  ["Ahead of AI", 3], // Sebastian Raschka - ML researcher newsletter
   ["The Decoder", 2],
   ["AI Trends", 2],
   ["CAIDP", 2],
@@ -349,7 +369,7 @@ export const PUBLISHER_REP = new Map<string, number>([
   // Tier 2 - Specialized publications
   ["Robotics Business Review", 2],
   ["Robotics & Automation News", 2],
-  ["Healthcare IT News", 2],
+  ["STAT News", 3],
   ["Medical Futurist", 2],
   ["CleanTechnica", 2],
   ["GreenBiz", 2],
@@ -363,7 +383,7 @@ export const PUBLISHER_REP = new Map<string, number>([
   ["Platformer", 3], // Casey Newton - tech journalism
   ["The Neuron", 2], // AI newsletter
   ["AI Breakfast", 2],
-  ["AI Tool Report", 2],
+  ["MLOps Community", 2],
   ["Last Week In AI", 2],
   ["The Gradient", 2], // Academic AI publication
   ["AI Explained", 2],
