@@ -5,7 +5,7 @@ import PlFooter from "@/components/plenitudo/layout/PlFooter";
 export const metadata: Metadata = {
   title: "MileTrack Privacy Policy | Plenitudo AI",
   description:
-    "MileTrack privacy policy — your mileage data stays on your device. No account required, no backend servers, no personal information collection.",
+    "MileTrack privacy policy — your mileage data stays on your device. Route traces, GPS coordinates, and trip data are stored locally only. No backend servers, no accounts.",
 };
 
 export default function MileTrackPrivacyPolicyPage() {
@@ -26,7 +26,16 @@ export default function MileTrackPrivacyPolicyPage() {
             </Link>
           </div>
           <p className="text-xs sm:text-sm text-slate-400">
-            <strong>Last Updated:</strong> 2/23/2026
+            <strong>Last Updated:</strong> April 1, 2026
+          </p>
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+            Full policy (all Plenitudo apps):{" "}
+            <Link
+              href="/privacy-policy"
+              className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2"
+            >
+              plenitudo.ai/privacy-policy
+            </Link>
           </p>
         </div>
 
@@ -88,10 +97,10 @@ export default function MileTrackPrivacyPolicyPage() {
                 Location Services
               </h4>
               <ul className="list-disc list-inside space-y-1 ml-4">
-                <li><strong>Purpose:</strong> Calculate trip distance and estimate start/end locations</li>
-                <li><strong>Used for:</strong> Distance measurement during detected drives, optional address labels</li>
-                <li><strong>Storage:</strong> Only start/end coordinates and calculated distance are saved locally</li>
-                <li><strong>Note:</strong> Continuous location tracking only occurs during detected drives</li>
+                <li><strong>Purpose:</strong> Calculate trip distance, record route, and estimate start/end locations</li>
+                <li><strong>Used for:</strong> Distance measurement, route tracing, and optional address labels</li>
+                <li><strong>Route trace:</strong> GPS coordinates are sampled throughout each trip (up to 500 points) and stored locally for map visualization</li>
+                <li><strong>Note:</strong> Continuous location tracking only occurs during active detected drives</li>
               </ul>
 
               <h3 className="text-base sm:text-lg font-semibold text-slate-200 mt-6 mb-2">
@@ -107,6 +116,7 @@ export default function MileTrackPrivacyPolicyPage() {
               <ul className="list-disc list-inside space-y-1 ml-4 mb-3">
                 <li>Trip distance (miles/kilometers)</li>
                 <li>Trip date and duration</li>
+                <li>Route trace — GPS coordinates sampled during the trip (up to 500 points), stored locally for map visualization</li>
                 <li>Optional start/end location labels (city/area names)</li>
                 <li>Optional category, client, project code, and notes you enter</li>
                 <li>Source (auto-detected or manual)</li>
@@ -137,11 +147,10 @@ export default function MileTrackPrivacyPolicyPage() {
               </p>
               <ul className="list-disc list-inside space-y-1 ml-4">
                 <li>Your name, email, phone number, or any personal identifiers</li>
-                <li>Your precise location coordinates (beyond start/end of trips stored locally)</li>
-                <li>Your complete location history or route paths</li>
+                <li>Your trip data or location data to external servers (everything stays on-device)</li>
                 <li>Your device identifiers for tracking</li>
-                <li>Your trip data or mileage records</li>
                 <li>Analytics or usage data</li>
+                <li>Any third-party analytics or advertising SDKs</li>
               </ul>
             </section>
 
@@ -334,7 +343,7 @@ export default function MileTrackPrivacyPolicyPage() {
 
             {/* Footer */}
             <div className="mt-8 pt-6 border-t border-white/10 text-xs text-slate-400">
-              <p><strong>Last Updated:</strong> 2/23/2026</p>
+              <p><strong>Last Updated:</strong> April 1, 2026</p>
             </div>
           </div>
         </div>
