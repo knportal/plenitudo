@@ -25,7 +25,7 @@ export default function MileTrackTermsPage() {
             </Link>
           </div>
           <p className="text-xs sm:text-sm text-slate-400">
-            <strong>Last Updated:</strong> February 21, 2026
+            <strong>Last Updated:</strong> April 2, 2026
           </p>
         </div>
 
@@ -360,9 +360,8 @@ export default function MileTrackTermsPage() {
               </h2>
               <p>
                 These Terms are governed by the laws of the United States and
-                the State of California, without regard to conflict of law
-                principles. You agree to submit to the exclusive jurisdiction of
-                courts in California.
+                the Commonwealth of Massachusetts, without regard to conflict of
+                law provisions.
               </p>
             </section>
 
@@ -457,13 +456,13 @@ export default function MileTrackTermsPage() {
                 <strong>Developer:</strong> Plenitudo AI
               </p>
               <p>
-                <strong>Last Updated:</strong> February 21, 2026
+                <strong>Last Updated:</strong> April 2, 2026
               </p>
             </section>
 
             <div className="mt-8 pt-6 border-t border-white/10 text-xs text-slate-400">
               <p>
-                <strong>Last Updated:</strong> February 21, 2026
+                <strong>Last Updated:</strong> April 2, 2026
               </p>
             </div>
           </div>

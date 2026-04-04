@@ -522,7 +522,7 @@ export default function MileTrackSupportPage() {
                   Q: Can I access my data from another device?
                 </h4>
                 <p className="text-slate-300">
-                  A: No, MileTrack doesn&apos;t sync between devices. Data stays on the device where it was created.
+                  A: If iCloud Drive is enabled, MileTrack automatically backs up your trip data to your private iCloud container (encrypted by Apple), allowing it to restore on a new device. Go to Settings &gt; iCloud to manage sync.
                 </p>
               </div>
               <div className="rounded-xl p-5 ring-1 ring-white/10 bg-slate-900/40">
@@ -539,6 +539,84 @@ export default function MileTrackSupportPage() {
                 </h4>
                 <p className="text-slate-300">
                   A: iOS device backups (iCloud or iTunes) may include MileTrack data. To exclude from backups, disable MileTrack in iOS backup settings.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Live Activity & Dynamic Island */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-slate-200 mb-4">
+              Live Activity &amp; Dynamic Island
+            </h3>
+            <div className="space-y-4">
+              <div className="rounded-xl p-5 ring-1 ring-white/10 bg-slate-900/40">
+                <h4 className="font-semibold text-slate-100 mb-2">
+                  Q: What is the trip progress indicator on my lock screen?
+                </h4>
+                <p className="text-slate-300">
+                  A: When MileTrack detects a trip in progress, it shows a Live Activity on your lock screen and Dynamic Island with real-time miles traveled, trip duration, and estimated deduction.
+                </p>
+              </div>
+              <div className="rounded-xl p-5 ring-1 ring-white/10 bg-slate-900/40">
+                <h4 className="font-semibold text-slate-100 mb-2">
+                  Q: The Live Activity doesn&apos;t appear. What do I do?
+                </h4>
+                <p className="text-slate-300 mb-2">A: Check the following:</p>
+                <ul className="space-y-1 text-slate-300 ml-4">
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-400 mt-1">•</span>
+                    <span>Live Activities are enabled: Settings &gt; MileTrack &gt; Live Activities</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-400 mt-1">•</span>
+                    <span>Open the app briefly before your first drive — iOS requires the app to be foregrounded at least once to initialize Live Activities</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-400 mt-1">•</span>
+                    <span>After the first successful use, Live Activity works from the background automatically</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="rounded-xl p-5 ring-1 ring-white/10 bg-slate-900/40">
+                <h4 className="font-semibold text-slate-100 mb-2">
+                  Q: Does Live Activity work when the app is closed?
+                </h4>
+                <p className="text-slate-300">
+                  A: Yes, after the first successful use. The first time you drive, you may see an &quot;Allow Live Activities&quot; prompt — this is an iOS requirement and works the same as apps like Uber or Lyft.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Route Maps */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-slate-200 mb-4">
+              Route Maps
+            </h3>
+            <div className="space-y-4">
+              <div className="rounded-xl p-5 ring-1 ring-white/10 bg-slate-900/40">
+                <h4 className="font-semibold text-slate-100 mb-2">
+                  Q: Can I see my route on a map?
+                </h4>
+                <p className="text-slate-300">
+                  A: Yes. After a trip is recorded, open it in the Inbox (tap the pencil icon) and look for the Route card. Tap &quot;View full map&quot; to see the gradient polyline of your actual driving route.
+                </p>
+              </div>
+              <div className="rounded-xl p-5 ring-1 ring-white/10 bg-slate-900/40">
+                <h4 className="font-semibold text-slate-100 mb-2">
+                  Q: Why don&apos;t older trips have a route map?
+                </h4>
+                <p className="text-slate-300">
+                  A: Route recording was added in version 1.2.1. Trips recorded before this version will show start and end pins but no route line.
+                </p>
+              </div>
+              <div className="rounded-xl p-5 ring-1 ring-white/10 bg-slate-900/40">
+                <h4 className="font-semibold text-slate-100 mb-2">
+                  Q: How accurate is the route map?
+                </h4>
+                <p className="text-slate-300">
+                  A: GPS accuracy varies by device and environment. Deduction estimates are based on total distance and are approximate — always verify before using for tax purposes. Route traces are stored locally and capped at 500 GPS points per trip.
                 </p>
               </div>
             </div>
@@ -729,8 +807,8 @@ export default function MileTrackSupportPage() {
           <div className="rounded-xl p-6 ring-1 ring-white/10 bg-slate-900/40">
             <ul className="space-y-2 text-slate-300">
               <li><strong className="text-slate-200">Developer:</strong> Plenitudo AI</li>
-              <li><strong className="text-slate-200">Last Updated:</strong> February 21, 2026</li>
-              <li><strong className="text-slate-200">Version:</strong> 1.0</li>
+              <li><strong className="text-slate-200">Last Updated:</strong> April 4, 2026</li>
+              <li><strong className="text-slate-200">Version:</strong> 1.2</li>
             </ul>
           </div>
         </section>
