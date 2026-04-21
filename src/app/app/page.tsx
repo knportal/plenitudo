@@ -5,7 +5,7 @@ import PlFooter from "@/components/plenitudo/layout/PlFooter";
 export const metadata: Metadata = {
   title: "Apps | Plenitudo AI",
   description:
-    "Apps by Plenitudo — Plena (mindfulness), MileTrack (mileage tracking), FullCapture (AR property scanning), and more.",
+    "Apps by Plenitudo — Plena (mindfulness), MileTrack (mileage tracking), Plenitudo Privacy (data audit), FullCapture (AR property scanning), and more.",
 };
 
 export default function AppsPage() {
@@ -116,6 +116,31 @@ export default function AppsPage() {
               >
                 Terms
               </Link>
+            </div>
+          </div>
+
+          {/* Plenitudo Privacy */}
+          <div className="rounded-xl p-6 sm:p-8 ring-1 ring-white/10 bg-slate-900/40">
+            <h2 className="text-xl font-semibold text-slate-100 mb-2">
+              Plenitudo Privacy
+            </h2>
+            <p className="text-slate-300 mb-4">
+              A guided audit of every device and platform in your life. See who
+              has your data, where it goes, and who profits from it — then take
+              it back in guided steps.
+            </p>
+            <div className="flex flex-wrap gap-3 items-center">
+              <span className="inline-block px-3 py-1 rounded-full bg-violet-500/15 text-violet-400 ring-1 ring-violet-400/30 text-sm font-medium">
+                Coming Soon
+              </span>
+              <a
+                href="https://privacy.plenitudo.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 ring-1 ring-white/10 text-slate-200 hover:bg-slate-700 hover:text-white transition-colors text-sm font-medium"
+              >
+                Learn More
+              </a>
             </div>
           </div>
 
