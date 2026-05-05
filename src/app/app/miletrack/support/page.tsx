@@ -544,6 +544,39 @@ export default function MileTrackSupportPage() {
             </div>
           </div>
 
+          {/* Home Screen Widget & Notifications */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-slate-200 mb-4">
+              Home Screen Widget &amp; Notifications
+            </h3>
+            <div className="space-y-4">
+              <div className="rounded-xl p-5 ring-1 ring-white/10 bg-slate-900/40">
+                <h4 className="font-semibold text-slate-100 mb-2">
+                  Q: Does MileTrack have a home screen widget?
+                </h4>
+                <p className="text-slate-300">
+                  A: Yes! Added in v1.2.4, MileTrack offers small and medium home screen widgets that show your trip count and total mileage at a glance. Long-press your home screen, tap the "+" button, and search for MileTrack to add a widget.
+                </p>
+              </div>
+              <div className="rounded-xl p-5 ring-1 ring-white/10 bg-slate-900/40">
+                <h4 className="font-semibold text-slate-100 mb-2">
+                  Q: Can I categorize trips from the notification?
+                </h4>
+                <p className="text-slate-300">
+                          A: Yes. When a new trip is detected, the notification banner includes &quot;Business&quot; and &quot;Personal&quot; action buttons so you can categorize the trip without opening the app. This feature was added in v1.2.4.
+                </p>
+              </div>
+              <div className="rounded-xl p-5 ring-1 ring-white/10 bg-slate-900/40">
+                <h4 className="font-semibold text-slate-100 mb-2">
+                  Q: When does the daily trip reminder fire?
+                </h4>
+                <p className="text-slate-300">
+                          A: If you have uncategorized trips, MileTrack sends a daily reminder notification. Go to Settings &gt; Notifications to enable or adjust reminders.
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Live Activity & Dynamic Island */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-slate-200 mb-4">
@@ -807,8 +840,8 @@ export default function MileTrackSupportPage() {
           <div className="rounded-xl p-6 ring-1 ring-white/10 bg-slate-900/40">
             <ul className="space-y-2 text-slate-300">
               <li><strong className="text-slate-200">Developer:</strong> Plenitudo AI</li>
-              <li><strong className="text-slate-200">Last Updated:</strong> April 4, 2026</li>
-              <li><strong className="text-slate-200">Version:</strong> 1.2</li>
+              <li><strong className="text-slate-200">Last Updated:</strong> May 5, 2026</li>
+              <li><strong className="text-slate-200">Version:</strong> 1.2.4</li>
             </ul>
           </div>
         </section>
