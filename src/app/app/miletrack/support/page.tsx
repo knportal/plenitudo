@@ -360,7 +360,7 @@ export default function MileTrackSupportPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-emerald-400 mt-1">•</span>
-                    <span><strong>PDF:</strong> Tap &quot;PDF&quot; to export a formatted summary (Pro subscription)</span>
+                    <span><strong>PDF:</strong> Tap &quot;PDF&quot; to export a professional report with a summary header, per-page subtotals, notes/purpose column, and total row — IRS-ready (Pro subscription)</span>
                   </li>
                 </ul>
               </div>
@@ -388,7 +388,7 @@ export default function MileTrackSupportPage() {
                   </li>
                 </ul>
                 <p className="text-slate-300 mt-2">
-                  PDF exports also include summary totals and client breakdowns.
+                  PDF exports (v1.3.0+) include a redesigned layout: summary header (total miles, total value, deduction), per-trip rows with Notes/Purpose, per-page subtotals, and a report total row.
                 </p>
               </div>
               <div className="rounded-xl p-5 ring-1 ring-white/10 bg-slate-900/40">
@@ -716,10 +716,18 @@ export default function MileTrackSupportPage() {
               </div>
               <div className="rounded-xl p-5 ring-1 ring-white/10 bg-slate-900/40">
                 <h4 className="font-semibold text-slate-100 mb-2">
-                  Q: I&apos;m not seeing address labels on my trips.
+                  Q: The trip duration looks longer than the actual drive. Why?
                 </h4>
                 <p className="text-slate-300">
-                  A: Address labels (start/end locations) are fetched from Apple&apos;s geocoding service and may take a few seconds to load. Ensure you have an internet connection.
+                  A: In rare cases, iOS suspends GPS for several minutes after you park. Older versions counted that waiting period as drive time. v1.3.0 fixes this — duration is now measured from when your speed first dropped below the driving threshold, not when the app confirmed the stop.
+                </p>
+              </div>
+              <div className="rounded-xl p-5 ring-1 ring-white/10 bg-slate-900/40">
+                <h4 className="font-semibold text-slate-100 mb-2">
+                  Q: I&apos;m not seeing address labels on my trips — just &quot;Trip start&quot; or &quot;Trip end&quot;.
+                </h4>
+                <p className="text-slate-300">
+                  A: This happens when there was no network connection when the trip ended and reverse geocoding failed. In v1.3.0 and later, MileTrack retries automatically the next time you open the app — just bring it to the foreground and addresses fill in within seconds. On older versions, force-quitting and relaunching triggers the same retry.
                 </p>
               </div>
               <div className="rounded-xl p-5 ring-1 ring-white/10 bg-slate-900/40">
@@ -840,8 +848,8 @@ export default function MileTrackSupportPage() {
           <div className="rounded-xl p-6 ring-1 ring-white/10 bg-slate-900/40">
             <ul className="space-y-2 text-slate-300">
               <li><strong className="text-slate-200">Developer:</strong> Plenitudo AI</li>
-              <li><strong className="text-slate-200">Last Updated:</strong> May 5, 2026</li>
-              <li><strong className="text-slate-200">Version:</strong> 1.2.4</li>
+              <li><strong className="text-slate-200">Last Updated:</strong> June 4, 2026</li>
+              <li><strong className="text-slate-200">Version:</strong> 1.3.0</li>
             </ul>
           </div>
         </section>
