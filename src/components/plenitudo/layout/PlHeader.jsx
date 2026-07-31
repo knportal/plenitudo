@@ -19,6 +19,20 @@ export default function PlHeader() {
     setMounted(true);
   }, []);
 
+  // Close the mobile menu when the Escape key is pressed
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isMobileMenuOpen]);
+
   // Handle hash scrolling after navigation and hash changes
   useEffect(() => {
     if (typeof window !== "undefined" && pathname === "/") {
