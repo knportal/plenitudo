@@ -2,6 +2,9 @@
   "name": "professional-nextjs-project",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "dev": "next dev",
     "dev:restart": "./restart-dev.sh",
@@ -48,10 +51,10 @@
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
     "framer-motion": "^12.23.16",
-    "next": "15.5.9",
+    "next": "^15.5.23",
     "p-map": "^7.0.3",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "react": "^19.1.7",
+    "react-dom": "^19.1.7",
     "resend": "^6.5.2",
     "rss-parser": "^3.13.0",
     "swr": "^2.3.6",
