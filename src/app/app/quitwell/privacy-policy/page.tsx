@@ -62,7 +62,7 @@ export default function QuitWellPrivacyPolicyPage() {
 
       <Section title="Optional AI Insights (Shared Only With Your Permission)">
         <p className="mb-2">
-          QuitWell Premium can write personalized insights using Claude, an AI model made by{" "}
+          QuitWell Plus can write personalized insights using Claude, an AI model made by{" "}
           <strong>Anthropic</strong>, a third-party company. Before anything is sent, QuitWell asks for your explicit
           permission. If you choose <em>Don&apos;t Allow</em>, insights are written on your device instead and nothing
           is sent.
@@ -114,7 +114,7 @@ export default function QuitWellPrivacyPolicyPage() {
 
       <Section title="Subscriptions">
         <p>
-          QuitWell Premium is sold through the App Store. Apple processes all payments; we receive only the
+          QuitWell Plus is sold through the App Store. Apple processes all payments; we receive only the
           subscription status (active or expired) through StoreKit and never see your payment details. See{" "}
           <A href="https://www.apple.com/legal/privacy/">Apple&apos;s Privacy Policy</A>.
         </p>

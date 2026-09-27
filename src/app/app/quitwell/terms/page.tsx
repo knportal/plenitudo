@@ -46,10 +46,10 @@ export default function QuitWellTermsPage() {
       </Section>
 
       <Section title="4. Subscriptions">
-        <Sub>Free and Premium</Sub>
+        <Sub>Free and QuitWell Plus</Sub>
         <p className="mb-3">
-          Core tracking is free. QuitWell Premium unlocks additional metrics, longer history, AI insights,
-          forecasts, and share cards. Premium is offered as an auto-renewable subscription, monthly or yearly, with
+          Core tracking is free. QuitWell Plus unlocks additional metrics, longer history, AI insights,
+          forecasts, and share cards. QuitWell Plus is offered as an auto-renewable subscription, monthly or yearly, with
           the price shown in the App before you buy. Offers such as free trials are shown in the App when you are
           eligible.
         </p>
