@@ -33,7 +33,15 @@ export default function PrivacyPolicyPage() {
           <p className="text-xs sm:text-sm text-slate-400 mt-2">
             This policy covers all iOS apps published by Plenitudo:{" "}
             <strong className="text-slate-300">Plena</strong> and{" "}
-            <strong className="text-slate-300">MileTrack</strong>.
+            <strong className="text-slate-300">MileTrack</strong>.{" "}
+            <strong className="text-slate-300">QuitWell</strong> offers optional AI insights and has its own policy:{" "}
+            <Link
+              href="/app/quitwell/privacy-policy"
+              className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2"
+            >
+              QuitWell Privacy Policy
+            </Link>
+            .
           </p>
         </div>
 

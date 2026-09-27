@@ -119,6 +119,38 @@ export default function AppsPage() {
             </div>
           </div>
 
+          {/* QuitWell */}
+          <div className="rounded-xl p-6 sm:p-8 ring-1 ring-white/10 bg-slate-900/40">
+            <h2 className="text-xl font-semibold text-slate-100 mb-2">
+              QuitWell
+            </h2>
+            <p className="text-slate-300 mb-4">
+              See how your body recovers when you quit or cut back on smoking,
+              alcohol, or cannabis — heart rate variability, resting heart rate,
+              sleep and more from Apple Health, compared against your own baseline.
+            </p>
+            <div className="flex flex-wrap gap-3 items-center">
+              <Link
+                href="/app/quitwell/support"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 ring-1 ring-white/10 text-slate-200 hover:bg-slate-700 hover:text-white transition-colors text-sm font-medium"
+              >
+                Support
+              </Link>
+              <Link
+                href="/app/quitwell/privacy-policy"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 ring-1 ring-white/10 text-slate-200 hover:bg-slate-700 hover:text-white transition-colors text-sm font-medium"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="/app/quitwell/terms"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 ring-1 ring-white/10 text-slate-200 hover:bg-slate-700 hover:text-white transition-colors text-sm font-medium"
+              >
+                Terms
+              </Link>
+            </div>
+          </div>
+
           {/* Plenitudo Privacy */}
           <div className="rounded-xl p-6 sm:p-8 ring-1 ring-white/10 bg-slate-900/40">
             <h2 className="text-xl font-semibold text-slate-100 mb-2">
