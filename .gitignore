@@ -41,3 +41,7 @@ prisma/dev.db-journal
 
 # backups (keep local, don't commit)
 backups/
+
+# env files (never commit)
+.env*
+!.env.example
