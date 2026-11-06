@@ -26,7 +26,7 @@ export default function MileTrackPrivacyPolicyPage() {
             </Link>
           </div>
           <p className="text-xs sm:text-sm text-slate-400">
-            <strong>Last Updated:</strong> April 1, 2026
+            <strong>Last Updated:</strong> November 6, 2026
           </p>
           <p className="text-xs sm:text-sm text-slate-400 mt-1">
             Full policy (all Plenitudo apps):{" "}
@@ -202,9 +202,10 @@ export default function MileTrackPrivacyPolicyPage() {
               </p>
               <ul className="list-disc list-inside space-y-1 ml-4">
                 <li>Delete individual trips from within the app</li>
-                <li>Delete all data via Settings &gt; Privacy &gt; &quot;Delete all data&quot;</li>
+                <li>Delete all trips via Settings &gt; Privacy &amp; Data &gt; &quot;Delete All Trips&quot;. This removes your trips, route data, local backups, receipts and your iCloud trip backup. Your categories, clients, rules, saved locations and vehicles are kept</li>
                 <li>Deleting the app removes all locally stored data</li>
-                <li>There are no remote backups to delete since no data is transmitted to servers</li>
+                <li>If you use iCloud backup, that copy is stored in your own iCloud account. You can remove it via Settings &gt; Apple ID &gt; iCloud &gt; Manage Storage</li>
+                <li>We operate no servers that hold your data, so there is nothing on our side to delete</li>
               </ul>
             </section>
 
@@ -273,7 +274,7 @@ export default function MileTrackPrivacyPolicyPage() {
               <ul className="list-disc list-inside space-y-1 ml-4">
                 <li><strong>Access:</strong> You have complete access to all your data within the app</li>
                 <li><strong>Correction:</strong> You can edit any trip details directly in the app</li>
-                <li><strong>Deletion:</strong> You can delete individual trips or all data at any time</li>
+                <li><strong>Deletion:</strong> You can delete individual trips or all trips at any time</li>
                 <li><strong>Export:</strong> You can export your data to CSV or PDF formats</li>
               </ul>
             </section>
@@ -343,7 +344,7 @@ export default function MileTrackPrivacyPolicyPage() {
 
             {/* Footer */}
             <div className="mt-8 pt-6 border-t border-white/10 text-xs text-slate-400">
-              <p><strong>Last Updated:</strong> April 1, 2026</p>
+              <p><strong>Last Updated:</strong> November 6, 2026</p>
             </div>
           </div>
         </div>
